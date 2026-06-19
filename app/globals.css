@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+:root {
+  --orange: #ec7323;
+  --orange-dark: #d4621a;
+  --orange-light: #fef3e8;
+  --dark: #0f172a;
+  --dark-2: #1e293b;
+  --grey: #64748b;
+  --light: #f8fafc;
+  --border: #e2e8f0;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #0f172a;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ticker animation */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 28s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Fade up animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* Counter animation */
+@keyframes countUp {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Carousel transition */
+.carousel-slide {
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+/* Smooth underline hover */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #ec7323;
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* Card hover */
+.service-card {
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.service-card:hover {
+  box-shadow: 0 12px 40px rgba(236,115,35,0.12);
+  transform: translateY(-4px);
+}
+
+/* Blog card hover */
+.blog-card:hover img {
+  transform: scale(1.04);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #ec7323; border-radius: 3px; }
