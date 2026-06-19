@@ -1,5 +1,8 @@
 "use client";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Link } from "lucide-react";
+import Image from 'next/image';
+// import LogoLight from '@/public/logo-light.svg';
+// import LogoLight from '@/public/logo-light.svg'
 
 const links = {
   Pages: ["Home", "About", "Services", "Case Studies", "Blog", "Pricing"],
@@ -22,16 +25,12 @@ export default function Footer() {
 
           {/* Brand column */}
           <div>
+            
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
-              <div style={{
-                width: 36, height: 36, borderRadius: 8,
-                background: "#ec7323",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontWeight: 800, color: "#fff", fontSize: 18,
-              }}>S</div>
-              <span style={{ fontWeight: 700, fontSize: 17, color: "#fff", letterSpacing: "-0.3px" }}>
-                Shoman<span style={{ color: "#ec7323" }}>.</span>
-              </span>
+              <Link key="Home" href="/"
+                style={{ paddingBottom: 2 }}>
+                <Image src="/logo.png" alt="Shoman Logo" width={120} height={36} />
+              </Link>
             </div>
 
             <p style={{ fontSize: 14, lineHeight: 1.75, color: "#64748b", marginBottom: 28, maxWidth: 280 }}>

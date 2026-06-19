@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from 'next/image';
+
 
 const services = [
   { name: "Adobe Commerce & Magento", href: "/services/adobe-commerce" },
@@ -40,8 +42,7 @@ export default function Navbar() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
 
           {/* Logo */}
-          <a href="/" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
-            <div style={{
+            {/* <div style={{
               width: 36, height: 36, borderRadius: 8,
               background: "#ec7323",
               display: "flex", alignItems: "center", justifyContent: "center",
@@ -49,26 +50,27 @@ export default function Navbar() {
             }}>S</div>
             <span style={{ fontWeight: 700, fontSize: 17, color: "#0f172a", letterSpacing: "-0.3px" }}>
               Shoman<span style={{ color: "#ec7323" }}>.</span>
-            </span>
-          </a>
+            </span> */}
+            <Link key="Home" href="/"
+                className=""
+                style={{ paddingBottom: 2 }}>
+              <Image src='/logo.png' alt="Shoman Logo" width={120} height={36} />
+            </Link>
+
 
           {/* Desktop Nav */}
           <nav style={{ display: "flex", alignItems: "center", gap: 32 }} className="hide-mobile">
-            {[
-              { label: "Home", href: "/" },
-              { label: "Services", href: "/services" },
-              { label: "About", href: "/about" },
-              { label: "Case Studies", href: "/case-studies" },
-              { label: "Blog", href: "/insights" },
-            ].map((item) => (
-              <Link key={item.label} href={item.href}
+            <Link key="Home" href="/"
                 className="nav-link"
                 style={{ fontSize: 14, fontWeight: 500, color: "#0f172a", textDecoration: "none", paddingBottom: 2 }}>
-                {item.label}
+                Home
               </Link>
-            ))}
-
-            {/* Services dropdown */}
+              <Link key="About" href="/about"
+                className="nav-link"
+                style={{ fontSize: 14, fontWeight: 500, color: "#0f172a", textDecoration: "none", paddingBottom: 2 }}>
+                About
+              </Link>
+              {/* Services dropdown */}
             <div
               style={{ position: "relative" }}
               onMouseEnter={() => setServicesOpen(true)}
@@ -104,13 +106,29 @@ export default function Navbar() {
               )}
             </div>
 
-            <a href="#" style={{ fontSize: 14, fontWeight: 500, color: "#0f172a", textDecoration: "none" }}
-              className="nav-link">Pricing</a>
+            {[
+              // { label: "Home", href: "/" },
+              // { label: "Services", href: "/services" },
+              // { label: "About", href: "/about" },
+              { label: "Case Studies", href: "/case-studies" },
+              { label: "Blog", href: "/insights" },
+            ].map((item) => (
+              <Link key={item.label} href={item.href}
+                className="nav-link"
+                style={{ fontSize: 14, fontWeight: 500, color: "#0f172a", textDecoration: "none", paddingBottom: 2 }}>
+                {item.label}
+              </Link>
+            ))}
+
+            
+
+            {/* <a href="#" style={{ fontSize: 14, fontWeight: 500, color: "#0f172a", textDecoration: "none" }}
+              className="nav-link">Pricing</a> */}
           </nav>
 
           {/* CTA */}
           <div style={{ display: "flex", alignItems: "center", gap: 16 }} className="hide-mobile">
-            <a href="#contact" style={{
+            <a href="/contact" style={{
               display: "inline-flex", alignItems: "center",
               padding: "10px 22px", borderRadius: 8,
               background: "#ec7323", color: "#fff",
