@@ -4,6 +4,7 @@ import {
   SectionLabel, SectionHeading, PainGrid, Checklist,
   FAQ, ProcessSteps, OutcomeCards, TwoCol,
 } from "@/components/services/ServiceComponents";
+import { AlertTriangle, CircleDollarSign, DatabaseZap, PackageX, Puzzle, RefreshCw } from "lucide-react";
 
 const COLOR = "#6366F1";
 const BG = "#f5f3ff";
@@ -15,7 +16,7 @@ export default function IntegrationsPage() {
       badge="ERP · CRM · API Development"
       badgeColor={COLOR}
       badgeBg={BG}
-      platformSymbol="⚙"
+      platformSymbol="API"
       platformColor={COLOR}
       heroTitle="Enterprise Systems"
       heroHighlight="Integration."
@@ -25,25 +26,25 @@ export default function IntegrationsPage() {
       breadcrumb="Systems Integration"
     >
       {/* Pain points */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="The Problem With Off-The-Shelf Apps" />
           <SectionHeading sub="Generic integration apps work for simple setups. The moment your business has real complexity, they break down — and you pay for it in manual work, errors, and missed orders.">
             Why businesses come to us for integrations
           </SectionHeading>
           <PainGrid color={COLOR} items={[
-            { icon: "🔄", title: "Manual data reconciliation every day", body: "Staff spending hours copying orders from Shopify into SAP, re-entering stock levels, manually updating pricing. Expensive, error-prone, and unscalable." },
-            { icon: "📦", title: "Overselling due to stock sync lag", body: "Shopify stock levels updating 15 minutes behind the warehouse. By then, you've sold stock you don't have and need to refund angry customers." },
-            { icon: "💸", title: "Pricing mismatches between systems", body: "Your ERP updates a price and it takes 24 hours to sync to your store — if it syncs at all. Meanwhile customers are ordering at the wrong price." },
-            { icon: "⚠️", title: "Integration apps breaking on updates", body: "Your Shopify app stops syncing every time either platform updates. No monitoring. You find out when a customer complains." },
-            { icon: "🧩", title: "Systems that were never designed to connect", body: "Legacy ERP built in 2003. Modern Shopify store. No official integration exists. The only solution is custom middleware." },
-            { icon: "📊", title: "No single source of truth for data", body: "Three systems, three versions of the same order. Finance has one number, the warehouse has another, and Shopify has a third." },
+            { icon: RefreshCw, title: "Manual data reconciliation every day", body: "Staff spending hours copying orders from Shopify into SAP, re-entering stock levels, manually updating pricing. Expensive, error-prone, and unscalable." },
+            { icon: PackageX, title: "Overselling due to stock sync lag", body: "Shopify stock levels updating 15 minutes behind the warehouse. By then, you've sold stock you don't have and need to refund angry customers." },
+            { icon: CircleDollarSign, title: "Pricing mismatches between systems", body: "Your ERP updates a price and it takes 24 hours to sync to your store — if it syncs at all. Meanwhile customers are ordering at the wrong price." },
+            { icon: AlertTriangle, title: "Integration apps breaking on updates", body: "Your Shopify app stops syncing every time either platform updates. No monitoring. You find out when a customer complains." },
+            { icon: Puzzle, title: "Systems that were never designed to connect", body: "Legacy ERP built in 2003. Modern Shopify store. No official integration exists. The only solution is custom middleware." },
+            { icon: DatabaseZap, title: "No single source of truth for data", body: "Three systems, three versions of the same order. Finance has one number, the warehouse has another, and Shopify has a third." },
           ]} />
         </div>
       </section>
 
       {/* Platforms we integrate */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Systems We Connect" />
           <SectionHeading sub="We've built integrations across every major enterprise platform. If it has an API — or even if it doesn't — we can connect it.">
@@ -66,23 +67,23 @@ export default function IntegrationsPage() {
                 { name: "Zoho CRM", sym: "Zo", color: "#E42527" },
                 { name: "Pipedrive", sym: "Pd", color: "#1A1A2E" },
               ]},
-              { category: "Warehouse / OMS", color: "#10b981", items: [
+              { category: "Warehouse / OMS", color: "var(--color-success)", items: [
                 { name: "ShipBob", sym: "Sb", color: "#0284c7" },
-                { name: "Linnworks", sym: "Lw", color: "#10b981" },
+                { name: "Linnworks", sym: "Lw", color: "var(--color-success)" },
                 { name: "Mintsoft", sym: "Ms", color: "#6366F1" },
-                { name: "ChannelAdvisor", sym: "CA", color: "#ec7323" },
-                { name: "Custom WMS", sym: "WM", color: "#64748b" },
+                { name: "ChannelAdvisor", sym: "CA", color: "var(--color-brand)" },
+                { name: "Custom WMS", sym: "WM", color: "var(--color-muted)" },
               ]},
               { category: "Search & Marketing", color: "#5468FF", items: [
                 { name: "Algolia", sym: "Al", color: "#5468FF" },
                 { name: "Klaviyo", sym: "Kl", color: "#1C1C1C" },
-                { name: "Yotpo", sym: "Yo", color: "#ec7323" },
+                { name: "Yotpo", sym: "Yo", color: "var(--color-brand)" },
                 { name: "Nosto", sym: "No", color: "#e11d48" },
                 { name: "Gorgias", sym: "Go", color: "#F59E0B" },
               ]},
             ].map((cat) => (
               <div key={cat.category} style={{
-                background: "#f8fafc", border: "1px solid #e2e8f0",
+                background: "var(--color-bg-soft)", border: "1px solid var(--color-border)",
                 borderRadius: 14, padding: 20,
               }}>
                 <div style={{
@@ -98,9 +99,9 @@ export default function IntegrationsPage() {
                         width: 24, height: 24, borderRadius: 5,
                         background: item.color,
                         display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 7, fontWeight: 800, color: "#fff", flexShrink: 0,
+                        fontSize: 7, fontWeight: 800, color: "var(--color-white)", flexShrink: 0,
                       }}>{item.sym}</div>
-                      <span style={{ fontSize: 12, color: "#475569", fontWeight: 500 }}>{item.name}</span>
+                      <span style={{ fontSize: 12, color: "var(--color-copy)", fontWeight: 500 }}>{item.name}</span>
                     </div>
                   ))}
                 </div>
@@ -111,9 +112,9 @@ export default function IntegrationsPage() {
             background: BG, border: `1px solid ${COLOR}25`,
             borderLeft: `4px solid ${COLOR}`,
             borderRadius: 10, padding: "16px 20px",
-            fontSize: 14, color: "#475569",
+            fontSize: 14, color: "var(--color-copy)",
           }}>
-            <strong style={{ color: COLOR }}>Don't see your system?</strong> If it has an API, a database, or even a CSV export, we've almost certainly built an integration for something similar. <a href="/contact" style={{ color: COLOR, fontWeight: 600 }}>Tell us what you're connecting →</a>
+            <strong style={{ color: COLOR }}>Don&apos;t see your system?</strong> If it has an API, a database, or even a CSV export, we&apos;ve almost certainly built an integration for something similar. <a href="/contact" style={{ color: COLOR, fontWeight: 600 }}>Tell us what you&apos;re connecting →</a>
           </div>
 
           <style jsx>{`
@@ -124,7 +125,7 @@ export default function IntegrationsPage() {
       </section>
 
       {/* How it works */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -147,7 +148,7 @@ export default function IntegrationsPage() {
               <div>
                 <SectionLabel text="What's Included" />
                 <div style={{ marginBottom: 20 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "#0f172a", marginBottom: 8 }}>
+                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "var(--color-ink)", marginBottom: 8 }}>
                     Everything in a custom integration
                   </h3>
                 </div>
@@ -164,9 +165,9 @@ export default function IntegrationsPage() {
                   "Optional ongoing maintenance retainer",
                 ]} />
                 <div style={{
-                  marginTop: 28, background: "#0f172a", borderRadius: 12, padding: 20,
+                  marginTop: 28, background: "var(--color-ink)", borderRadius: 12, padding: 20,
                 }}>
-                  <div style={{ fontSize: 11, color: "#64748b", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>
+                  <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>
                     Integration health monitor
                   </div>
                   {[
@@ -177,11 +178,11 @@ export default function IntegrationsPage() {
                   ].map((m) => (
                     <div key={m.label} style={{
                       display: "flex", justifyContent: "space-between", alignItems: "center",
-                      padding: "8px 0", borderBottom: "1px solid #1e293b",
+                      padding: "8px 0", borderBottom: "1px solid var(--color-ink-2)",
                     }}>
-                      <span style={{ fontSize: 12, color: "#94a3b8" }}>{m.label}</span>
+                      <span style={{ fontSize: 12, color: "var(--color-subtle)" }}>{m.label}</span>
                       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <span style={{ fontSize: 12, fontWeight: 600, color: "#e2e8f0" }}>{m.value}</span>
+                        <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-border)" }}>{m.value}</span>
                         <span style={{
                           fontSize: 10, fontWeight: 700, color: m.color,
                           background: m.color + "20", padding: "2px 7px", borderRadius: 100,
@@ -197,7 +198,7 @@ export default function IntegrationsPage() {
       </section>
 
       {/* Outcomes */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Integration Outcomes" />
           <SectionHeading sub="What businesses gain when their systems actually talk to each other.">
@@ -213,7 +214,7 @@ export default function IntegrationsPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="FAQ" />

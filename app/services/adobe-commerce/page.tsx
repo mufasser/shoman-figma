@@ -1,8 +1,10 @@
+"use client";
 import ServiceLayout from "@/components/services/ServiceLayout";
 import {
   SectionLabel, SectionHeading, PainGrid, Checklist,
   PricingTable, FAQ, ProcessSteps, OutcomeCards, TwoCol,
 } from "@/components/services/ServiceComponents";
+import { AlertTriangle, Ban, Gauge, PhoneOff, Puzzle, ShieldAlert } from "lucide-react";
 
 const COLOR = "#FF0000";
 const BG = "#fff5f5";
@@ -24,25 +26,25 @@ export default function AdobeCommercePage() {
       breadcrumb="Adobe Commerce & Magento"
     >
       {/* Pain points */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Common Pain Points" />
           <SectionHeading sub="These are the real issues we hear every week from merchants stuck on Magento and Adobe Commerce — and the exact problems we're built to fix.">
             Sound familiar?
           </SectionHeading>
           <PainGrid color={COLOR} items={[
-            { icon: "🐌", title: "Slow checkout costing conversions", body: "Unoptimised queries, missing indices, and bloated extensions drag checkout to 6–12 seconds. Every second costs you sales." },
-            { icon: "🔓", title: "Security patches falling behind", body: "Adobe releases patches regularly. Missing them leaves your store vulnerable to exploit and non-compliant with PCI DSS." },
-            { icon: "⚠️", title: "Extension conflicts breaking things", body: "Third-party extensions fighting each other cause cart errors, admin crashes, and broken product pages." },
-            { icon: "🚫", title: "No staging or deployment process", body: "Changes pushed directly to live. No rollback plan. One bad deploy brings the whole store down." },
-            { icon: "📞", title: "Previous agency went silent", body: "Mid-project handoffs with no documentation, undocumented code, and zero knowledge transfer." },
-            { icon: "🧩", title: "Custom module technical debt", body: "Old modules written by multiple developers with no standards, no tests, and no one who knows how they work." },
+            { icon: Gauge, title: "Slow checkout costing conversions", body: "Unoptimised queries, missing indices, and bloated extensions drag checkout to 6–12 seconds. Every second costs you sales." },
+            { icon: ShieldAlert, title: "Security patches falling behind", body: "Adobe releases patches regularly. Missing them leaves your store vulnerable to exploit and non-compliant with PCI DSS." },
+            { icon: AlertTriangle, title: "Extension conflicts breaking things", body: "Third-party extensions fighting each other cause cart errors, admin crashes, and broken product pages." },
+            { icon: Ban, title: "No staging or deployment process", body: "Changes pushed directly to live. No rollback plan. One bad deploy brings the whole store down." },
+            { icon: PhoneOff, title: "Previous agency went silent", body: "Mid-project handoffs with no documentation, undocumented code, and zero knowledge transfer." },
+            { icon: Puzzle, title: "Custom module technical debt", body: "Old modules written by multiple developers with no standards, no tests, and no one who knows how they work." },
           ]} />
         </div>
       </section>
 
       {/* What's included */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -65,30 +67,30 @@ export default function AdobeCommercePage() {
               </>
             }
             right={
-              <div style={{ background: "#0f172a", borderRadius: 16, padding: 28 }}>
-                <div style={{ fontSize: 11, color: "#64748b", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 20 }}>
+              <div style={{ background: "var(--color-ink)", borderRadius: 16, padding: 28 }}>
+                <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 20 }}>
                   Typical project outcomes
                 </div>
                 {[
                   { label: "Checkout load time", before: "8.4s", after: "1.1s", color: COLOR },
-                  { label: "Core Web Vitals LCP", before: "Fail", after: "Pass", color: "#10b981" },
-                  { label: "Security patches", before: "6 behind", after: "Current", color: "#ec7323" },
+                  { label: "Core Web Vitals LCP", before: "Fail", after: "Pass", color: "var(--color-success)" },
+                  { label: "Security patches", before: "6 behind", after: "Current", color: "var(--color-brand)" },
                   { label: "Extension conflicts", before: "12 active", after: "0", color: "#0284c7" },
                 ].map((r) => (
                   <div key={r.label} style={{ marginBottom: 18 }}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                      <span style={{ fontSize: 12, color: "#94a3b8" }}>{r.label}</span>
+                      <span style={{ fontSize: 12, color: "var(--color-subtle)" }}>{r.label}</span>
                       <div style={{ display: "flex", gap: 8 }}>
-                        <span style={{ fontSize: 12, color: "#475569", textDecoration: "line-through" }}>{r.before}</span>
+                        <span style={{ fontSize: 12, color: "var(--color-copy)", textDecoration: "line-through" }}>{r.before}</span>
                         <span style={{ fontSize: 12, fontWeight: 700, color: r.color }}>{r.after}</span>
                       </div>
                     </div>
-                    <div style={{ height: 5, background: "#1e293b", borderRadius: 3, overflow: "hidden" }}>
+                    <div style={{ height: 5, background: "var(--color-ink-2)", borderRadius: 3, overflow: "hidden" }}>
                       <div style={{ height: "100%", width: "85%", background: r.color, borderRadius: 3 }} />
                     </div>
                   </div>
                 ))}
-                <div style={{ marginTop: 24, paddingTop: 18, borderTop: "1px solid #1e293b", fontSize: 12, color: "#64748b" }}>
+                <div style={{ marginTop: 24, paddingTop: 18, borderTop: "1px solid var(--color-ink-2)", fontSize: 12, color: "var(--color-muted)" }}>
                   Average results across 40+ Adobe Commerce retainer clients
                 </div>
               </div>
@@ -98,7 +100,7 @@ export default function AdobeCommercePage() {
       </section>
 
       {/* Process */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -120,7 +122,7 @@ export default function AdobeCommercePage() {
               <div>
                 <SectionLabel text="Outcomes We Deliver" />
                 <div style={{ marginBottom: 24 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "#0f172a", marginBottom: 8 }}>Numbers from real client projects</h3>
+                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "var(--color-ink)", marginBottom: 8 }}>Numbers from real client projects</h3>
                 </div>
                 <OutcomeCards color={COLOR} items={[
                   { metric: "53%", label: "Faster checkout", desc: "Average page speed improvement on checkout after first sprint" },
@@ -136,7 +138,7 @@ export default function AdobeCommercePage() {
       </section>
 
       {/* Pricing */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="Retainer Packages" />
@@ -192,7 +194,7 @@ export default function AdobeCommercePage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="FAQ" />

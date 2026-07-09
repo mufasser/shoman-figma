@@ -1,9 +1,10 @@
 "use client";
 import ServiceLayout from "@/components/services/ServiceLayout";
 import {
-  SectionLabel, SectionHeading, PainGrid, Checklist,
+  SectionLabel, SectionHeading, Checklist,
   PricingTable, FAQ, ProcessSteps, OutcomeCards, TwoCol,
 } from "@/components/services/ServiceComponents";
+import { Building2, Rocket, TrendingUp } from "lucide-react";
 
 const COLOR = "#96BF48";
 const BG = "#f5fbee";
@@ -25,7 +26,7 @@ export default function ShopifyPage() {
       breadcrumb="Shopify Development"
     >
       {/* Who it's for */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Who We Build For" />
           <SectionHeading sub="We don't have a minimum project size. We have a minimum standard. Whether you're a founder with an idea or a brand doing £5M/year, the engineering quality is the same.">
@@ -34,27 +35,30 @@ export default function ShopifyPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="three-col">
             {[
               {
-                icon: "🚀",
+                icon: Rocket,
                 title: "Startups & First Stores",
                 body: "Just starting out? We build your first Shopify store properly — clean code, fast load times, and a structure you can actually scale. No shortcuts that you'll have to undo in 12 months.",
                 tag: "From £2,000",
               },
               {
-                icon: "📈",
+                icon: TrendingUp,
                 title: "Growing Brands",
                 body: "Doing £50K–£5M/year and hitting limits? We rebuild the right parts of your store — theme, integrations, checkout — to unblock the next stage of growth.",
                 tag: "From £5,000",
               },
               {
-                icon: "🏢",
+                icon: Building2,
                 title: "Shopify Plus Upgrade",
                 body: "Moving to Shopify Plus opens checkout extensibility, B2B features, automation, and more. We handle the full Plus migration and implementation — including custom checkout flows.",
                 tag: "Custom quote",
               },
-            ].map((c) => (
+            ].map((c) => {
+              const Icon = c.icon;
+
+              return (
               <div key={c.title} style={{
-                background: "#fff",
-                border: "1.5px solid #e2e8f0",
+                background: "var(--color-white)",
+                border: "1.5px solid var(--color-border)",
                 borderTop: `4px solid ${COLOR}`,
                 borderRadius: 14, padding: "28px 24px",
                 transition: "transform 0.2s, box-shadow 0.2s",
@@ -68,23 +72,36 @@ export default function ShopifyPage() {
                 (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}>
-                <div style={{ fontSize: 32, marginBottom: 14 }}>{c.icon}</div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", marginBottom: 10 }}>{c.title}</div>
-                <div style={{ fontSize: 13, lineHeight: 1.7, color: "#64748b", marginBottom: 16 }}>{c.body}</div>
+                <div style={{
+                  width: 46,
+                  height: 46,
+                  borderRadius: 12,
+                  background: BG,
+                  color: COLOR,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: 14,
+                }}>
+                  <Icon size={22} strokeWidth={2.1} />
+                </div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: "var(--color-ink)", marginBottom: 10 }}>{c.title}</div>
+                <div style={{ fontSize: 13, lineHeight: 1.7, color: "var(--color-muted)", marginBottom: 16 }}>{c.body}</div>
                 <div style={{
                   display: "inline-block", fontSize: 12, fontWeight: 600,
                   color: COLOR, background: BG,
                   padding: "4px 12px", borderRadius: 100,
                 }}>{c.tag}</div>
               </div>
-            ))}
+              );
+            })}
             <style jsx>{`@media(max-width:768px){.three-col{grid-template-columns:1fr!important}}`}</style>
           </div>
         </div>
       </section>
 
       {/* What we build */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -110,7 +127,7 @@ export default function ShopifyPage() {
               <div>
                 <SectionLabel text="Tech Stack" />
                 <div style={{ marginBottom: 20 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "#0f172a", marginBottom: 8 }}>Integrations we work with daily</h3>
+                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "var(--color-ink)", marginBottom: 8 }}>Integrations we work with daily</h3>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                   {[
@@ -119,24 +136,24 @@ export default function ShopifyPage() {
                     { name: "Algolia", color: "#5468FF", sym: "Al", desc: "Search" },
                     { name: "Recharge", color: "#6366F1", sym: "Rc", desc: "Subscriptions" },
                     { name: "Gorgias", color: "#F59E0B", sym: "Go", desc: "Support" },
-                    { name: "Yotpo", color: "#ec7323", sym: "Yo", desc: "Reviews" },
-                    { name: "Loop Returns", color: "#10b981", sym: "Lp", desc: "Returns" },
+                    { name: "Yotpo", color: "var(--color-brand)", sym: "Yo", desc: "Reviews" },
+                    { name: "Loop Returns", color: "var(--color-success)", sym: "Lp", desc: "Returns" },
                     { name: "ShipBob", color: "#0284c7", sym: "Sb", desc: "Fulfilment" },
                   ].map((app) => (
                     <div key={app.name} style={{
                       display: "flex", alignItems: "center", gap: 10,
-                      background: "#f8fafc", border: "1px solid #e2e8f0",
+                      background: "var(--color-bg-soft)", border: "1px solid var(--color-border)",
                       borderRadius: 10, padding: "12px 14px",
                     }}>
                       <div style={{
                         width: 32, height: 32, borderRadius: 8,
                         background: app.color,
                         display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 9, fontWeight: 800, color: "#fff", flexShrink: 0,
+                        fontSize: 9, fontWeight: 800, color: "var(--color-white)", flexShrink: 0,
                       }}>{app.sym}</div>
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: "#0f172a" }}>{app.name}</div>
-                        <div style={{ fontSize: 11, color: "#94a3b8" }}>{app.desc}</div>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--color-ink)" }}>{app.name}</div>
+                        <div style={{ fontSize: 11, color: "var(--color-subtle)" }}>{app.desc}</div>
                       </div>
                     </div>
                   ))}
@@ -148,7 +165,7 @@ export default function ShopifyPage() {
       </section>
 
       {/* Process */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -184,7 +201,7 @@ export default function ShopifyPage() {
       </section>
 
       {/* Pricing */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="Project Packages" />
@@ -239,7 +256,7 @@ export default function ShopifyPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="FAQ" />

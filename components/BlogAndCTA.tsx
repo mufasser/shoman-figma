@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight, Clock, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Rocket, ShoppingBag, Shuffle, Store } from "lucide-react";
 
 const posts = [
   {
@@ -11,6 +11,7 @@ const posts = [
     date: "12 Nov 2024",
     readTime: "5 min read",
     num: "01",
+    icon: ShoppingBag,
   },
   {
     tag: "Migration",
@@ -21,6 +22,7 @@ const posts = [
     date: "28 Oct 2024",
     readTime: "8 min read",
     num: "02",
+    icon: Shuffle,
   },
   {
     tag: "Shopify",
@@ -31,49 +33,50 @@ const posts = [
     date: "15 Oct 2024",
     readTime: "6 min read",
     num: "03",
+    icon: Store,
   },
 ];
 
 export function Blog() {
   return (
-    <section style={{ background: "#f8fafc", padding: "96px 0" }}>
+    <section style={{ background: "var(--color-bg-soft)", padding: "96px 0" }}>
       <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
 
         {/* Header */}
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 48, flexWrap: "wrap", gap: 24 }}>
           <div>
             <div style={{
-              fontSize: 12, fontWeight: 700, color: "#ec7323",
+              fontSize: 12, fontWeight: 700, color: "var(--color-brand)",
               letterSpacing: "0.1em", textTransform: "uppercase",
               marginBottom: 12, display: "flex", alignItems: "center", gap: 8,
             }}>
-              <span style={{ width: 24, height: 2, background: "#ec7323", display: "inline-block" }} />
+              <span style={{ width: 24, height: 2, background: "var(--color-brand)", display: "inline-block" }} />
               Our Blog
             </div>
             <h2 style={{
               fontSize: "clamp(28px, 3.5vw, 40px)",
               fontWeight: 800, lineHeight: 1.2,
-              letterSpacing: "-0.02em", color: "#0f172a",
+              letterSpacing: "-0.02em", color: "var(--color-ink)",
             }}>
               Technical insights,<br />no filler.
             </h2>
           </div>
           <a href="#" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
-            border: "1.5px solid #e2e8f0", borderRadius: 10,
+            border: "1.5px solid var(--color-border)", borderRadius: 10,
             padding: "11px 20px",
-            fontSize: 13, fontWeight: 600, color: "#0f172a",
+            fontSize: 13, fontWeight: 600, color: "var(--color-ink)",
             textDecoration: "none",
             transition: "all 0.2s",
-            background: "#fff",
+            background: "var(--color-white)",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = "#ec7323";
-            (e.currentTarget as HTMLElement).style.color = "#ec7323";
+            (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)";
+            (e.currentTarget as HTMLElement).style.color = "var(--color-brand)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = "#e2e8f0";
-            (e.currentTarget as HTMLElement).style.color = "#0f172a";
+            (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
+            (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
           }}>
             View All <ArrowRight size={14} />
           </a>
@@ -81,17 +84,19 @@ export function Blog() {
 
         {/* Blog cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="blog-grid">
-          {posts.map((post) => (
+          {posts.map((post) => {
+            const Icon = post.icon;
+            return (
             <article key={post.title} className="blog-card" style={{
-              background: "#fff",
+              background: "var(--color-white)",
               borderRadius: 16,
               overflow: "hidden",
-              border: "1px solid #e2e8f0",
+              border: "1px solid var(--color-border)",
               transition: "box-shadow 0.25s, transform 0.25s",
               cursor: "pointer",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 40px rgba(0,0,0,0.08)";
+              (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 40px rgba(0, 0, 0, 0.08)";
               (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
             }}
             onMouseLeave={(e) => {
@@ -105,12 +110,7 @@ export function Blog() {
                 display: "flex", alignItems: "center", justifyContent: "center",
                 position: "relative", overflow: "hidden",
               }}>
-                <span style={{
-                  fontSize: 64,
-                  opacity: 0.3,
-                }}>
-                  {post.tag === "Adobe Commerce" ? "🔴" : post.tag === "Migration" ? "🔀" : "🟢"}
-                </span>
+                <Icon size={58} color={post.tagColor} strokeWidth={1.8} opacity={0.3} />
                 <div style={{
                   position: "absolute", top: 16, left: 16,
                   background: post.tagColor + "15",
@@ -122,32 +122,32 @@ export function Blog() {
                 <div style={{
                   position: "absolute", top: 16, right: 16,
                   fontSize: 32, fontWeight: 900, color: post.tagColor, opacity: 0.15,
-                  fontFamily: "Georgia, serif",
+                  fontFamily: "var(--font-serif)",
                 }}>{post.num}</div>
               </div>
 
               <div style={{ padding: 24 }}>
                 <h3 style={{
                   fontSize: 15, fontWeight: 700, lineHeight: 1.4,
-                  color: "#0f172a", marginBottom: 10, letterSpacing: "-0.01em",
+                  color: "var(--color-ink)", marginBottom: 10, letterSpacing: "-0.01em",
                 }}>{post.title}</h3>
 
-                <p style={{ fontSize: 13, lineHeight: 1.7, color: "#64748b", marginBottom: 20 }}>
+                <p style={{ fontSize: 13, lineHeight: 1.7, color: "var(--color-muted)", marginBottom: 20 }}>
                   {post.excerpt}
                 </p>
 
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div style={{ display: "flex", gap: 14 }}>
-                    <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "#94a3b8" }}>
+                    <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "var(--color-subtle)" }}>
                       <Calendar size={11} /> {post.date}
                     </span>
-                    <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "#94a3b8" }}>
+                    <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "var(--color-subtle)" }}>
                       <Clock size={11} /> {post.readTime}
                     </span>
                   </div>
                   <a href="#" style={{
                     display: "flex", alignItems: "center", gap: 4,
-                    fontSize: 12, fontWeight: 600, color: "#ec7323",
+                    fontSize: 12, fontWeight: 600, color: "var(--color-brand)",
                     textDecoration: "none",
                   }}>
                     Read <ArrowRight size={12} />
@@ -155,7 +155,8 @@ export function Blog() {
                 </div>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -173,44 +174,45 @@ export function Blog() {
 
 export function CommunityBanner() {
   return (
-    <section style={{ background: "#0f172a", padding: "80px 24px", textAlign: "center", position: "relative", overflow: "hidden" }}>
+    <section style={{ background: "var(--color-ink)", padding: "80px 24px", textAlign: "center", position: "relative", overflow: "hidden" }}>
       {/* Background decoration */}
       <div style={{
         position: "absolute", top: "50%", left: "50%",
         transform: "translate(-50%, -50%)",
         width: 800, height: 400,
-        background: "radial-gradient(ellipse, rgba(236,115,35,0.1) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse, rgba(var(--color-brand-rgb), 0.1) 0%, transparent 65%)",
         pointerEvents: "none",
       }} />
 
       <div style={{ maxWidth: 600, margin: "0 auto", position: "relative" }}>
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 8,
-          background: "rgba(236,115,35,0.1)",
-          border: "1px solid rgba(236,115,35,0.2)",
+          background: "rgba(var(--color-brand-rgb), 0.1)",
+          border: "1px solid rgba(var(--color-brand-rgb), 0.2)",
           borderRadius: 100, padding: "6px 16px", marginBottom: 24,
         }}>
-          <span style={{ fontSize: 12, fontWeight: 600, color: "#ec7323" }}>🚀 Free discovery call — no commitment</span>
+          <Rocket size={14} color="var(--color-brand)" strokeWidth={2.2} />
+          <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>Free discovery call — no commitment</span>
         </div>
 
         <h2 style={{
           fontSize: "clamp(28px, 4vw, 48px)",
           fontWeight: 800, lineHeight: 1.15,
           letterSpacing: "-0.02em",
-          color: "#ffffff", marginBottom: 16,
+          color: "var(--color-white)", marginBottom: 16,
         }}>
           Ready to build ecommerce<br />
-          <span style={{ color: "#ec7323" }}>that actually performs?</span>
+          <span style={{ color: "var(--color-brand)" }}>that actually performs?</span>
         </h2>
 
-        <p style={{ fontSize: 16, lineHeight: 1.7, color: "#94a3b8", marginBottom: 36 }}>
+        <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--color-subtle)", marginBottom: 36 }}>
           Tell us where your store is today and where it needs to be. No jargon, no hard sell — just a direct conversation with a senior engineer.
         </p>
 
         <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
           <div style={{
-            display: "flex", background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.1)",
+            display: "flex", background: "rgba(255, 255, 255, 0.06)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
             borderRadius: 10, overflow: "hidden",
           }}>
             <input
@@ -218,25 +220,25 @@ export function CommunityBanner() {
               placeholder="Enter your email address"
               style={{
                 padding: "14px 20px", fontSize: 14, background: "transparent",
-                border: "none", outline: "none", color: "#fff", width: 260,
+                border: "none", outline: "none", color: "var(--color-white)", width: 260,
               }}
             />
             <button style={{
-              padding: "14px 20px", background: "#ec7323", border: "none",
-              cursor: "pointer", fontSize: 14, fontWeight: 600, color: "#fff",
+              padding: "14px 20px", background: "var(--color-brand)", border: "none",
+              cursor: "pointer", fontSize: 14, fontWeight: 600, color: "var(--color-white)",
               display: "flex", alignItems: "center", gap: 6,
               transition: "background 0.2s",
               whiteSpace: "nowrap",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#d4621a")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#ec7323")}>
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--color-brand-hover)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--color-brand)")}>
               Get Started <ArrowRight size={14} />
             </button>
           </div>
         </div>
 
-        <p style={{ marginTop: 16, fontSize: 12, color: "#475569" }}>
-          Or <a href="#" style={{ color: "#ec7323", textDecoration: "none", fontWeight: 600 }}>book a 30-min call directly →</a>
+        <p style={{ marginTop: 16, fontSize: 12, color: "var(--color-copy)" }}>
+          Or <a href="#" style={{ color: "var(--color-brand)", textDecoration: "none", fontWeight: 600 }}>book a 30-min call directly →</a>
         </p>
       </div>
     </section>

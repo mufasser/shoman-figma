@@ -5,7 +5,7 @@ import {
   SectionLabel, SectionHeading, Checklist,
   FAQ, OutcomeCards, TwoCol,
 } from "@/components/services/ServiceComponents";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, ClipboardList, Microscope, ShieldCheck, Shuffle, TrendingUp, Wrench, Zap } from "lucide-react";
 
 const COLOR = "#0284C7";
 const BG = "#f0f9ff";
@@ -14,7 +14,7 @@ const auditTypes = [
   {
     id: "security",
     label: "Security & Core Health",
-    icon: "🔒",
+    icon: ShieldCheck,
     title: "Security & Core Health Check",
     desc: "A comprehensive review of your store's security posture, patch status, and platform stability. Ideal before a major marketing push or when you suspect vulnerabilities.",
     includes: [
@@ -31,7 +31,7 @@ const auditTypes = [
   {
     id: "migration",
     label: "Migration Complexity",
-    icon: "🔀",
+    icon: Shuffle,
     title: "Migration Complexity Assessment",
     desc: "Understand exactly what a platform migration will involve before committing. We assess your data volume, custom features, and integrations and tell you the real cost and timeline.",
     includes: [
@@ -48,7 +48,7 @@ const auditTypes = [
   {
     id: "checkout",
     label: "Checkout & Performance",
-    icon: "⚡",
+    icon: Zap,
     title: "Checkout & Payment Path Optimisation",
     desc: "A detailed analysis of your checkout funnel and payment path. We identify exactly where users are dropping off and give you a prioritised list of fixes to implement.",
     includes: [
@@ -67,6 +67,7 @@ const auditTypes = [
 export default function AuditsPage() {
   const [activeTab, setActiveTab] = useState("security");
   const active = auditTypes.find((a) => a.id === activeTab)!;
+  const ActiveIcon = active.icon;
 
   return (
     <ServiceLayout
@@ -83,7 +84,7 @@ export default function AuditsPage() {
       breadcrumb="Technical Audits"
     >
       {/* Audit type tabs */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Audit Types" />
           <SectionHeading sub="Three specialist audit types. Choose the one that matches your current need — or order all three.">
@@ -93,21 +94,24 @@ export default function AuditsPage() {
           {/* Tab switcher */}
           <div style={{
             display: "flex", gap: 8, marginBottom: 32,
-            background: "#fff", border: "1px solid #e2e8f0",
+            background: "var(--color-white)", border: "1px solid var(--color-border)",
             borderRadius: 12, padding: 6, width: "fit-content",
           }} className="tabs-wrap">
-            {auditTypes.map((a) => (
+            {auditTypes.map((a) => {
+              const Icon = a.icon;
+              return (
               <button key={a.id} onClick={() => setActiveTab(a.id)} style={{
                 display: "flex", alignItems: "center", gap: 8,
                 padding: "10px 18px", borderRadius: 8, border: "none",
                 fontSize: 13, fontWeight: 600, cursor: "pointer",
                 background: activeTab === a.id ? COLOR : "transparent",
-                color: activeTab === a.id ? "#fff" : "#64748b",
+                color: activeTab === a.id ? "var(--color-white)" : "var(--color-muted)",
                 transition: "all 0.2s",
               }}>
-                <span>{a.icon}</span> {a.label}
+                <Icon size={15} strokeWidth={2.2} /> {a.label}
               </button>
-            ))}
+              );
+            })}
           </div>
 
           {/* Active tab content */}
@@ -118,14 +122,14 @@ export default function AuditsPage() {
                 background: BG, border: `1px solid ${COLOR}30`,
                 borderRadius: 100, padding: "5px 14px", marginBottom: 16,
               }}>
-                <span style={{ fontSize: 16 }}>{active.icon}</span>
+                <ActiveIcon size={15} color={COLOR} strokeWidth={2.2} />
                 <span style={{ fontSize: 12, fontWeight: 600, color: COLOR }}>{active.label}</span>
               </div>
-              <h3 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", marginBottom: 14, letterSpacing: "-0.02em" }}>{active.title}</h3>
-              <p style={{ fontSize: 15, lineHeight: 1.75, color: "#475569", marginBottom: 28 }}>{active.desc}</p>
+              <h3 style={{ fontSize: 24, fontWeight: 800, color: "var(--color-ink)", marginBottom: 14, letterSpacing: "-0.02em" }}>{active.title}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--color-copy)", marginBottom: 28 }}>{active.desc}</p>
               <a href="/contact" style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
-                background: COLOR, color: "#fff",
+                background: COLOR, color: "var(--color-white)",
                 padding: "12px 22px", borderRadius: 9,
                 fontSize: 14, fontWeight: 600, textDecoration: "none",
                 transition: "all 0.2s",
@@ -142,11 +146,11 @@ export default function AuditsPage() {
               </a>
             </div>
             <div style={{
-              background: "#fff", border: "1.5px solid #e2e8f0",
+              background: "var(--color-white)", border: "1.5px solid var(--color-border)",
               borderTop: `4px solid ${COLOR}`,
               borderRadius: 14, padding: 28,
             }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#94a3b8", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 16 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--color-subtle)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 16 }}>
                 What&apos;s reviewed
               </div>
               <Checklist color={COLOR} items={active.includes} />
@@ -163,7 +167,7 @@ export default function AuditsPage() {
       </section>
 
       {/* Sample report */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -174,36 +178,39 @@ export default function AuditsPage() {
                 </SectionHeading>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 28 }}>
                   {[
-                    { icon: "📋", title: "Executive summary", body: "A clear top-10 priority list written for both technical and non-technical readers. You know exactly what to fix first and why." },
-                    { icon: "🔬", title: "Detailed findings", body: "Every issue documented with the specific file, query, or configuration causing it — not a generic description." },
-                    { icon: "🛠️", title: "Remediation guidance", body: "For each issue: what to fix, how to fix it, and an estimated effort level. You can hand this directly to any developer." },
-                    { icon: "📈", title: "Impact scoring", body: "Each finding is scored by severity (Critical / High / Medium / Low) and expected business impact if left unfixed." },
-                  ].map((f) => (
+                    { icon: ClipboardList, title: "Executive summary", body: "A clear top-10 priority list written for both technical and non-technical readers. You know exactly what to fix first and why." },
+                    { icon: Microscope, title: "Detailed findings", body: "Every issue documented with the specific file, query, or configuration causing it — not a generic description." },
+                    { icon: Wrench, title: "Remediation guidance", body: "For each issue: what to fix, how to fix it, and an estimated effort level. You can hand this directly to any developer." },
+                    { icon: TrendingUp, title: "Impact scoring", body: "Each finding is scored by severity (Critical / High / Medium / Low) and expected business impact if left unfixed." },
+                  ].map((f) => {
+                    const Icon = f.icon;
+                    return (
                     <div key={f.title} style={{ display: "flex", gap: 14 }}>
                       <div style={{
                         width: 40, height: 40, borderRadius: 10,
                         background: BG, display: "flex", alignItems: "center",
-                        justifyContent: "center", fontSize: 18, flexShrink: 0,
-                      }}>{f.icon}</div>
+                        justifyContent: "center", color: COLOR, flexShrink: 0,
+                      }}><Icon size={19} strokeWidth={2.2} /></div>
                       <div>
-                        <div style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>{f.title}</div>
-                        <div style={{ fontSize: 13, lineHeight: 1.65, color: "#64748b" }}>{f.body}</div>
+                        <div style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)", marginBottom: 4 }}>{f.title}</div>
+                        <div style={{ fontSize: 13, lineHeight: 1.65, color: "var(--color-muted)" }}>{f.body}</div>
                       </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </>
             }
             right={
-              <div style={{ background: "#0f172a", borderRadius: 16, overflow: "hidden" }}>
+              <div style={{ background: "var(--color-ink)", borderRadius: 16, overflow: "hidden" }}>
                 {/* Mock PDF report preview */}
                 <div style={{ background: COLOR, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ color: "#fff", fontSize: 13, fontWeight: 700 }}>Audit Report — example.com</span>
-                  <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 11 }}>5 pages · PDF</span>
+                  <span style={{ color: "var(--color-white)", fontSize: 13, fontWeight: 700 }}>Audit Report — example.com</span>
+                  <span style={{ color: "rgba(255, 255, 255, 0.6)", fontSize: 11 }}>5 pages · PDF</span>
                 </div>
                 <div style={{ padding: 24 }}>
                   <div style={{ marginBottom: 20 }}>
-                    <div style={{ fontSize: 11, color: "#64748b", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Executive Summary</div>
+                    <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Executive Summary</div>
                     {[
                       { label: "Critical issues", count: 2, color: "#ef4444" },
                       { label: "High priority", count: 5, color: "#f97316" },
@@ -211,7 +218,7 @@ export default function AuditsPage() {
                       { label: "Low priority", count: 12, color: "#10b981" },
                     ].map((s) => (
                       <div key={s.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                        <span style={{ fontSize: 12, color: "#94a3b8" }}>{s.label}</span>
+                        <span style={{ fontSize: 12, color: "var(--color-subtle)" }}>{s.label}</span>
                         <span style={{
                           fontSize: 12, fontWeight: 700, color: s.color,
                           background: s.color + "20", padding: "2px 10px", borderRadius: 100,
@@ -219,8 +226,8 @@ export default function AuditsPage() {
                       </div>
                     ))}
                   </div>
-                  <div style={{ borderTop: "1px solid #1e293b", paddingTop: 18 }}>
-                    <div style={{ fontSize: 11, color: "#64748b", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Top Priority Findings</div>
+                  <div style={{ borderTop: "1px solid var(--color-ink-2)", paddingTop: 18 }}>
+                    <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Top Priority Findings</div>
                     {[
                       { title: "Missing security patch SUPEE-11346", severity: "CRITICAL", color: "#ef4444" },
                       { title: "Checkout query running 4.2s without index", severity: "CRITICAL", color: "#ef4444" },
@@ -228,7 +235,7 @@ export default function AuditsPage() {
                     ].map((f) => (
                       <div key={f.title} style={{ marginBottom: 10, padding: "10px 12px", background: "#162032", borderRadius: 8 }}>
                         <div style={{ display: "flex", justifyContent: "space-between", gap: 8 }}>
-                          <span style={{ fontSize: 12, color: "#e2e8f0", lineHeight: 1.4 }}>{f.title}</span>
+                          <span style={{ fontSize: 12, color: "var(--color-border)", lineHeight: 1.4 }}>{f.title}</span>
                           <span style={{
                             fontSize: 9, fontWeight: 700, color: f.color,
                             background: f.color + "20", padding: "2px 7px", borderRadius: 100,
@@ -238,7 +245,7 @@ export default function AuditsPage() {
                       </div>
                     ))}
                   </div>
-                  <div style={{ marginTop: 16, fontSize: 11, color: "#475569", textAlign: "center" }}>
+                  <div style={{ marginTop: 16, fontSize: 11, color: "var(--color-copy)", textAlign: "center" }}>
                     This is a preview. Real reports contain 20–40 detailed findings.
                   </div>
                 </div>
@@ -249,7 +256,7 @@ export default function AuditsPage() {
       </section>
 
       {/* Pricing */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="Pricing" />
@@ -298,8 +305,8 @@ export default function AuditsPage() {
               },
             ].map((tier) => (
               <div key={tier.name} style={{
-                background: tier.highlight ? "#0f172a" : "#fff",
-                border: tier.highlight ? `2px solid ${COLOR}` : "1.5px solid #e2e8f0",
+                background: tier.highlight ? "var(--color-ink)" : "var(--color-white)",
+                border: tier.highlight ? `2px solid ${COLOR}` : "1.5px solid var(--color-border)",
                 borderRadius: 16, padding: "28px 24px",
                 position: "relative",
                 transition: "transform 0.2s, box-shadow 0.2s",
@@ -315,22 +322,22 @@ export default function AuditsPage() {
                 {tier.highlight && (
                   <div style={{
                     position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)",
-                    background: COLOR, color: "#fff",
+                    background: COLOR, color: "var(--color-white)",
                     fontSize: 11, fontWeight: 700, padding: "4px 14px", borderRadius: 100,
                   }}>MOST ORDERED</div>
                 )}
-                <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: tier.highlight ? COLOR : "#94a3b8", marginBottom: 10 }}>{tier.name}</div>
-                <div style={{ fontSize: 36, fontWeight: 800, color: tier.highlight ? "#fff" : "#0f172a", letterSpacing: "-0.03em", marginBottom: 4 }}>{tier.price}</div>
-                {(tier as { period?: string }).period && <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 8 }}>{(tier as { period?: string }).period}</div>}
-                <p style={{ fontSize: 13, lineHeight: 1.65, color: tier.highlight ? "#94a3b8" : "#64748b", marginBottom: 24, minHeight: 52 }}>{tier.desc}</p>
-                <div style={{ borderTop: `1px solid ${tier.highlight ? "#1e293b" : "#f1f5f9"}`, paddingTop: 20, marginBottom: 24 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: tier.highlight ? COLOR : "var(--color-subtle)", marginBottom: 10 }}>{tier.name}</div>
+                <div style={{ fontSize: 36, fontWeight: 800, color: tier.highlight ? "var(--color-white)" : "var(--color-ink)", letterSpacing: "-0.03em", marginBottom: 4 }}>{tier.price}</div>
+                {(tier as { period?: string }).period && <div style={{ fontSize: 12, color: "var(--color-subtle)", marginBottom: 8 }}>{(tier as { period?: string }).period}</div>}
+                <p style={{ fontSize: 13, lineHeight: 1.65, color: tier.highlight ? "var(--color-subtle)" : "var(--color-muted)", marginBottom: 24, minHeight: 52 }}>{tier.desc}</p>
+                <div style={{ borderTop: `1px solid ${tier.highlight ? "var(--color-ink-2)" : "var(--color-bg-muted)"}`, paddingTop: 20, marginBottom: 24 }}>
                   <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
                     {tier.features.map((f) => (
                       <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
                         <span style={{ width: 18, height: 18, borderRadius: "50%", background: COLOR + "20", border: `1.5px solid ${COLOR}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
                           <Check size={10} color={COLOR} strokeWidth={2.5} />
                         </span>
-                        <span style={{ fontSize: 13, color: tier.highlight ? "#cbd5e1" : "#475569", lineHeight: 1.5 }}>{f}</span>
+                        <span style={{ fontSize: 13, color: tier.highlight ? "var(--color-border-strong)" : "var(--color-copy)", lineHeight: 1.5 }}>{f}</span>
                       </li>
                     ))}
                   </ul>
@@ -340,14 +347,14 @@ export default function AuditsPage() {
                   width: "100%", padding: "12px 0", borderRadius: 9,
                   fontSize: 14, fontWeight: 600, textDecoration: "none",
                   background: tier.highlight ? COLOR : "transparent",
-                  color: tier.highlight ? "#fff" : COLOR,
+                  color: tier.highlight ? "var(--color-white)" : COLOR,
                   border: `1.5px solid ${COLOR}`,
                   transition: "all 0.2s",
                 }}
                 onMouseEnter={(e) => {
                   if (!tier.highlight) {
                     (e.currentTarget as HTMLElement).style.background = COLOR;
-                    (e.currentTarget as HTMLElement).style.color = "#fff";
+                    (e.currentTarget as HTMLElement).style.color = "var(--color-white)";
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -366,7 +373,7 @@ export default function AuditsPage() {
       </section>
 
       {/* Outcomes */}
-      <section style={{ background: "#fff", padding: "64px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "64px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Audit Outcomes" />
           <SectionHeading sub="What clients do with their audit results.">After the audit</SectionHeading>
@@ -380,7 +387,7 @@ export default function AuditsPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="FAQ" />

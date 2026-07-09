@@ -1,15 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --orange: #ec7323;
-  --orange-dark: #d4621a;
-  --orange-light: #fef3e8;
-  --dark: #0f172a;
-  --dark-2: #1e293b;
-  --grey: #64748b;
-  --light: #f8fafc;
-  --border: #e2e8f0;
-  --white: #ffffff;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-accent: "42dot Sans", var(--font-sans);
+  --font-serif: Georgia, "Times New Roman", serif;
+
+  --color-brand: #ec7323;
+  --color-brand-rgb: 236, 115, 35;
+  --color-brand-hover: #d4621a;
+  --color-brand-soft: #fef3e8;
+  --color-brand-soft-2: #fff8f0;
+  --color-brand-border: rgba(var(--color-brand-rgb), 0.2);
+
+  --color-ink: #0f172a;
+  --color-ink-rgb: 15, 23, 42;
+  --color-ink-2: #1e293b;
+  --color-copy: #475569;
+  --color-muted: #64748b;
+  --color-subtle: #94a3b8;
+  --color-footer-muted: #334155;
+
+  --color-white: #ffffff;
+  --color-bg: var(--color-white);
+  --color-bg-soft: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-footer: #080f1d;
+
+  --color-success: #10b981;
+  --color-success-soft: #f0fdf4;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+  --color-info: #0284c7;
+  --color-info-dark: #0369a1;
+  --color-info-soft: #f0f9ff;
+  --color-indigo: #6366f1;
+  --color-indigo-soft: #f5f3ff;
+
+  --color-adobe: #ff0000;
+  --color-adobe-soft: #fff5f5;
+  --color-magento: #f46f25;
+  --color-shopify: #96bf48;
+  --color-shopify-soft: #f5fbee;
+
+  --shadow-brand-card: 0 12px 40px rgba(var(--color-brand-rgb), 0.12);
+
+  --orange: var(--color-brand);
+  --orange-dark: var(--color-brand-hover);
+  --orange-light: var(--color-brand-soft);
+  --dark: var(--color-ink);
+  --dark-2: var(--color-ink-2);
+  --grey: var(--color-muted);
+  --light: var(--color-bg-soft);
+  --border: var(--color-border);
+  --white: var(--color-white);
 }
 
 * {
@@ -23,10 +68,11 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #0f172a;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* Ticker animation */
@@ -82,7 +128,7 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: #ec7323;
+  background: var(--color-brand);
   transition: width 0.25s ease;
 }
 .nav-link:hover::after { width: 100%; }
@@ -92,7 +138,7 @@ body {
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 .service-card:hover {
-  box-shadow: 0 12px 40px rgba(236,115,35,0.12);
+  box-shadow: var(--shadow-brand-card);
   transform: translateY(-4px);
 }
 
@@ -103,5 +149,5 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #f1f5f9; }
-::-webkit-scrollbar-thumb { background: #ec7323; border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--color-bg-muted); }
+::-webkit-scrollbar-thumb { background: var(--color-brand); border-radius: 3px; }

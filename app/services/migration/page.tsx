@@ -4,6 +4,7 @@ import {
   SectionLabel, SectionHeading, Checklist,
   PricingTable, FAQ, ProcessSteps, OutcomeCards, TwoCol,
 } from "@/components/services/ServiceComponents";
+import { Clock3, Search, ShieldCheck } from "lucide-react";
 
 const COLOR = "#F46F25";
 const BG = "#fff8f0";
@@ -25,7 +26,7 @@ export default function MigrationPage() {
       breadcrumb="Migration"
     >
       {/* Guarantees */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Our Migration Guarantees" />
           <SectionHeading sub="Every migration we run comes with three non-negotiable commitments. We've delivered on all three across 40+ migrations.">
@@ -34,30 +35,33 @@ export default function MigrationPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="three-col">
             {[
               {
-                icon: "🔒",
+                icon: ShieldCheck,
                 title: "Zero data loss",
                 body: "Every product, variant, order, customer record, and piece of metadata is transferred and validated against the source. We run automated checks before go-live.",
                 metric: "100%",
                 metricLabel: "data accuracy rate",
               },
               {
-                icon: "🔍",
+                icon: Search,
                 title: "SEO rankings protected",
                 body: "Full URL redirect mapping, meta data transfer, canonical handling, and structured data rebuild. We don't just move your content — we protect what it's worth to you in organic traffic.",
                 metric: "0",
                 metricLabel: "ranking drops on average",
               },
               {
-                icon: "⏱️",
+                icon: Clock3,
                 title: "No launch downtime",
                 body: "We run a live migration on a staging URL, validate everything, then switch DNS with a planned cutover window. Average downtime on launch day is under 15 minutes.",
                 metric: "<15min",
                 metricLabel: "average cutover window",
               },
-            ].map((c) => (
+            ].map((c) => {
+              const Icon = c.icon;
+
+              return (
               <div key={c.title} style={{
-                background: "#fff",
-                border: "1.5px solid #e2e8f0",
+                background: "var(--color-white)",
+                border: "1.5px solid var(--color-border)",
                 borderTop: `4px solid ${COLOR}`,
                 borderRadius: 14, padding: "28px 24px",
                 transition: "transform 0.2s, box-shadow 0.2s",
@@ -70,20 +74,33 @@ export default function MigrationPage() {
                 (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}>
-                <div style={{ fontSize: 32, marginBottom: 14 }}>{c.icon}</div>
+                <div style={{
+                  width: 46,
+                  height: 46,
+                  borderRadius: 12,
+                  background: BG,
+                  color: COLOR,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: 14,
+                }}>
+                  <Icon size={22} strokeWidth={2.1} />
+                </div>
                 <div style={{ fontSize: 36, fontWeight: 800, color: COLOR, letterSpacing: "-0.03em", marginBottom: 2 }}>{c.metric}</div>
-                <div style={{ fontSize: 12, color: "#64748b", marginBottom: 14, fontWeight: 500 }}>{c.metricLabel}</div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", marginBottom: 8 }}>{c.title}</div>
-                <div style={{ fontSize: 13, lineHeight: 1.7, color: "#64748b" }}>{c.body}</div>
+                <div style={{ fontSize: 12, color: "var(--color-muted)", marginBottom: 14, fontWeight: 500 }}>{c.metricLabel}</div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: "var(--color-ink)", marginBottom: 8 }}>{c.title}</div>
+                <div style={{ fontSize: 13, lineHeight: 1.7, color: "var(--color-muted)" }}>{c.body}</div>
               </div>
-            ))}
+              );
+            })}
             <style jsx>{`@media(max-width:768px){.three-col{grid-template-columns:1fr!important}}`}</style>
           </div>
         </div>
       </section>
 
       {/* Migration pipeline */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -107,7 +124,7 @@ export default function MigrationPage() {
               <>
                 <SectionLabel text="What's Included" />
                 <div style={{ marginBottom: 24 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "#0f172a", marginBottom: 8 }}>Everything in a full migration</h3>
+                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "var(--color-ink)", marginBottom: 8 }}>Everything in a full migration</h3>
                 </div>
                 <Checklist color={COLOR} items={[
                   "Full product, variant, and metafield transfer",
@@ -126,8 +143,11 @@ export default function MigrationPage() {
                   border: `1px solid ${COLOR}30`,
                   borderRadius: 12, padding: "20px",
                 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: COLOR, marginBottom: 6 }}>🔍 Migration Roadmap — Fixed Fee</div>
-                  <div style={{ fontSize: 13, lineHeight: 1.65, color: "#475569" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 700, color: COLOR, marginBottom: 6 }}>
+                    <Search size={15} strokeWidth={2.2} />
+                    Migration Roadmap — Fixed Fee
+                  </div>
+                  <div style={{ fontSize: 13, lineHeight: 1.65, color: "var(--color-copy)" }}>
                     Not ready to commit to a full migration? Start with our fixed-fee Migration Roadmap. We audit your Magento store and deliver a written plan covering scope, complexity, timeline, and cost — before you sign anything.
                   </div>
                   <div style={{ marginTop: 12, fontSize: 14, fontWeight: 700, color: COLOR }}>From £499 · 5 business day turnaround</div>
@@ -139,7 +159,7 @@ export default function MigrationPage() {
       </section>
 
       {/* Why switch */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Magento vs Shopify" />
           <SectionHeading sub="Why businesses make the switch — and what they gain on the other side.">
@@ -148,8 +168,8 @@ export default function MigrationPage() {
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 600 }}>
               <thead>
-                <tr style={{ background: "#0f172a" }}>
-                  <th style={{ padding: "14px 20px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "#94a3b8", letterSpacing: "0.06em" }}>Factor</th>
+                <tr style={{ background: "var(--color-ink)" }}>
+                  <th style={{ padding: "14px 20px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "var(--color-subtle)", letterSpacing: "0.06em" }}>Factor</th>
                   <th style={{ padding: "14px 20px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "#F46F25", letterSpacing: "0.06em" }}>Magento 2</th>
                   <th style={{ padding: "14px 20px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "#96BF48", letterSpacing: "0.06em" }}>Shopify / Plus</th>
                 </tr>
@@ -165,10 +185,10 @@ export default function MigrationPage() {
                   ["Time to market (new features)", "Weeks to months", "Days to weeks"],
                   ["B2B capabilities (Plus)", "Available but complex", "Native B2B features in Shopify Plus"],
                 ].map(([factor, magento, shopify], i) => (
-                  <tr key={factor} style={{ background: i % 2 === 0 ? "#fff" : "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
-                    <td style={{ padding: "14px 20px", fontSize: 13, fontWeight: 600, color: "#0f172a" }}>{factor}</td>
-                    <td style={{ padding: "14px 20px", fontSize: 13, color: "#64748b" }}>{magento}</td>
-                    <td style={{ padding: "14px 20px", fontSize: 13, color: "#10b981", fontWeight: 500 }}>✓ {shopify}</td>
+                  <tr key={factor} style={{ background: i % 2 === 0 ? "var(--color-white)" : "var(--color-bg-soft)", borderBottom: "1px solid var(--color-border)" }}>
+                    <td style={{ padding: "14px 20px", fontSize: 13, fontWeight: 600, color: "var(--color-ink)" }}>{factor}</td>
+                    <td style={{ padding: "14px 20px", fontSize: 13, color: "var(--color-muted)" }}>{magento}</td>
+                    <td style={{ padding: "14px 20px", fontSize: 13, color: "var(--color-success)", fontWeight: 500 }}>✓ {shopify}</td>
                   </tr>
                 ))}
               </tbody>
@@ -178,7 +198,7 @@ export default function MigrationPage() {
       </section>
 
       {/* Outcomes */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Migration Outcomes" />
           <SectionHeading sub="Results from real client migrations — not estimates.">Numbers from real projects</SectionHeading>
@@ -192,7 +212,7 @@ export default function MigrationPage() {
       </section>
 
       {/* Pricing */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="Pricing" />
@@ -246,7 +266,7 @@ export default function MigrationPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="FAQ" />

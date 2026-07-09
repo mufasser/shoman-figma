@@ -9,14 +9,14 @@ const services = [
     platformColor: "#FF0000",
     platformSymbol: "Ac",
     label: "Platform Engineering",
-    title: "Adobe Commerce & Magento Support",
+    title: "Adobe Commerce (Magento) Engineering",
     description:
-      "From security patching and performance stabilisation to custom module builds — we keep your Adobe Commerce and Magento 2 store fast, secure, and future-ready.",
+      "Security patching, performance stabilisation, and custom module builds. We keep your platform fast, secure, and future-ready.",
     bullets: [
       "Core security patches & updates",
-      "Custom module & extension builds",
-      "Performance audits & speed optimisation",
-      "Ongoing retainer support with clear SLAs",
+      "Custom module builds",
+      "Performance optimisation",
+      "Clear SLA retainers",
     ],
     accentColor: "#FF0000",
     bgAccent: "#fff5f5",
@@ -27,14 +27,14 @@ const services = [
     platformColor: "#F46F25",
     platformSymbol: "M→",
     label: "Platform Migration",
-    title: "Magento to Shopify Migration",
+    title: "Adobe Commerce App Builder",
     description:
-      "Escape technical debt and infrastructure overhead. We migrate your entire store — products, orders, customer data, SEO, and integrations — with zero data loss.",
+      "Full store migration — products, orders, data, SEO, integrations — with zero data loss and no downtime on launch day.",
     bullets: [
-      "Full data extraction & clean transfer",
-      "SEO redirect mapping & rank protection",
-      "Third-party integration re-mapping",
-      "Fixed-price Migration Roadmap available",
+      "Full data extraction & transfer",
+      "SEO redirect mapping",
+      "Third-party re-mapping",
+      "Fixed-price Roadmap available",
     ],
     accentColor: "#F46F25",
     bgAccent: "#fff8f0",
@@ -45,14 +45,14 @@ const services = [
     platformColor: "#96BF48",
     platformSymbol: "Sh",
     label: "Store Development",
-    title: "Shopify Store Launch & Development",
+    title: "Shopify Development",
     description:
-      "Starting fresh or stepping up to Shopify Plus? We design and build high-converting Shopify stores for startups and growing brands — on time, on budget.",
+      "Bespoke Shopify and Shopify Plus builds for startups and growing brands — on time, on budget, conversion-ready from day one.",
     bullets: [
-      "Bespoke theme design & custom development",
-      "App integrations: Klaviyo, Stripe, Algolia",
-      "Shopify Plus enterprise capabilities",
-      "Conversion-focused UX from day one",
+      "Custom theme design & development",
+      "App integrations (Klaviyo, Stripe)",
+      "Shopify Plus capabilities",
+      "Conversion-focused UX design",
     ],
     accentColor: "#96BF48",
     bgAccent: "#f5fbee",
@@ -63,14 +63,14 @@ const services = [
     platformColor: "#0284C7",
     platformSymbol: "Au",
     label: "Fixed-Fee Service",
-    title: "Technical Audit Service",
+    title: "Systems Integrations",
     description:
-      "Get a clear, prioritised picture of your store's health before investing in new features. Expert-written, actionable PDF report — not an automated tool export.",
+      "Prioritised, expert-written PDF report on your store's security, performance, checkout health, and migration complexity.",
     bullets: [
       "Security & core health check",
-      "Checkout & payment path analysis",
-      "Migration complexity assessment",
-      "5 business day turnaround from £499",
+      "Checkout path analysis",
+      "Migration assessment",
+      "From £499 · 5 day turnaround",
     ],
     accentColor: "#0284C7",
     bgAccent: "#f0f9ff",
@@ -79,7 +79,7 @@ const services = [
     id: 5,
     platform: "Integration",
     platformColor: "#6366F1",
-    platformSymbol: "⚙",
+    platformSymbol: "API",
     label: "Systems & API",
     title: "Enterprise Systems Integration",
     description:
@@ -138,54 +138,72 @@ export default function ServicesCarousel() {
   }
 
   return (
-    <section id="services" style={{ background: "#f8fafc", padding: "96px 0" }}>
+    <section id="services" style={{ background: "var(--color-bg-soft)", padding: "96px 0" }}>
       <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
 
         {/* Section header */}
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 48, flexWrap: "wrap", gap: 24 }}>
           <div>
             <div style={{
-              fontSize: 12, fontWeight: 700, color: "#ec7323",
+              fontSize: 12, fontWeight: 700, color: "var(--color-brand)",
               letterSpacing: "0.1em", textTransform: "uppercase",
               marginBottom: 12, display: "flex", alignItems: "center", gap: 8,
             }}>
-              <span style={{ width: 24, height: 2, background: "#ec7323", display: "inline-block" }} />
+              <span style={{ width: 24, height: 2, background: "var(--color-brand)", display: "inline-block" }} />
               Our Services
             </div>
             <h2 style={{
               fontSize: "clamp(28px, 4vw, 44px)",
               fontWeight: 800, lineHeight: 1.15,
-              letterSpacing: "-0.02em", color: "#0f172a",
+              letterSpacing: "-0.02em", color: "var(--color-ink)",
               maxWidth: 520,
             }}>
-              Engineering services for every stage of your ecommerce journey
+              Engineering services for every stage of your eCommerce journey
             </h2>
           </div>
 
           {/* Arrow controls */}
           <div style={{ display: "flex", gap: 12 }}>
-            {[{ action: prev, icon: <ChevronLeft size={20} /> }, { action: next, icon: <ChevronRight size={20} /> }].map((btn, i) => (
-              <button key={i} onClick={btn.action} style={{
+            <button onClick={prev} aria-label="Previous service" style={{
+              width: 48, height: 48, borderRadius: "50%",
+              border: "1.5px solid var(--color-border)",
+              background: "var(--color-white)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              cursor: "pointer", color: "var(--color-ink)",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.background = "var(--color-brand)";
+              (e.currentTarget as HTMLElement).style.color = "var(--color-white)";
+              (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.background = "var(--color-white)";
+              (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
+              (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
+            }}>
+              <ChevronLeft size={20} />
+            </button>
+            <button onClick={next} aria-label="Next service" style={{
                 width: 48, height: 48, borderRadius: "50%",
-                border: "1.5px solid #e2e8f0",
-                background: "#fff",
+                border: "1.5px solid var(--color-border)",
+                background: "var(--color-white)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", color: "#0f172a",
+                cursor: "pointer", color: "var(--color-ink)",
                 transition: "all 0.2s",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "#ec7323";
-                (e.currentTarget as HTMLElement).style.color = "#fff";
-                (e.currentTarget as HTMLElement).style.borderColor = "#ec7323";
+                (e.currentTarget as HTMLElement).style.background = "var(--color-brand)";
+                (e.currentTarget as HTMLElement).style.color = "var(--color-white)";
+                (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "#fff";
-                (e.currentTarget as HTMLElement).style.color = "#0f172a";
-                (e.currentTarget as HTMLElement).style.borderColor = "#e2e8f0";
+                (e.currentTarget as HTMLElement).style.background = "var(--color-white)";
+                (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
+                (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
               }}>
-                {btn.icon}
-              </button>
-            ))}
+              <ChevronRight size={20} />
+            </button>
           </div>
         </div>
 
@@ -203,10 +221,10 @@ export default function ServicesCarousel() {
                 key={`${idx}-${pos}`}
                 className="service-card"
                 style={{
-                  background: "#fff",
+                  background: "var(--color-white)",
                   borderRadius: 16,
                   padding: "28px 24px",
-                  border: `1px solid ${isFirst ? s.accentColor + "40" : "#e2e8f0"}`,
+                  border: `1px solid ${isFirst ? s.accentColor + "40" : "var(--color-border)"}`,
                   borderTop: `4px solid ${s.accentColor}`,
                   opacity: isFirst ? 1 : 0.85,
                   transform: isFirst ? "scale(1)" : "scale(0.98)",
@@ -235,13 +253,13 @@ export default function ServicesCarousel() {
                       width: 20, height: 20, borderRadius: 4,
                       background: s.platformColor,
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: 8, fontWeight: 800, color: "#fff",
+                      fontSize: 8, fontWeight: 800, color: "var(--color-white)",
                     }}>{s.platformSymbol}</div>
                     <span style={{ fontSize: 11, fontWeight: 600, color: s.accentColor }}>{s.label}</span>
                   </div>
                   <span style={{
-                    fontSize: 11, fontWeight: 600, color: "#94a3b8",
-                    background: "#f1f5f9", borderRadius: 4, padding: "2px 8px",
+                    fontSize: 11, fontWeight: 600, color: "var(--color-subtle)",
+                    background: "var(--color-bg-muted)", borderRadius: 4, padding: "2px 8px",
                   }}>
                     0{s.id}
                   </span>
@@ -249,13 +267,13 @@ export default function ServicesCarousel() {
 
                 <h3 style={{
                   fontSize: 17, fontWeight: 700, lineHeight: 1.3,
-                  color: "#0f172a", marginBottom: 12, letterSpacing: "-0.01em",
+                  color: "var(--color-ink)", marginBottom: 12, letterSpacing: "-0.01em",
                 }}>
                   {s.title}
                 </h3>
 
                 <p style={{
-                  fontSize: 13, lineHeight: 1.65, color: "#64748b", marginBottom: 20,
+                  fontSize: 13, lineHeight: 1.65, color: "var(--color-muted)", marginBottom: 20,
                 }}>
                   {s.description}
                 </p>
@@ -264,7 +282,7 @@ export default function ServicesCarousel() {
                   {s.bullets.map((b) => (
                     <li key={b} style={{
                       display: "flex", alignItems: "flex-start", gap: 8,
-                      fontSize: 12, color: "#475569", marginBottom: 8, lineHeight: 1.5,
+                      fontSize: 12, color: "var(--color-copy)", marginBottom: 8, lineHeight: 1.5,
                     }}>
                       <span style={{
                         width: 16, height: 16, borderRadius: "50%",
@@ -302,7 +320,7 @@ export default function ServicesCarousel() {
               style={{
                 width: active === i ? 24 : 8,
                 height: 8, borderRadius: 4,
-                background: active === i ? "#ec7323" : "#cbd5e1",
+                background: active === i ? "var(--color-brand)" : "var(--color-border-strong)",
                 border: "none", cursor: "pointer",
                 transition: "all 0.3s ease",
               }}

@@ -5,27 +5,28 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const testimonials = [
   {
     quote:
-      "Shoman Solutions fixed in two weeks what our previous agency couldn't solve in six months. Our Adobe Commerce store went from an embarrassing 8-second load to under 2 seconds. The difference in conversions was immediate.",
-    name: "Sarah M.",
-    role: "Head of Ecommerce",
-    company: "UK Fashion Retailer",
-    initial: "S",
+      "Working with Shoman Solutions has been a fantastic experience, and I wouldn't hesitate to recommend them. Throughout our engagement, Shoman Solutions consistently delivered high-quality Adobe Commerce (Magento) development...",
+    // name: "Matthew Johnson",
+    name: "Matthew J***",
+    role: "Head of Core Software Services",
+    company: "PerfectDraft",
+    initial: "MJ",
     color: "#FF0000",
     platform: "Adobe Commerce",
   },
   {
     quote:
-      "The Magento to Shopify migration was the smoothest technical project we've run in years. Not a single order was lost, our SEO rankings held, and the launch was genuinely boring — which is exactly what you want.",
-    name: "James T.",
+      "Can't really say anything other than Shoman Solutions Limited is very professional at their work and is my go to for anything Magento related...",
+    name: "S*** Joan",
     role: "Operations Director",
     company: "B2B Distributor",
-    initial: "J",
+    initial: "SJ",
     color: "#96BF48",
-    platform: "Shopify Plus",
+    platform: "Magento",
   },
   {
     quote:
-      "Their technical audit was the most useful £499 we've spent. We went in thinking we had a checkout problem and came out knowing we had five database issues that were causing it. Clear, actionable, no fluff.",
+      "Great and experienced Developers. They were able to implement a system whereby we streamlined our process and made sure our coding was up to Magento's standards...",
     name: "Priya K.",
     role: "CTO",
     company: "DTC Homeware Brand",
@@ -44,7 +45,7 @@ export default function Testimonials() {
   const t = testimonials[active];
 
   return (
-    <section style={{ background: "#fff", padding: "96px 0", overflow: "hidden" }}>
+    <section style={{ background: "var(--color-white)", padding: "96px 0", overflow: "hidden" }}>
       <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
 
         <div style={{
@@ -56,25 +57,24 @@ export default function Testimonials() {
           {/* Left — decorative */}
           <div>
             <div style={{
-              fontSize: 12, fontWeight: 700, color: "#ec7323",
+              fontSize: 12, fontWeight: 700, color: "var(--color-brand)",
               letterSpacing: "0.1em", textTransform: "uppercase",
               marginBottom: 12, display: "flex", alignItems: "center", gap: 8,
             }}>
-              <span style={{ width: 24, height: 2, background: "#ec7323", display: "inline-block" }} />
+              <span style={{ width: 24, height: 2, background: "var(--color-brand)", display: "inline-block" }} />
               Testimonials
             </div>
             <h2 style={{
               fontSize: "clamp(28px, 3.5vw, 40px)",
               fontWeight: 800, lineHeight: 1.2,
-              letterSpacing: "-0.02em", color: "#0f172a",
+              letterSpacing: "-0.02em", color: "var(--color-ink)",
               marginBottom: 24,
             }}>
-              Hear what our<br />clients say about<br />
-              <span style={{ color: "#ec7323" }}>working with us.</span>
+              Hear what our clients say about &nbsp;
+              <span style={{ color: "var(--color-brand)" }}>working with us.</span>
             </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.7, color: "#64748b" }}>
-              Every client relationship starts with a technical conversation.
-              These are the outcomes they came back to tell us about.
+            <p style={{ fontSize: 15, lineHeight: 1.7, color: "var(--color-muted)" }}>
+              Every client relationship starts with a technical conversation. These are the outcomes they came back to tell us about.
             </p>
 
             {/* Avatar cluster */}
@@ -83,10 +83,10 @@ export default function Testimonials() {
                 <div key={i} style={{
                   width: 44, height: 44, borderRadius: "50%",
                   background: t.color,
-                  border: "3px solid #fff",
+                  border: "3px solid var(--color-white)",
                   marginLeft: i === 0 ? 0 : -12,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 16, fontWeight: 800, color: "#fff",
+                  fontSize: 16, fontWeight: 800, color: "var(--color-white)",
                   cursor: "pointer",
                   zIndex: testimonials.length - i,
                   transition: "transform 0.2s",
@@ -96,7 +96,7 @@ export default function Testimonials() {
                 onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
                 >{t.initial}</div>
               ))}
-              <span style={{ marginLeft: 16, fontSize: 13, color: "#64748b", fontWeight: 500 }}>
+              <span style={{ marginLeft: 16, fontSize: 13, color: "var(--color-muted)", fontWeight: 500 }}>
                 {testimonials.length} clients · 5★ average
               </span>
             </div>
@@ -105,8 +105,8 @@ export default function Testimonials() {
           {/* Right — testimonial card */}
           <div>
             <div style={{
-              background: "#f8fafc",
-              border: "1.5px solid #e2e8f0",
+              background: "var(--color-bg-soft)",
+              border: "1.5px solid var(--color-border)",
               borderRadius: 20,
               padding: 40,
               position: "relative",
@@ -114,10 +114,10 @@ export default function Testimonials() {
               {/* Quote mark */}
               <div style={{
                 position: "absolute", top: 24, right: 32,
-                fontSize: 80, fontWeight: 900, color: "#ec7323",
+                fontSize: 80, fontWeight: 900, color: "var(--color-brand)",
                 opacity: 0.12, lineHeight: 1,
-                fontFamily: "Georgia, serif",
-              }}>"</div>
+                fontFamily: "var(--font-serif)",
+              }}>&quot;</div>
 
               {/* Platform badge */}
               <div style={{
@@ -134,17 +134,17 @@ export default function Testimonials() {
               {/* Stars */}
               <div style={{ display: "flex", gap: 4, marginBottom: 20 }}>
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} style={{ color: "#ec7323", fontSize: 16 }}>★</span>
+                  <span key={i} style={{ color: "var(--color-brand)", fontSize: 16 }}>★</span>
                 ))}
               </div>
 
               <blockquote style={{
-                fontSize: 17, lineHeight: 1.75, color: "#1e293b",
+                fontSize: 17, lineHeight: 1.75, color: "var(--color-ink-2)",
                 fontStyle: "italic", marginBottom: 28,
-                borderLeft: "3px solid #ec7323",
+                borderLeft: "3px solid var(--color-brand)",
                 paddingLeft: 20,
               }}>
-                "{t.quote}"
+                &quot;{t.quote}&quot;
               </blockquote>
 
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
@@ -153,11 +153,11 @@ export default function Testimonials() {
                     width: 44, height: 44, borderRadius: "50%",
                     background: t.color,
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 18, fontWeight: 800, color: "#fff",
+                    fontSize: 18, fontWeight: 800, color: "var(--color-white)",
                   }}>{t.initial}</div>
                   <div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: "#0f172a" }}>{t.name}</div>
-                    <div style={{ fontSize: 12, color: "#64748b" }}>{t.role} · {t.company}</div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)" }}>{t.name}</div>
+                    <div style={{ fontSize: 12, color: "var(--color-muted)" }}>{t.role} · {t.company}</div>
                   </div>
                 </div>
 
@@ -166,20 +166,20 @@ export default function Testimonials() {
                   {[{ action: prev, icon: <ChevronLeft size={16} /> }, { action: next, icon: <ChevronRight size={16} /> }].map((btn, i) => (
                     <button key={i} onClick={btn.action} style={{
                       width: 40, height: 40, borderRadius: "50%",
-                      border: "1.5px solid #e2e8f0", background: "#fff",
+                      border: "1.5px solid var(--color-border)", background: "var(--color-white)",
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      cursor: "pointer", color: "#0f172a",
+                      cursor: "pointer", color: "var(--color-ink)",
                       transition: "all 0.2s",
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "#ec7323";
-                      (e.currentTarget as HTMLElement).style.color = "#fff";
-                      (e.currentTarget as HTMLElement).style.borderColor = "#ec7323";
+                      (e.currentTarget as HTMLElement).style.background = "var(--color-brand)";
+                      (e.currentTarget as HTMLElement).style.color = "var(--color-white)";
+                      (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)";
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "#fff";
-                      (e.currentTarget as HTMLElement).style.color = "#0f172a";
-                      (e.currentTarget as HTMLElement).style.borderColor = "#e2e8f0";
+                      (e.currentTarget as HTMLElement).style.background = "var(--color-white)";
+                      (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
+                      (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
                     }}>
                       {btn.icon}
                     </button>
@@ -193,7 +193,7 @@ export default function Testimonials() {
                   <button key={i} onClick={() => setActive(i)} style={{
                     width: active === i ? 20 : 6, height: 6,
                     borderRadius: 3,
-                    background: active === i ? "#ec7323" : "#cbd5e1",
+                    background: active === i ? "var(--color-brand)" : "var(--color-border-strong)",
                     border: "none", cursor: "pointer",
                     transition: "all 0.3s",
                   }} />

@@ -4,6 +4,17 @@ import {
   SectionLabel, SectionHeading, PainGrid, Checklist,
   FAQ, ProcessSteps, OutcomeCards, TwoCol,
 } from "@/components/services/ServiceComponents";
+import {
+  CalendarClock,
+  CircleDollarSign,
+  CircleOff,
+  Gauge,
+  GraduationCap,
+  Handshake,
+  MessageCircleQuestion,
+  SearchCheck,
+  Tag,
+} from "lucide-react";
 
 const COLOR = "#0284C7";
 const BG = "#f0f9ff";
@@ -25,25 +36,25 @@ export default function WhiteLabelPage() {
       breadcrumb="White-Label Partnerships"
     >
       {/* Problems we solve */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Agency Problems We Solve" />
           <SectionHeading sub="Every problem below is one we hear from agency partners in the first conversation. If any of these sound familiar, we should talk.">
             The situations that bring agencies to us
           </SectionHeading>
           <PainGrid color={COLOR} items={[
-            { icon: "🚫", title: "Turning away profitable work", body: "A client asks for a Magento build or Shopify Plus project and you have to pass because your team doesn't have the platform depth. That revenue goes to a competitor." },
-            { icon: "🎲", title: "Freelancer quality lottery", body: "You've used freelancers for overflow before. Sometimes great, often unreliable, always risky when there's a deadline or a difficult client. The inconsistency is the problem." },
-            { icon: "📅", title: "Missing deadlines under pressure", body: "Your internal dev team is stretched. A project slips. The client relationship suffers. You need capacity that's actually reliable when you book it." },
-            { icon: "💰", title: "Cost of full-time specialist hires", body: "A senior Adobe Commerce engineer costs £70K–£90K per year. You don't have enough specialist work to justify the hire, but you keep losing projects without one." },
-            { icon: "🔍", title: "No senior technical review", body: "Your developers are capable but haven't worked at the scale or complexity the client needs. You want a senior layer that can QA the work and give you confidence before it goes live." },
-            { icon: "📢", title: "Clients asking questions you can't answer", body: "A client asks about Shopify Plus Checkout Extensibility, or Adobe Commerce headless, or SAP integration. You need someone who can actually answer — not someone googling it." },
+            { icon: CircleOff, title: "Turning away profitable work", body: "A client asks for a Magento build or Shopify Plus project and you have to pass because your team doesn't have the platform depth. That revenue goes to a competitor." },
+            { icon: Gauge, title: "Freelancer quality lottery", body: "You've used freelancers for overflow before. Sometimes great, often unreliable, always risky when there's a deadline or a difficult client. The inconsistency is the problem." },
+            { icon: CalendarClock, title: "Missing deadlines under pressure", body: "Your internal dev team is stretched. A project slips. The client relationship suffers. You need capacity that's actually reliable when you book it." },
+            { icon: CircleDollarSign, title: "Cost of full-time specialist hires", body: "A senior Adobe Commerce engineer costs £70K–£90K per year. You don't have enough specialist work to justify the hire, but you keep losing projects without one." },
+            { icon: SearchCheck, title: "No senior technical review", body: "Your developers are capable but haven't worked at the scale or complexity the client needs. You want a senior layer that can QA the work and give you confidence before it goes live." },
+            { icon: MessageCircleQuestion, title: "Clients asking questions you can't answer", body: "A client asks about Shopify Plus Checkout Extensibility, or Adobe Commerce headless, or SAP integration. You need someone who can actually answer — not someone googling it." },
           ]} />
         </div>
       </section>
 
       {/* How it works */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -64,35 +75,37 @@ export default function WhiteLabelPage() {
               <>
                 <SectionLabel text="Operational Models" />
                 <div style={{ marginBottom: 24 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "#0f172a", marginBottom: 8 }}>
+                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "var(--color-ink)", marginBottom: 8 }}>
                     Three ways to work with us
                   </h3>
                 </div>
                 {[
-                  {
-                    icon: "🏷️",
+	                  {
+	                    icon: Tag,
                     title: "Full White-Label",
                     body: "We build everything under your brand. All code, documentation, and deliverables carry your agency name. Invisible to your client.",
                     color: COLOR,
                   },
-                  {
-                    icon: "🤝",
+	                  {
+	                    icon: Handshake,
                     title: "Technical Sub-Contractor",
                     body: "You brief us, we deliver. Your client knows a specialist partner is involved but not who. Common for larger projects where specialist credentials matter.",
                     color: "#6366F1",
                   },
-                  {
-                    icon: "🎓",
+	                  {
+	                    icon: GraduationCap,
                     title: "Technical Consulting",
                     body: "We join your team on calls, review architecture decisions, answer hard client questions, and give your team the senior technical layer they need without a full project handoff.",
-                    color: "#ec7323",
+                    color: "var(--color-brand)",
                   },
-                ].map((m) => (
-                  <div key={m.title} style={{
+	                ].map((m) => {
+                    const Icon = m.icon;
+                    return (
+	                  <div key={m.title} style={{
                     display: "flex", gap: 16,
                     padding: "18px 20px",
-                    background: "#f8fafc",
-                    border: "1px solid #e2e8f0",
+                    background: "var(--color-bg-soft)",
+                    border: "1px solid var(--color-border)",
                     borderLeft: `4px solid ${m.color}`,
                     borderRadius: 10, marginBottom: 12,
                     transition: "transform 0.2s",
@@ -100,13 +113,19 @@ export default function WhiteLabelPage() {
                   onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.transform = "translateX(4px)"}
                   onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.transform = "translateX(0)"}
                   >
-                    <span style={{ fontSize: 24, flexShrink: 0 }}>{m.icon}</span>
+	                    <span style={{
+                        width: 38, height: 38, borderRadius: 10,
+                        background: m.color + "12", color: m.color,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        flexShrink: 0,
+                      }}><Icon size={19} strokeWidth={2.2} /></span>
                     <div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>{m.title}</div>
-                      <div style={{ fontSize: 13, lineHeight: 1.65, color: "#64748b" }}>{m.body}</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)", marginBottom: 4 }}>{m.title}</div>
+                      <div style={{ fontSize: 13, lineHeight: 1.65, color: "var(--color-muted)" }}>{m.body}</div>
                     </div>
-                  </div>
-                ))}
+	                  </div>
+                    );
+                  })}
               </>
             }
           />
@@ -114,7 +133,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* What you get */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -138,15 +157,15 @@ export default function WhiteLabelPage() {
               </>
             }
             right={
-              <div style={{ background: "#0f172a", borderRadius: 16, padding: 28 }}>
-                <div style={{ fontSize: 11, color: "#64748b", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 20 }}>
+              <div style={{ background: "var(--color-ink)", borderRadius: 16, padding: 28 }}>
+                <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 20 }}>
                   Active partner projects
                 </div>
                 {[
                   { agency: "Digital Agency, London", project: "Adobe Commerce Rebuild", platform: "Ac", color: "#FF0000", status: "In Sprint 3", progress: 72 },
                   { agency: "Creative Studio, Manchester", project: "Shopify Plus Launch", platform: "Sh", color: "#96BF48", status: "UAT Phase", progress: 88 },
                   { agency: "Marketing Agency, Leeds", project: "Magento → Shopify", platform: "→", color: "#F46F25", status: "Data Migration", progress: 55 },
-                  { agency: "Web Agency, Birmingham", project: "SAP Integration", platform: "⚙", color: "#6366F1", status: "Live", progress: 100 },
+	                  { agency: "Web Agency, Birmingham", project: "SAP Integration", platform: "API", color: "#6366F1", status: "Live", progress: 100 },
                 ].map((p) => (
                   <div key={p.agency} style={{ marginBottom: 20 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
@@ -154,23 +173,23 @@ export default function WhiteLabelPage() {
                         width: 28, height: 28, borderRadius: 6,
                         background: p.color,
                         display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 9, fontWeight: 800, color: "#fff", flexShrink: 0,
+                        fontSize: 9, fontWeight: 800, color: "var(--color-white)", flexShrink: 0,
                       }}>{p.platform}</div>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 12, fontWeight: 600, color: "#e2e8f0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.project}</div>
-                        <div style={{ fontSize: 10, color: "#64748b" }}>{p.agency}</div>
+                        <div style={{ fontSize: 12, fontWeight: 600, color: "var(--color-border)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.project}</div>
+                        <div style={{ fontSize: 10, color: "var(--color-muted)" }}>{p.agency}</div>
                       </div>
                       <span style={{
                         fontSize: 9, fontWeight: 600, color: p.color,
                         background: p.color + "20", padding: "2px 8px", borderRadius: 100, whiteSpace: "nowrap",
                       }}>{p.status}</span>
                     </div>
-                    <div style={{ height: 4, background: "#1e293b", borderRadius: 2, overflow: "hidden" }}>
+                    <div style={{ height: 4, background: "var(--color-ink-2)", borderRadius: 2, overflow: "hidden" }}>
                       <div style={{ height: "100%", width: `${p.progress}%`, background: p.color, borderRadius: 2 }} />
                     </div>
                   </div>
                 ))}
-                <div style={{ paddingTop: 16, borderTop: "1px solid #1e293b", fontSize: 11, color: "#475569", textAlign: "center" }}>
+                <div style={{ paddingTop: 16, borderTop: "1px solid var(--color-ink-2)", fontSize: 11, color: "var(--color-copy)", textAlign: "center" }}>
                   All client names anonymised · NDA protected
                 </div>
               </div>
@@ -180,7 +199,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* Outcomes */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Partnership Results" />
           <SectionHeading sub="What agencies gain when they add our team to their roster.">
@@ -196,7 +215,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* Partner enquiry box */}
-      <section style={{ background: "#f8fafc", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <SectionLabel text="Start a Partnership" />
@@ -205,7 +224,7 @@ export default function WhiteLabelPage() {
             </SectionHeading>
           </div>
           <div style={{
-            background: "#fff", border: "1.5px solid #e2e8f0",
+            background: "var(--color-white)", border: "1.5px solid var(--color-border)",
             borderRadius: 16, padding: 36,
           }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }} className="form-grid">
@@ -216,20 +235,20 @@ export default function WhiteLabelPage() {
                 { label: "Website", type: "url", placeholder: "https://youragency.com" },
               ].map((f) => (
                 <div key={f.label}>
-                  <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "#0f172a", marginBottom: 6 }}>{f.label}</label>
+                  <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "var(--color-ink)", marginBottom: 6 }}>{f.label}</label>
                   <input type={f.type} placeholder={f.placeholder} style={{
                     width: "100%", padding: "11px 14px",
-                    border: "1.5px solid #e2e8f0", borderRadius: 8,
-                    fontSize: 13, color: "#0f172a", background: "#f8fafc",
+                    border: "1.5px solid var(--color-border)", borderRadius: 8,
+                    fontSize: 13, color: "var(--color-ink)", background: "var(--color-bg-soft)",
                     outline: "none", transition: "border-color 0.2s",
                   }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = COLOR)}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = "#e2e8f0")} />
+                  onBlur={(e) => (e.currentTarget.style.borderColor = "var(--color-border)")} />
                 </div>
               ))}
             </div>
             <div style={{ marginBottom: 16 }}>
-              <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "#0f172a", marginBottom: 6 }}>
+              <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "var(--color-ink)", marginBottom: 6 }}>
                 What type of work do you want to refer?
               </label>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -237,9 +256,9 @@ export default function WhiteLabelPage() {
                   <label key={opt} style={{
                     display: "flex", alignItems: "center", gap: 6,
                     padding: "8px 14px",
-                    background: "#f8fafc", border: "1.5px solid #e2e8f0",
+                    background: "var(--color-bg-soft)", border: "1.5px solid var(--color-border)",
                     borderRadius: 8, cursor: "pointer", fontSize: 13,
-                    color: "#475569", fontWeight: 500,
+                    color: "var(--color-copy)", fontWeight: 500,
                     transition: "all 0.15s",
                   }}
                   onMouseEnter={(e) => {
@@ -247,8 +266,8 @@ export default function WhiteLabelPage() {
                     (e.currentTarget as HTMLElement).style.color = COLOR;
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "#e2e8f0";
-                    (e.currentTarget as HTMLElement).style.color = "#475569";
+                    (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
+                    (e.currentTarget as HTMLElement).style.color = "var(--color-copy)";
                   }}>
                     <input type="checkbox" style={{ accentColor: COLOR }} /> {opt}
                   </label>
@@ -256,13 +275,13 @@ export default function WhiteLabelPage() {
               </div>
             </div>
             <div style={{ marginBottom: 20 }}>
-              <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "#0f172a", marginBottom: 6 }}>
+              <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "var(--color-ink)", marginBottom: 6 }}>
                 Monthly capacity needed (rough estimate)
               </label>
               <select style={{
                 width: "100%", padding: "11px 14px",
-                border: "1.5px solid #e2e8f0", borderRadius: 8,
-                fontSize: 13, color: "#475569", background: "#f8fafc",
+                border: "1.5px solid var(--color-border)", borderRadius: 8,
+                fontSize: 13, color: "var(--color-copy)", background: "var(--color-bg-soft)",
                 outline: "none",
               }}>
                 <option>1–2 projects per month</option>
@@ -274,7 +293,7 @@ export default function WhiteLabelPage() {
             </div>
             <button style={{
               width: "100%", padding: "14px 0",
-              background: COLOR, color: "#fff",
+              background: COLOR, color: "var(--color-white)",
               border: "none", borderRadius: 9,
               fontSize: 15, fontWeight: 600, cursor: "pointer",
               transition: "background 0.2s, transform 0.15s",
@@ -289,7 +308,7 @@ export default function WhiteLabelPage() {
             }}>
               Submit Partnership Enquiry →
             </button>
-            <p style={{ textAlign: "center", fontSize: 12, color: "#94a3b8", marginTop: 12 }}>
+            <p style={{ textAlign: "center", fontSize: 12, color: "var(--color-subtle)", marginTop: 12 }}>
               We respond within 24 hours · NDA sent before any project details shared
             </p>
           </div>
@@ -298,7 +317,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="FAQ" />
