@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from 'next/image';
+import { BriefcaseBusiness, Code2, Mail, MessageCircle, Phone } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 // import LogoLight from '@/public/logo-light.svg';
 // import LogoLight from '@/public/logo-light.svg'
 
@@ -9,6 +11,13 @@ const links = {
   Company: ["Terms & Conditions", "Privacy Policy", "Cookies", "Careers"],
   Community: ["Help Centre", "Contact Us", "Support", "FAQs"],
 };
+
+const socialLinks: { label: string; href: string; icon: LucideIcon }[] = [
+  { label: "LinkedIn", href: "#", icon: BriefcaseBusiness },
+  { label: "Phone", href: "#", icon: Phone },
+  { label: "Code", href: "#", icon: Code2 },
+  { label: "Email", href: "mailto:hello@shomansolutions.com", icon: Mail },
+];
 
 export default function Footer() {
   return (
@@ -39,13 +48,11 @@ export default function Footer() {
 
             {/* Social icons */}
             <div style={{ display: "flex", gap: 12 }}>
-              {[
-                { label: "Li", href: "#", color: "#0077B5" },
-                { label: "Gh", href: "#", color: "#333" },
-                { label: "X", href: "#", color: "#000" },
-                { label: "Em", href: "#", color: "var(--color-brand)" },
-              ].map((s) => (
-                <a key={s.label} href={s.href} style={{
+              {socialLinks.map((s) => {
+                const Icon = s.icon;
+
+                return (
+                <a key={s.label} href={s.href} aria-label={s.label} title={s.label} style={{
                   width: 36, height: 36, borderRadius: 8,
                   background: "var(--color-ink)",
                   border: "1px solid var(--color-ink-2)",
@@ -62,9 +69,10 @@ export default function Footer() {
                   (e.currentTarget as HTMLElement).style.borderColor = "var(--color-ink-2)";
                   (e.currentTarget as HTMLElement).style.color = "var(--color-muted)";
                 }}>
-                  {s.label}
+                  <Icon size={16} strokeWidth={2.1} />
                 </a>
-              ))}
+                );
+              })}
             </div>
           </div>
 
