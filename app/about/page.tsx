@@ -119,7 +119,7 @@ export default function AboutPage() {
                   (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
                   (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
                 }}>
-                  Our Services
+                  View Our Services
                 </Link>
               </div>
             </div>
@@ -379,7 +379,7 @@ export default function AboutPage() {
             {/* Dark card */}
             <div style={{ borderRadius: 20, padding: 32, position: 'relative', height: '400px', overflow: 'hidden', top: '80px' }}>
             <Image 
-              src="/section/process.png" 
+              src="/section/quality-body.png" 
               alt="Quality standards" 
               fill // 2. Replaces explicit width and height props
               style={{ objectFit: 'cover' }} // 3. Now works perfectly as intended
@@ -422,7 +422,7 @@ export default function AboutPage() {
             }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)"; (e.currentTarget as HTMLElement).style.color = "var(--color-brand)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255, 255, 255, 0.15)"; (e.currentTarget as HTMLElement).style.color = "var(--color-white)"; }}>
-              View Our Services
+              Our Services
             </Link>
           </div>
         </div>
