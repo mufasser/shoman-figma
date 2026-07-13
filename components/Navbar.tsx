@@ -107,7 +107,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* {[
+            {[
               // { label: "Home", href: "/" },
               // { label: "Services", href: "/services" },
               // { label: "About", href: "/about" },
@@ -119,7 +119,7 @@ export default function Navbar() {
                 style={{ fontSize: 14, fontWeight: 500, color: "var(--color-ink)", textDecoration: "none", paddingBottom: 2 }}>
                 {item.label}
               </Link>
-            ))} */}
+            ))}
 
             
 
