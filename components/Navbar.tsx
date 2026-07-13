@@ -71,7 +71,7 @@ export default function Navbar() {
                 About
               </Link>
               {/* Services dropdown */}
-            {/* <div
+            <div
               className="services-menu-trigger"
               style={{ position: "relative" }}
               onMouseEnter={() => setServicesOpen(true)}
@@ -105,7 +105,7 @@ export default function Navbar() {
                   ))}
                 </div>
               )}
-            </div> */}
+            </div>
 
             {/* {[
               // { label: "Home", href: "/" },
