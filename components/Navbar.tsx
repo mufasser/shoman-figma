@@ -70,6 +70,11 @@ export default function Navbar() {
                 style={{ fontSize: 14, fontWeight: 500, color: "var(--color-ink)", textDecoration: "none", paddingBottom: 2 }}>
                 About
               </Link>
+              <Link key="Testimonials" href="/testimonials"
+                className="nav-link"
+                style={{ fontSize: 14, fontWeight: 500, color: "var(--color-ink)", textDecoration: "none", paddingBottom: 2 }}>
+                Testimonials
+              </Link>
               {/* Services dropdown */}
             <div
               className="services-menu-trigger"
@@ -112,6 +117,7 @@ export default function Navbar() {
               // { label: "Services", href: "/services" },
               // { label: "About", href: "/about" },
               { label: "Portfolio", href: "/portfolio" },
+              { label: "Testimonials", href: "/testimonials" },
               { label: "Blog", href: "/insights" },
             ].map((item) => (
               <Link key={item.label} href={item.href}
@@ -168,6 +174,7 @@ export default function Navbar() {
               { label: "Home", href: "/" },
               { label: "Services", href: "/services" },
               { label: "Portfolio", href: "/portfolio" },
+              { label: "Testimonials", href: "/testimonials" },
               { label: "About", href: "/about" },
               { label: "Insights", href: "/insights" },
               { label: "Contact", href: "/contact" },

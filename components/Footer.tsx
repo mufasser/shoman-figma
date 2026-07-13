@@ -1,15 +1,25 @@
 "use client";
 import Link from "next/link";
 import Image from 'next/image';
-import { BriefcaseBusiness, Code2, Mail, MessageCircle, Phone } from "lucide-react";
+import { BriefcaseBusiness, Code2, Mail, Phone } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 // import LogoLight from '@/public/logo-light.svg';
 // import LogoLight from '@/public/logo-light.svg'
 
 const links = {
-  Pages: ["Home", "About", "Services", "Portfolio", "Blog"],
+  Pages: ["Home", "About", "Services", "Portfolio", "Testimonials", "Blog"],
   Company: ["Terms & Conditions", "Privacy Policy", "Cookies", "Careers"],
   Community: ["Help Centre", "Contact Us", "Support", "FAQs"],
+};
+
+const footerHrefs: Record<string, string> = {
+  Home: "/",
+  About: "/about",
+  Services: "/services",
+  Portfolio: "/portfolio",
+  Testimonials: "/testimonials",
+  Blog: "/insights",
+  "Contact Us": "/contact",
 };
 
 const socialLinks: { label: string; href: string; icon: LucideIcon }[] = [
@@ -85,18 +95,18 @@ export default function Footer() {
                 marginBottom: 20,
               }}>{title}</h4>
               <ul style={{ listStyle: "none" }}>
-                {items.map((item) => (
-                  <li key={item} style={{ marginBottom: 12 }}>
-                    <a href="#" style={{
-                      fontSize: 14, color: "var(--color-muted)", textDecoration: "none",
-                      transition: "color 0.15s",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-brand)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-muted)")}>
-                      {item}
-                    </a>
-                  </li>
-                ))}
+	                {items.map((item) => (
+	                  <li key={item} style={{ marginBottom: 12 }}>
+	                    <Link href={footerHrefs[item] || "#"} style={{
+	                      fontSize: 14, color: "var(--color-muted)", textDecoration: "none",
+	                      transition: "color 0.15s",
+	                    }}
+	                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-brand)")}
+	                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-muted)")}>
+	                      {item}
+	                    </Link>
+	                  </li>
+	                ))}
               </ul>
             </div>
           ))}

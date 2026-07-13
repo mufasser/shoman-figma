@@ -53,7 +53,7 @@ export default function CaseStudies() {
               marginBottom: 12, display: "flex", alignItems: "center", gap: 8,
             }}>
               <span style={{ width: 24, height: 2, background: "var(--color-brand)", display: "inline-block" }} />
-              Our Case Studies
+              Our Portfolio
             </div>
             <h2 style={{
               fontSize: "clamp(28px, 3.5vw, 42px)",

@@ -33,7 +33,7 @@ export default function CaseStudiesPage() {
           <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 24 }}>
             <Link href="/" style={{ fontSize: 13, color: "var(--color-subtle)", textDecoration: "none", fontWeight: 500 }}>Home</Link>
             <ChevronRight size={13} color="var(--color-border-strong)" />
-            <span style={{ fontSize: 13, color: "var(--color-ink)", fontWeight: 600 }}>Case Studies</span>
+            <span style={{ fontSize: 13, color: "var(--color-ink)", fontWeight: 600 }}>Portfolio</span>
           </div>
           <div style={{ maxWidth: 640 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)", borderRadius: 100, padding: "6px 14px", marginBottom: 20 }}>
@@ -125,7 +125,7 @@ export default function CaseStudiesPage() {
           {filtered.length === 0 && (
             <div style={{ textAlign: "center", padding: "64px 0", color: "var(--color-subtle)" }}>
               <Search size={36} color="var(--color-subtle)" style={{ marginBottom: 12 }} />
-              <p style={{ fontSize: 15 }}>No case studies found for &ldquo;{active}&rdquo;</p>
+              <p style={{ fontSize: 15 }}>No portfolio found for &ldquo;{active}&rdquo;</p>
             </div>
           )}
         </div>
