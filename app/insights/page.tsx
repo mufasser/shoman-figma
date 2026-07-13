@@ -146,7 +146,7 @@ export default function InsightsPage() {
       {/* Newsletter CTA */}
       <section style={{ background: "var(--color-white)", padding: "64px 24px" }}>
         <div style={{ maxWidth: 520, margin: "0 auto", textAlign: "center" }}>
-          <Mail size={38} color="var(--color-brand)" style={{ marginBottom: 16 }} />
+          <Mail size={38} color="var(--color-brand)" style={{ marginBottom: 16, margin: "0 auto", }} />
           <h2 style={{ fontSize: 24, fontWeight: 800, color: "var(--color-ink)", marginBottom: 12 }}>New articles, straight to your inbox</h2>
           <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--color-muted)", marginBottom: 24 }}>
             One email when a new article is published. No newsletters. No marketing. Unsubscribe any time.
