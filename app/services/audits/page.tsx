@@ -6,6 +6,7 @@ import {
   FAQ, OutcomeCards, TwoCol,
 } from "@/components/services/ServiceComponents";
 import { ArrowRight, Check, ClipboardList, Microscope, ShieldCheck, Shuffle, TrendingUp, Wrench, Zap } from "lucide-react";
+import FinalCTA from "@/components/FinalCTA";
 
 const COLOR = "#0284C7";
 const BG = "#f0f9ff";
@@ -401,6 +402,8 @@ export default function AuditsPage() {
           ]} />
         </div>
       </section>
+      <FinalCTA />
     </ServiceLayout>
+    
   );
 }

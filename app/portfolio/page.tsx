@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { SectionLabel } from "@/components/services/ServiceComponents";
 import { ArrowRight, BarChart3, ChevronRight, PackageCheck, RefreshCw, Rocket, Search, Settings, ShieldCheck, ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import FinalCTA from "@/components/FinalCTA";
 
 const cases = [
   { id: 1, platform: "Adobe Commerce", platformColor: "#FF0000", platformSym: "Ac", type: "Performance", bg: "#fff5f5", icon: ShoppingBag, client: "UK Fashion Retailer", title: "Checkout Load Cut by 53% — Adobe Commerce", problem: "8.4-second checkout losing 30% of shoppers before payment", result: "53% faster", resultLabel: "checkout speed", tags: ["Adobe Commerce", "Performance"] },
@@ -160,6 +161,8 @@ export default function CaseStudiesPage() {
           </div>
         </div>
       </section>
+
+      <FinalCTA />
 
       <Footer />
       <style jsx>{`

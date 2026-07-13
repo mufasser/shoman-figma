@@ -1,6 +1,7 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FinalCTA from "@/components/FinalCTA";
 import { SectionLabel } from "@/components/services/ServiceComponents";
 import {
   ArrowRight,
@@ -390,43 +391,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section style={{ background: "var(--color-ink)", padding: "80px 24px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 600, height: 300, background: "radial-gradient(ellipse, rgba(var(--color-brand-rgb), 0.12) 0%, transparent 65%)", pointerEvents: "none" }} />
-        <div style={{ maxWidth: 540, margin: "0 auto", position: "relative" }}>
-          <h2 style={{ fontSize: "clamp(26px, 3.5vw, 42px)", fontWeight: 800, lineHeight: 1.15, color: "var(--color-white)", marginBottom: 14, letterSpacing: "-0.02em" }}>
-            Ready to work with a team<br />
-            <span style={{ color: "var(--color-brand)" }}>that actually delivers?</span>
-          </h2>
-          <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--color-subtle)", marginBottom: 32 }}>
-            Start with a free discovery call. No pitch deck. Just a conversation with a senior engineer about your store.
-          </p>
-          <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-            <Link href="/contact" style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              background: "var(--color-brand)", color: "var(--color-white)",
-              padding: "14px 28px", borderRadius: 9,
-              fontSize: 14, fontWeight: 600, textDecoration: "none",
-              transition: "all 0.2s",
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--color-brand-hover)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--color-brand)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
-              Book Free Discovery Call <ArrowRight size={15} />
-            </Link>
-            <Link href="/services" style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              border: "1.5px solid rgba(255, 255, 255, 0.15)", color: "var(--color-white)",
-              padding: "14px 28px", borderRadius: 9,
-              fontSize: 14, fontWeight: 600, textDecoration: "none",
-              transition: "all 0.2s",
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)"; (e.currentTarget as HTMLElement).style.color = "var(--color-brand)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255, 255, 255, 0.15)"; (e.currentTarget as HTMLElement).style.color = "var(--color-white)"; }}>
-              Our Services
-            </Link>
-          </div>
-        </div>
-      </section>
+      <FinalCTA />
 
       <Footer />
     </div>

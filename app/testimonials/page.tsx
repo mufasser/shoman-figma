@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FinalCTA from "@/components/FinalCTA";
 import {
-  ArrowRight,
   BadgeCheck,
   ChevronRight,
   Play,
@@ -16,15 +16,9 @@ import {
   Star,
   Store,
 } from "lucide-react";
+import LogoTicker from "@/components/LogoTicker";
 
 const BRAND = "var(--color-brand)";
-
-const stats = [
-  { value: "98%", label: "Client satisfaction", color: "var(--color-brand)" },
-  { value: "150+", label: "Projects completed", color: "var(--color-success)" },
-  { value: "4.9/5", label: "Average rating", color: "#96BF48" },
-  { value: "87%", label: "Refer us to others", color: "#0284C7" },
-];
 
 const filters = ["All", "Adobe Commerce", "Shopify", "Migration", "Integration", "Audit", "White-Label"];
 
@@ -274,7 +268,9 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      <section style={{ background: "var(--color-ink)", borderBottom: "1px solid var(--color-ink-2)" }}>
+      <LogoTicker />
+
+      {/* <section style={{ background: "var(--color-ink)", borderBottom: "1px solid var(--color-ink-2)" }}>
         <div className="stats-grid" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
           {stats.map((stat, index) => (
             <div key={stat.label} style={{ textAlign: "center", padding: "21px 12px", borderRight: index === stats.length - 1 ? "none" : "1px solid var(--color-ink-2)" }}>
@@ -283,7 +279,7 @@ export default function TestimonialsPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <section style={{ background: "var(--color-white)", borderBottom: "1.5px solid var(--color-border)" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto", padding: "16px 24px", display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
@@ -468,13 +464,10 @@ export default function TestimonialsPage() {
             ))}
           </div>
 
-          <div style={{ textAlign: "center", marginTop: 44 }}>
-            <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand)", color: "var(--color-white)", borderRadius: 9, padding: "14px 24px", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>
-              Start your project <ArrowRight size={15} />
-            </Link>
-          </div>
         </div>
       </section>
+
+      <FinalCTA />
 
       <Footer />
 
