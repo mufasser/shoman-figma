@@ -1,7 +1,8 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowRight, BadgeCheck, ChevronRight, FileText, MapPin, ShieldCheck, Zap } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
+import { ArrowRight, BadgeCheck, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 interface ServiceLayoutProps {
@@ -21,6 +22,17 @@ interface ServiceLayoutProps {
   breadcrumb: string;
 }
 
+function getDefaultService(breadcrumb: string) {
+  if (breadcrumb.includes("Adobe")) return "Adobe Commerce / Magento";
+  if (breadcrumb.includes("Shopify") && breadcrumb.includes("Migration")) return "Migration";
+  if (breadcrumb.includes("Shopify")) return "Shopify Development";
+  if (breadcrumb.includes("Audit")) return "Technical Audit";
+  if (breadcrumb.includes("White-Label")) return "White-Label Partnership";
+  if (breadcrumb.includes("Integration")) return "Systems Integration";
+
+  return "";
+}
+
 export default function ServiceLayout({
   children,
   badge,
@@ -35,6 +47,8 @@ export default function ServiceLayout({
   secondaryCta,
   breadcrumb,
 }: ServiceLayoutProps) {
+  const defaultService = getDefaultService(breadcrumb);
+
   return (
     <div style={{ background: "var(--color-white)", minHeight: "100vh" }}>
       <Navbar />
@@ -71,7 +85,7 @@ export default function ServiceLayout({
             <span style={{ fontSize: 13, color: "var(--color-ink)", fontWeight: 600 }}>{breadcrumb}</span>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 48, alignItems: "center" }} className="hero-service-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(360px, 430px)", gap: 48, alignItems: "start" }} className="hero-service-grid">
             <div>
               {/* Platform badge */}
               <div style={{
@@ -145,36 +159,28 @@ export default function ServiceLayout({
               </div>
             </div>
 
-            {/* Right: trust pill cluster */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, minWidth: 200 }} className="hero-trust-pills">
-              {[
-                { icon: MapPin, text: "UK-managed delivery" },
-                { icon: ShieldCheck, text: "NDA on every project" },
-                { icon: FileText, text: "You own all code" },
-                { icon: Zap, text: "Senior engineers only" },
-              ].map((p) => {
-                const Icon = p.icon;
-
-                return (
-                <div key={p.text} style={{
-                  display: "flex", alignItems: "center", gap: 10,
-                  background: "var(--color-bg-soft)", border: "1px solid var(--color-border)",
-                  borderRadius: 10, padding: "10px 14px",
-                  fontSize: 13, fontWeight: 500, color: "var(--color-ink-2)",
-                }}>
-                  <Icon size={15} color={platformColor} strokeWidth={2.2} />
-                  {p.text}
-                </div>
-                );
-              })}
+            <div className="hero-service-form">
+              <ContactForm
+                compact
+                title="Tell us about your project"
+                subtitle="Share the essentials and a senior ecommerce engineer will reply with the next best step."
+                submitLabel="Send Enquiry"
+                footerNote="Response within one business day."
+                defaultServices={defaultService ? [defaultService] : []}
+                defaultValues={{
+                  message: `I'm interested in ${breadcrumb}.`,
+                }}
+                backHref="/services"
+                backLabel="Back to Services"
+              />
             </div>
           </div>
         </div>
 
         <style jsx>{`
           @media (max-width: 768px) {
-            .hero-service-grid { grid-template-columns: 1fr !important; }
-            .hero-trust-pills { display: none !important; }
+            .hero-service-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+            .hero-service-form { max-width: 100% !important; }
           }
         `}</style>
       </section>

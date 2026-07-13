@@ -16,6 +16,7 @@ export type ContactFormValues = {
 };
 
 type ContactFormProps = {
+  compact?: boolean;
   title?: string;
   subtitle?: string;
   submitLabel?: string;
@@ -109,6 +110,7 @@ async function parseApiResponse(response: Response) {
 }
 
 export default function ContactForm({
+  compact = false,
   title = "Send us an enquiry",
   subtitle = "Tell us a little about your store, your goals and any challenges you're facing. We'll review everything before our first conversation so we can make the call as useful as possible.",
   submitLabel = "Let's Talk",
@@ -231,7 +233,14 @@ export default function ContactForm({
 
   if (submitted) {
     return (
-      <div style={{ background: "var(--color-white)", border: "1.5px solid var(--color-border)", borderRadius: 20, padding: "64px 36px", textAlign: "center" }}>
+      <div style={{
+        background: "var(--color-white)",
+        border: "1.5px solid var(--color-border)",
+        borderRadius: compact ? 16 : 20,
+        padding: compact ? "36px 24px" : "64px 36px",
+        textAlign: "center",
+        boxShadow: compact ? "0 24px 70px rgba(15, 23, 42, 0.08)" : undefined,
+      }}>
         <div style={{ width: 64, height: 64, borderRadius: "50%", background: "var(--color-success-soft)", border: "2px solid var(--color-success)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
           <Check size={28} color="var(--color-success)" strokeWidth={2.5} />
         </div>
@@ -255,12 +264,18 @@ export default function ContactForm({
   }
 
   return (
-    <div style={{ background: "var(--color-white)", border: "1.5px solid var(--color-border)", borderRadius: 20, padding: "40px 36px" }}>
-      <h2 style={{ fontSize: 20, fontWeight: 800, color: "var(--color-ink)", marginBottom: 6 }}>{title}</h2>
-      <p style={{ fontSize: 13, color: "var(--color-muted)", marginBottom: 28, lineHeight: 1.65 }}>{subtitle}</p>
+    <div style={{
+      background: "var(--color-white)",
+      border: "1.5px solid var(--color-border)",
+      borderRadius: compact ? 16 : 20,
+      padding: compact ? "24px" : "40px 36px",
+      boxShadow: compact ? "0 24px 70px rgba(15, 23, 42, 0.08)" : undefined,
+    }}>
+      <h2 style={{ fontSize: compact ? 18 : 20, fontWeight: 800, color: "var(--color-ink)", marginBottom: 6 }}>{title}</h2>
+      <p style={{ fontSize: compact ? 12 : 13, color: "var(--color-muted)", marginBottom: compact ? 20 : 28, lineHeight: 1.65 }}>{subtitle}</p>
 
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
+        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
           <div>
             <label style={LABEL_STYLE}>Full Name *</label>
             <input
@@ -275,22 +290,24 @@ export default function ContactForm({
               onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
             />
           </div>
-          <div>
-            <label style={LABEL_STYLE}>Company Name</label>
-            <input
-              name="company"
-              type="text"
-              placeholder="Your company"
-              value={form.company}
-              onChange={(event) => updateField("company", event.target.value)}
-              style={INPUT_STYLE}
-              onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-              onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
-            />
-          </div>
+          {!compact && (
+            <div>
+              <label style={LABEL_STYLE}>Company Name</label>
+              <input
+                name="company"
+                type="text"
+                placeholder="Your company"
+                value={form.company}
+                onChange={(event) => updateField("company", event.target.value)}
+                style={INPUT_STYLE}
+                onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
+                onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+              />
+            </div>
+          )}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
+        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
           <div>
             <label style={LABEL_STYLE}>Email Address *</label>
             <input
@@ -305,22 +322,24 @@ export default function ContactForm({
               onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
             />
           </div>
-          <div>
-            <label style={LABEL_STYLE}>Phone Number</label>
-            <input
-              name="phone"
-              type="tel"
-              placeholder="123-456-7890"
-              value={form.phone}
-              onChange={(event) => updateField("phone", event.target.value)}
-              style={INPUT_STYLE}
-              onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-              onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
-            />
-          </div>
+          {!compact && (
+            <div>
+              <label style={LABEL_STYLE}>Phone Number</label>
+              <input
+                name="phone"
+                type="tel"
+                placeholder="123-456-7890"
+                value={form.phone}
+                onChange={(event) => updateField("phone", event.target.value)}
+                style={INPUT_STYLE}
+                onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
+                onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+              />
+            </div>
+          )}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
+        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
           <div ref={dropdownRef} style={{ position: "relative" }}>
             <label id={`${servicesId}-label`} style={LABEL_STYLE}>Services interested in</label>
             <button
@@ -381,34 +400,36 @@ export default function ContactForm({
             )}
           </div>
 
-          <div>
-            <label style={LABEL_STYLE}>Business Stage</label>
-            <select
-              name="stage"
-              value={form.stage}
-              onChange={(event) => updateField("stage", event.target.value)}
-              style={{ ...INPUT_STYLE, color: form.stage ? "var(--color-ink)" : "var(--color-subtle)" }}
-              onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-              onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
-            >
-              <option value="">Select stage</option>
-              <option>Startup (pre-launch)</option>
-              <option>Growing (£0-£500K/yr)</option>
-              <option>Established (£500K-£5M/yr)</option>
-              <option>Enterprise (£5M+/yr)</option>
-            </select>
-          </div>
+          {!compact && (
+            <div>
+              <label style={LABEL_STYLE}>Business Stage</label>
+              <select
+                name="stage"
+                value={form.stage}
+                onChange={(event) => updateField("stage", event.target.value)}
+                style={{ ...INPUT_STYLE, color: form.stage ? "var(--color-ink)" : "var(--color-subtle)" }}
+                onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
+                onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+              >
+                <option value="">Select stage</option>
+                <option>Startup (pre-launch)</option>
+                <option>Growing (£0-£500K/yr)</option>
+                <option>Established (£500K-£5M/yr)</option>
+                <option>Enterprise (£5M+/yr)</option>
+              </select>
+            </div>
+          )}
         </div>
 
-        <div style={{ marginBottom: 24 }}>
+        <div style={{ marginBottom: compact ? 18 : 24 }}>
           <label style={LABEL_STYLE}>Tell Us What You Need</label>
           <textarea
             name="message"
             placeholder="Describe your current situation and what you're trying to achieve. The more detail, the better our first call will be..."
             value={form.message}
             onChange={(event) => updateField("message", event.target.value)}
-            rows={4}
-            style={{ ...INPUT_STYLE, resize: "vertical", minHeight: 100 }}
+            rows={compact ? 3 : 4}
+            style={{ ...INPUT_STYLE, resize: "vertical", minHeight: compact ? 86 : 100 }}
             onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
             onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
           />
@@ -462,7 +483,7 @@ export default function ContactForm({
             </>
           )}
         </button>
-        <p style={{ textAlign: "center", fontSize: 12, color: "var(--color-subtle)", marginTop: 12 }}>
+        <p style={{ textAlign: "center", fontSize: 12, color: "var(--color-subtle)", marginTop: 12, marginBottom: 0 }}>
           {apiEndpoint ? "Your enquiry will be sent securely to our team." : footerNote}
         </p>
       </form>
