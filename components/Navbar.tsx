@@ -70,11 +70,7 @@ export default function Navbar() {
                 style={{ fontSize: 14, fontWeight: 500, color: "var(--color-ink)", textDecoration: "none", paddingBottom: 2 }}>
                 About
               </Link>
-              <Link key="Testimonials" href="/testimonials"
-                className="nav-link"
-                style={{ fontSize: 14, fontWeight: 500, color: "var(--color-ink)", textDecoration: "none", paddingBottom: 2 }}>
-                Testimonials
-              </Link>
+              
               {/* Services dropdown */}
             <div
               className="services-menu-trigger"
