@@ -111,7 +111,7 @@ export default function Navbar() {
               // { label: "Home", href: "/" },
               // { label: "Services", href: "/services" },
               // { label: "About", href: "/about" },
-              { label: "Case Studies", href: "/case-studies" },
+              { label: "Portfolio", href: "/portfolio" },
               { label: "Blog", href: "/insights" },
             ].map((item) => (
               <Link key={item.label} href={item.href}
@@ -167,7 +167,7 @@ export default function Navbar() {
             {[
               { label: "Home", href: "/" },
               { label: "Services", href: "/services" },
-              { label: "Case Studies", href: "/case-studies" },
+              { label: "Portfolio", href: "/portfolio" },
               { label: "About", href: "/about" },
               { label: "Insights", href: "/insights" },
               { label: "Contact", href: "/contact" },

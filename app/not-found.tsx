@@ -25,7 +25,7 @@ export default function NotFound() {
           {[
             { href: "/", label: "Home", color: "var(--color-brand)" },
             { href: "/services", label: "Our Services", color: "#0284C7" },
-            { href: "/case-studies", label: "Case Studies", color: "#96BF48" },
+            { href: "/portfolio", label: "Portfolio", color: "#96BF48" },
             { href: "/contact", label: "Contact Us", color: "#6366F1" },
           ].map((l) => (
             <Link key={l.href} href={l.href} style={{
