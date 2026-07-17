@@ -13,14 +13,14 @@ const BG = "#fff5f5";
 export default function AdobeCommercePage() {
   return (
     <ServiceLayout
-      badge="Adobe Commerce Certified"
+      badge="Adobe Commerce Experts"
       badgeColor={COLOR}
       badgeBg={BG}
       platformSymbol="Ac"
       platformColor={COLOR}
       heroTitle="Adobe Commerce & Magento"
       heroHighlight="Engineered to Stay Fast."
-      heroSub="Certified backend engineering for Adobe Commerce and Magento 2. We stabilise platforms other agencies gave up on — security patching, performance, custom modules, and honest SLAs."
+      heroSub="Experienced backend engineering for Adobe Commerce and Magento 2. We stabilise platforms other agencies gave up on — security patching, performance, custom modules, and honest SLAs."
       ctaText="Book Free Consultation"
       secondaryCta="See Our Process"
       breadcrumb="Adobe Commerce & Magento"

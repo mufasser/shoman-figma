@@ -30,7 +30,7 @@ export default function WhiteLabelPage() {
       platformColor={COLOR}
       heroTitle="White-Label Development"
       heroHighlight="For Agencies."
-      heroSub="Add a certified ecommerce engineering team to your agency — invisibly. We deliver Adobe Commerce, Magento, and Shopify work under your brand, to your clients, on your timelines. You present. We build."
+      heroSub="Add a experienced ecommerce engineering team to your agency — invisibly. We deliver Adobe Commerce, Magento, and Shopify work under your brand, to your clients, on your timelines. You present. We build."
       ctaText="Start a Partnership"
       secondaryCta="How It Works"
       breadcrumb="White-Label Partnerships"

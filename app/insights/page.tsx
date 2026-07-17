@@ -16,6 +16,15 @@ const posts = [
 
 const categories = ["All", "Adobe Commerce", "Shopify", "Migration", "Integration"];
 
+const heroStats = [
+  { value: "48", label: "Articles published", color: "var(--color-brand)" },
+  { value: "6", label: "Topic categories", color: "#0284C7" },
+  { value: "4.2K", label: "Monthly readers", color: "#96BF48" },
+];
+
+
+
+
 export default function InsightsPage() {
   const [active, setActive] = useState("All");
   const filtered = active === "All" ? posts : posts.filter(p => p.tag === active);
@@ -25,7 +34,6 @@ export default function InsightsPage() {
   return (
     <div style={{ background: "var(--color-white)", minHeight: "100vh" }}>
       <Navbar />
-
       {/* Hero */}
       <section style={{ paddingTop: 72, background: "var(--color-white)", borderBottom: "1px solid var(--color-border)", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: -80, right: -80, width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(var(--color-brand-rgb), 0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
@@ -35,20 +43,47 @@ export default function InsightsPage() {
             <ChevronRight size={13} color="var(--color-border-strong)" />
             <span style={{ fontSize: 13, color: "var(--color-ink)", fontWeight: 600 }}>Insights</span>
           </div>
-          <div style={{ maxWidth: 560 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)", borderRadius: 100, padding: "6px 14px", marginBottom: 20 }}>
-              <PenLine size={14} color="var(--color-brand)" strokeWidth={2.2} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>TECHNICAL INSIGHTS · NO FILLER</span>
+          <div className="insights-hero-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0, 560px) minmax(420px, 1fr)", gap: 64, alignItems: "center" }}>
+            <div>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)", borderRadius: 100, padding: "6px 14px", marginBottom: 20 }}>
+                <PenLine size={14} color="var(--color-brand)" strokeWidth={2.2} />
+                <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>TECHNICAL INSIGHTS · NO FILLER</span>
+              </div>
+              <h1 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--color-ink)", marginBottom: 16 }}>
+                Ecommerce engineering<br />
+                <span style={{ color: "var(--color-brand)" }}>explained plainly.</span>
+              </h1>
+              <p style={{ fontSize: 16, lineHeight: 1.75, color: "var(--color-copy)" }}>
+                Written by the engineers who do the work — not a content team. Practical guides on Adobe Commerce, Shopify, migrations, and integrations.
+              </p>
             </div>
-            <h1 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--color-ink)", marginBottom: 16 }}>
-              Ecommerce engineering<br />
-              <span style={{ color: "var(--color-brand)" }}>explained plainly.</span>
-            </h1>
-            <p style={{ fontSize: 16, lineHeight: 1.75, color: "var(--color-copy)" }}>
-              Written by the engineers who do the work — not a content team. Practical guides on Adobe Commerce, Shopify, migrations, and integrations.
-            </p>
+
+            <div className="blog-hero-stats" style={{ position: "relative", minHeight: 360 }}>
+              {heroStats.map((stat, index) => (
+                <div key={stat.label} className={`blog-hero-stat-card blog-hero-stat-card--${index + 1}`} style={{
+                  background: "var(--color-bg-soft)",
+                  border: "1.5px solid var(--color-border)",
+                  borderRadius: 22,
+                  minHeight: 90,
+                  width: 230,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 18px 44px rgba(15, 23, 42, 0.04)",
+                }}>
+                  <div style={{ fontSize: 32, lineHeight: 1, fontWeight: 800, letterSpacing: "-0.04em", color: stat.color, marginBottom: 12 }}>
+                    {stat.value}
+                  </div>
+                  <div style={{ fontSize: 18, lineHeight: 1.2, color: "#64748b", fontWeight: 500, textAlign: "center" }}>
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+
       </section>
 
       <section style={{ background: "var(--color-bg-soft)", padding: "64px 24px" }}>
@@ -165,12 +200,59 @@ export default function InsightsPage() {
 
       <Footer />
       <style jsx>{`
+        .blog-hero-stat-card {
+          position: absolute;
+        }
+        .blog-hero-stat-card--1 {
+          top: 0;
+          left: 0;
+        }
+        .blog-hero-stat-card--2 {
+          top: 110px;
+          left: 154px;
+        }
+        .blog-hero-stat-card--3 {
+          top: 224px;
+          right: 0;
+        }
+        @media(max-width:980px){
+          .insights-hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+          .blog-hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            min-height: 90px !important;
+          }
+          .blog-hero-stat-card {
+            position: static;
+            width: 100% !important;
+            transform: none !important;
+          }
+        }
+        @media(max-width:640px){
+          .blog-hero-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            min-height: 0 !important;
+          }
+          .blog-hero-stat-card {
+            position: static;
+            width: 100% !important;
+            min-height: 112px !important;
+            transform: none !important;
+          }
+        }
         @media(max-width:768px){
           .featured-post{grid-template-columns:1fr!important}
           .posts-grid{grid-template-columns:1fr 1fr!important}
         }
         @media(max-width:600px){.posts-grid{grid-template-columns:1fr!important}}
       `}</style>
+      
     </div>
   );
 }

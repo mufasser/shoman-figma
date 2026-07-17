@@ -3,79 +3,62 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { SectionLabel } from "@/components/services/ServiceComponents";
 
 const services = [
   {
-    num: "01",
-    platform: "Adobe Commerce",
-    sym: "Ac",
-    platformColor: "#FF0000",
     bg: "#fff5f5",
     href: "/services/adobe-commerce",
+    image: "/assets/services/adobe-commerce-engineering.jpg",
+    imageAlt: "Adobe Commerce engineers discussing a store build",
     title: "Adobe Commerce (Magento) Engineering",
-    desc: "Certified backend engineering, security patching, performance optimisation, and custom module development for Adobe Commerce and Magento 2 stores.",
-    tags: ["Security Patching", "Performance", "Custom Modules", "Retainers"],
+    desc: "Experienced backend engineering, security patching, performance optimisation, and custom module development for Adobe Commerce and Magento 2 stores.",
     cta: "Explore Service",
   },
   {
-    num: "02",
-    platform: "Shopify",
-    sym: "Sh",
-    platformColor: "#96BF48",
     bg: "#f5fbee",
     href: "/services/shopify",
+    image: "/assets/services/shopify-store-development.jpg",
+    imageAlt: "Shopify project planning session",
     title: "Shopify Store Launch & Development",
     desc: "End-to-end Shopify and Shopify Plus store builds for startups, growing brands, and enterprise clients. Custom themes, integrations, and conversion-focused development.",
-    tags: ["Custom Theme", "Shopify Plus", "App Integration", "Startup to Enterprise"],
     cta: "Explore Service",
   },
   {
-    num: "03",
-    platform: "Migration",
-    sym: "→",
-    platformColor: "#F46F25",
     bg: "#fff8f0",
     href: "/services/migration",
+    image: "/assets/services/adobe-commerce-app-builder.jpg",
+    imageAlt: "Adobe Commerce App Builder migration planning",
     title: "Adobe Commerce App Builder",
     desc: "Full platform migration handling all products, orders, customers, SEO redirects, and third-party integrations — with zero data loss and no downtime on launch day.",
-    tags: ["Zero Data Loss", "SEO Protected", "No Downtime", "Fixed-Price Roadmap"],
     cta: "Explore Service",
   },
   {
-    num: "04",
-    platform: "Audit",
-    sym: "Au",
-    platformColor: "#0284C7",
     bg: "#f0f9ff",
     href: "/services/audits",
+    image: "/assets/services/technical-audit-service.jpg",
+    imageAlt: "Technical audit review meeting",
     title: "Technical Audit Service",
     desc: "Fixed-fee, expert-written audit of your ecommerce store. Security, performance, checkout path, or migration complexity — delivered as a prioritised PDF report in 5 days.",
-    tags: ["From £499", "5 Day Turnaround", "Security", "Checkout Performance"],
     cta: "Order Audit",
   },
   {
-    num: "05",
-    platform: "Integration",
-    sym: "API",
-    platformColor: "#6366F1",
     bg: "#f5f3ff",
     href: "/services/integrations",
+    image: "/assets/services/enterprise-systems-integration.jpg",
+    imageAlt: "Enterprise systems integration workshop",
     title: "Enterprise Systems Integration",
     desc: "Custom middleware and API development connecting your ecommerce platform to ERP (SAP, Dynamics), CRM (Salesforce, HubSpot), and warehouse systems in real time.",
-    tags: ["SAP", "Salesforce", "Custom API", "Real-Time Sync"],
     cta: "Explore Service",
   },
   {
-    num: "06",
-    platform: "White-Label",
-    sym: "WL",
-    platformColor: "#0284C7",
     bg: "#f0f9ff",
     href: "/services/white-label",
+    image: "/assets/services/white-label-agency-partnerships.jpg",
+    imageAlt: "White-label agency partnership discussion",
     title: "White-Label Agency Partnerships",
-    desc: "Add a certified ecommerce engineering team to your agency roster invisibly. We deliver under your brand, on your timelines — so you never have to turn away profitable work.",
-    tags: ["NDA Protected", "Your Brand", "Overflow Capacity", "Pre-Sales Support"],
+    desc: "Add an experienced ecommerce engineering team to your agency roster invisibly. We deliver under your brand, on your timelines — so you never have to turn away profitable work.",
     cta: "Become a Partner",
   },
 ];
@@ -143,85 +126,73 @@ export default function ServicesPage() {
       {/* Services list */}
       <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div className="services-card-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 24 }}>
             {services.map((s) => (
-              <Link key={s.href} href={s.href} style={{ textDecoration: "none" }}>
-                <div style={{
+              <Link key={s.href} href={s.href} className="service-card-link" style={{ textDecoration: "none", color: "inherit" }}>
+                <article className="service-list-card" style={{
                   background: "var(--color-white)",
                   border: "1.5px solid var(--color-border)",
-                  borderRadius: 16,
-                  padding: "32px 36px",
-                  display: "grid",
-                  gridTemplateColumns: "64px 1fr auto",
-                  gap: 28, alignItems: "center",
-                  transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = s.platformColor + "60";
-                  el.style.boxShadow = `0 12px 40px ${s.platformColor}15`;
-                  el.style.transform = "translateY(-2px)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = "var(--color-border)";
-                  el.style.boxShadow = "none";
-                  el.style.transform = "translateY(0)";
-                }}
-                className="service-row"
-                >
-                  {/* Number + icon */}
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
-                    <div style={{
-                      width: 48, height: 48, borderRadius: 12,
-                      background: s.platformColor,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: 14, fontWeight: 800, color: "var(--color-white)",
-                    }}>{s.sym}</div>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "var(--color-subtle)" }}>{s.num}</span>
+                  borderRadius: 18,
+                  overflow: "hidden",
+                  minHeight: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  transition: "border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease",
+                }}>
+                  <div className="service-list-card__media" style={{ position: "relative", aspectRatio: "16 / 7", overflow: "hidden", background: s.bg }}>
+                    <Image
+                      src={s.image}
+                      alt={s.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      style={{ objectFit: "cover", transition: "transform 0.35s ease" }}
+                    />
                   </div>
 
-                  {/* Content */}
-                  <div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                      <div style={{
-                        fontSize: 11, fontWeight: 600, color: s.platformColor,
-                        background: s.bg, padding: "3px 10px", borderRadius: 100,
-                      }}>{s.platform}</div>
-                    </div>
+                  <div className="service-list-card__content" style={{ padding: "34px 36px 36px", display: "flex", flexDirection: "column", flex: 1 }}>
                     <h3 style={{
-                      fontSize: 18, fontWeight: 700, color: "var(--color-ink)",
-                      marginBottom: 8, letterSpacing: "-0.01em",
+                      fontSize: "clamp(28px, 3vw, 38px)",
+                      fontWeight: 800,
+                      color: "var(--color-ink)",
+                      lineHeight: 1.12,
+                      marginBottom: 24,
+                      letterSpacing: "-0.03em",
                     }}>{s.title}</h3>
-                    <p style={{ fontSize: 14, lineHeight: 1.7, color: "var(--color-muted)", marginBottom: 14, maxWidth: 600 }}>{s.desc}</p>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                      {s.tags.map((tag) => (
-                        <span key={tag} style={{
-                          fontSize: 11, fontWeight: 500,
-                          color: "var(--color-copy)", background: "var(--color-bg-muted)",
-                          padding: "3px 10px", borderRadius: 100,
-                          border: "1px solid var(--color-border)",
-                        }}>{tag}</span>
-                      ))}
-                    </div>
+                    <p style={{ fontSize: 16, lineHeight: 1.55, color: "var(--color-copy)", marginBottom: 30 }}>
+                      {s.desc}
+                    </p>
+                    <span className="service-list-card__cta" style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 12,
+                      alignSelf: "flex-start",
+                      marginTop: "auto",
+                      minHeight: 52,
+                      padding: "0 24px",
+                      borderRadius: 8,
+                      background: "rgba(var(--color-brand-rgb), 0.48)",
+                      color: "var(--color-ink)",
+                      fontSize: 15,
+                      fontWeight: 800,
+                      transition: "background 0.2s ease, transform 0.2s ease",
+                    }}>
+                      {s.cta}
+                      <span style={{
+                        width: 32,
+                        height: 32,
+                        borderRadius: 7,
+                        background: "var(--color-brand)",
+                        color: "var(--color-white)",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}>
+                        <ArrowRight size={17} strokeWidth={2.4} />
+                      </span>
+                    </span>
                   </div>
-
-                  {/* CTA arrow */}
-                  <div style={{
-                    display: "flex", alignItems: "center", gap: 8,
-                    fontSize: 13, fontWeight: 600, color: s.platformColor,
-                    whiteSpace: "nowrap",
-                    padding: "10px 18px", borderRadius: 9,
-                    border: `1.5px solid ${s.platformColor}40`,
-                    background: s.bg,
-                    transition: "all 0.2s",
-                  }}
-                  className="service-cta"
-                  >
-                    {s.cta} <ArrowRight size={14} />
-                  </div>
-                </div>
+                </article>
               </Link>
             ))}
           </div>
@@ -302,10 +273,35 @@ export default function ServicesPage() {
       <Footer />
 
       <style jsx>{`
+        .service-card-link:hover .service-list-card {
+          border-color: rgba(var(--color-brand-rgb), 0.34);
+          box-shadow: 0 18px 54px rgba(15, 23, 42, 0.08);
+          transform: translateY(-3px);
+        }
+        .service-card-link:hover .service-list-card__media :global(img) {
+          transform: scale(1.04);
+        }
+        .service-card-link:hover .service-list-card__cta {
+          background: rgba(var(--color-brand-rgb), 0.6) !important;
+        }
+        @media (max-width: 980px) {
+          .services-card-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
         @media (max-width: 768px) {
-          .service-row { grid-template-columns: 1fr !important; }
-          .service-cta { display: none !important; }
+          .service-list-card__content {
+            padding: 26px 24px 28px !important;
+          }
+          .service-list-card__media {
+            aspect-ratio: 16 / 9 !important;
+          }
           .cta-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 520px) {
+          .service-list-card__cta {
+            width: 100%;
+          }
         }
       `}</style>
     </div>
