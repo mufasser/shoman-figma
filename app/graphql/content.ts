@@ -162,13 +162,31 @@ export type ContentPayload = {
   errors: string[];
 };
 
-const endpoint =
+function normalizeGraphQLEndpoint(value: string) {
+  if (!value) return "";
+
+  try {
+    const url = new URL(value);
+    if (url.protocol === "http:" && !["localhost", "127.0.0.1"].includes(url.hostname)) {
+      url.protocol = "https:";
+    }
+    if (url.pathname === "/graphql") {
+      url.pathname = "/graphql/";
+    }
+    return url.toString();
+  } catch {
+    return value;
+  }
+}
+
+const endpoint = normalizeGraphQLEndpoint(
   process.env.WORDPRESS_GRAPHQL_ENDPOINT ||
   process.env.WP_GRAPHQL_ENDPOINT ||
   process.env.GRAPHQL_ENDPOINT ||
   process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_ENDPOINT ||
   process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ||
-  "";
+  "",
+);
 
 const palettes: { keywords: string[]; value: Palette }[] = [
   {

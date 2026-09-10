@@ -30,6 +30,7 @@ type ContactFormProps = {
   apiEndpoint?: string;
   apiMethod?: "POST" | "PUT" | "PATCH";
   requestHeaders?: HeadersInit;
+  showResponseDetails?: boolean;
   buildPayload?: (values: ContactFormValues) => unknown;
   onSubmit?: (values: ContactFormValues, payload: unknown) => void | Promise<unknown>;
   onSuccess?: (response: unknown, values: ContactFormValues) => void;
@@ -123,9 +124,10 @@ export default function ContactForm({
   backLabel = "Back to Home",
   defaultValues,
   defaultServices = [],
-  apiEndpoint,
+  apiEndpoint = "/api/contact",
   apiMethod = "POST",
   requestHeaders,
+  showResponseDetails = false,
   buildPayload = (values) => values,
   onSubmit,
   onSuccess,
@@ -248,7 +250,7 @@ export default function ContactForm({
         <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--color-muted)", marginBottom: 28, maxWidth: 430, margin: "0 auto 28px" }}>
           {successMessage(values, submitResponse)}
         </p>
-        {responseOutput && (
+        {showResponseDetails && responseOutput && (
           <div style={{ textAlign: "left", background: "var(--color-bg-soft)", border: "1px solid var(--color-border)", borderRadius: 12, padding: 14, margin: "0 auto 24px", maxWidth: 460 }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: "var(--color-subtle)", marginBottom: 8, textTransform: "uppercase" }}>API response</div>
             <pre style={{ margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word", color: "var(--color-muted)", fontSize: 12, lineHeight: 1.5, maxHeight: 180, overflow: "auto" }}>
