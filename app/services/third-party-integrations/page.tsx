@@ -114,7 +114,7 @@ export default function IntegrationsPage() {
             borderRadius: 10, padding: "16px 20px",
             fontSize: 14, color: "var(--color-copy)",
           }}>
-            <strong style={{ color: COLOR }}>Don&apos;t see your system?</strong> If it has an API, a database, or even a CSV export, we&apos;ve almost certainly built an integration for something similar. <a href="/contact" style={{ color: COLOR, fontWeight: 600 }}>Tell us what you&apos;re connecting →</a>
+            <strong style={{ color: COLOR }}>Don&apos;t see your system?</strong> If it has an API, a database, or even a CSV export, we&apos;ve almost certainly built an integration for something similar. <a href="/contact-us" style={{ color: COLOR, fontWeight: 600 }}>Tell us what you&apos;re connecting →</a>
           </div>
 
           <style jsx>{`

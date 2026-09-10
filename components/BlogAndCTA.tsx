@@ -1,7 +1,36 @@
 "use client";
+import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, Clock, Rocket, ShoppingBag, Shuffle, Store } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 
-const posts = [
+type BlogPreviewPost = {
+  tag: string;
+  tagColor: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  num: string;
+  icon: LucideIcon;
+  iconKey?: keyof typeof blogIconMap;
+  href: string;
+};
+
+type ApiBlogPreviewPost = Omit<BlogPreviewPost, "icon" | "num"> & {
+  iconKey?: keyof typeof blogIconMap;
+};
+
+const blogIconMap = {
+  shoppingBag: ShoppingBag,
+  shuffle: Shuffle,
+  store: Store,
+  settings: ShoppingBag,
+  shieldCheck: ShoppingBag,
+  trendingUp: Store,
+};
+
+const posts: BlogPreviewPost[] = [
   {
     tag: "Adobe Commerce",
     tagColor: "#FF0000",
@@ -12,6 +41,7 @@ const posts = [
     readTime: "5 min read",
     num: "01",
     icon: ShoppingBag,
+    href: "#",
   },
   {
     tag: "Migration",
@@ -23,6 +53,7 @@ const posts = [
     readTime: "8 min read",
     num: "02",
     icon: Shuffle,
+    href: "#",
   },
   {
     tag: "Shopify",
@@ -34,10 +65,45 @@ const posts = [
     readTime: "6 min read",
     num: "03",
     icon: Store,
+    href: "#",
   },
 ];
 
+function normalizePreviewPosts(items: ApiBlogPreviewPost[]) {
+  return items.slice(0, 3).map((item, index) => ({
+    ...item,
+    num: String(index + 1).padStart(2, "0"),
+    icon: blogIconMap[item.iconKey || "shoppingBag"] || ShoppingBag,
+    href: item.href || "#",
+  }));
+}
+
 export function Blog() {
+  const [postItems, setPostItems] = useState(posts);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadPosts() {
+      try {
+        const response = await fetch("/api/content", { cache: "no-store" });
+        const data = (await response.json()) as { posts?: ApiBlogPreviewPost[] };
+
+        if (!cancelled && data.posts?.length) {
+          setPostItems(normalizePreviewPosts(data.posts));
+        }
+      } catch (error) {
+        console.warn("Unable to load homepage blog posts from GraphQL.", error);
+      }
+    }
+
+    loadPosts();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <section style={{ background: "var(--color-bg-soft)", padding: "96px 0" }}>
       <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
@@ -61,7 +127,7 @@ export function Blog() {
               Technical insights,<br />no filler.
             </h2>
           </div>
-          <a href="#" style={{
+          <Link href="/insights" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
             border: "1.5px solid var(--color-border)", borderRadius: 10,
             padding: "11px 20px",
@@ -79,12 +145,12 @@ export function Blog() {
             (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
           }}>
             View All <ArrowRight size={14} />
-          </a>
+          </Link>
         </div>
 
         {/* Blog cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="blog-grid">
-          {posts.map((post) => {
+          {postItems.map((post) => {
             const Icon = post.icon;
             return (
             <article key={post.title} className="blog-card" style={{
@@ -145,7 +211,7 @@ export function Blog() {
                       <Clock size={11} /> {post.readTime}
                     </span>
                   </div>
-                  <a href="#" style={{
+                  <a href={post.href} style={{
                     display: "flex", alignItems: "center", gap: 4,
                     fontSize: 12, fontWeight: 600, color: "var(--color-brand)",
                     textDecoration: "none",
@@ -238,7 +304,7 @@ export function CommunityBanner() {
         </div>
 
         <p style={{ marginTop: 16, fontSize: 12, color: "var(--color-copy)" }}>
-          Or <a href="#" style={{ color: "var(--color-brand)", textDecoration: "none", fontWeight: 600 }}>book a 30-min call directly →</a>
+          Or <a href="/contact-us" style={{ color: "var(--color-brand)", textDecoration: "none", fontWeight: 600 }}>book a 30-min call directly →</a>
         </p>
       </div>
     </section>

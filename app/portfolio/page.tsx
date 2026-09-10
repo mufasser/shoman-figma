@@ -1,27 +1,92 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SectionLabel } from "@/components/services/ServiceComponents";
 import { ArrowRight, BarChart3, ChevronRight, PackageCheck, RefreshCw, Rocket, Search, Settings, ShieldCheck, ShoppingBag } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import FinalCTA from "@/components/FinalCTA";
 
-const cases = [
-  { id: 1, platform: "Adobe Commerce", platformColor: "#FF0000", platformSym: "Ac", type: "Performance", bg: "#fff5f5", icon: ShoppingBag, client: "UK Fashion Retailer", title: "Checkout Load Cut by 53% — Adobe Commerce", problem: "8.4-second checkout losing 30% of shoppers before payment", result: "53% faster", resultLabel: "checkout speed", tags: ["Adobe Commerce", "Performance"] },
-  { id: 2, platform: "Shopify Plus", platformColor: "#96BF48", platformSym: "Sh", type: "Migration", bg: "#f5fbee", icon: PackageCheck, client: "B2B Distributor", title: "40,000 Orders Migrated — Zero Downtime", problem: "Magento 1 end-of-life with 10 years of order history at risk", result: "0 hrs", resultLabel: "downtime on launch", tags: ["Shopify Plus", "Migration"] },
-  { id: 3, platform: "SAP Integration", platformColor: "#6366F1", platformSym: "API", type: "Integration", bg: "#f5f3ff", icon: Settings, client: "Manufacturing Brand", title: "£80K/Year Saved via ERP Sync", problem: "Staff manually reconciling 1,200+ daily orders between Shopify and SAP", result: "£80K/yr", resultLabel: "manual cost removed", tags: ["Integration", "SAP"] },
-  { id: 4, platform: "Adobe Commerce", platformColor: "#FF0000", platformSym: "Ac", type: "Support", bg: "#fff5f5", icon: ShieldCheck, client: "Health & Beauty Brand", title: "6 Critical Security Patches Applied — Live in 48h", problem: "6 outstanding Adobe security patches including a critical RCE vulnerability", result: "48hrs", resultLabel: "to fully patched & live", tags: ["Adobe Commerce", "Security"] },
-  { id: 5, platform: "Shopify", platformColor: "#96BF48", platformSym: "Sh", type: "Build", bg: "#f5fbee", icon: Rocket, client: "UK DTC Startup", title: "First Store Launched — £120K Revenue Month 1", problem: "Founder needed a production-ready Shopify store in 3 weeks, no technical team", result: "£120K", resultLabel: "revenue in launch month", tags: ["Shopify", "Build"] },
-  { id: 6, platform: "Salesforce Integration", platformColor: "#00A1E0", platformSym: "Sf", type: "Integration", bg: "#f0f9ff", icon: RefreshCw, client: "SaaS Company", title: "Shopify ↔ Salesforce CRM Sync in Real Time", problem: "No connection between Shopify order data and Salesforce — sales team flying blind", result: "<5s", resultLabel: "order-to-CRM sync time", tags: ["Integration", "Salesforce"] },
+type PortfolioCard = {
+  id: number | string;
+  platform: string;
+  platformColor: string;
+  platformSym: string;
+  type: string;
+  bg: string;
+  icon: LucideIcon;
+  client: string;
+  title: string;
+  problem: string;
+  result: string;
+  resultLabel: string;
+  tags: string[];
+  href?: string;
+};
+
+type ApiPortfolioCard = Omit<PortfolioCard, "icon"> & {
+  iconKey?: keyof typeof projectIconMap;
+};
+
+const projectIconMap = {
+  shoppingBag: ShoppingBag,
+  packageCheck: PackageCheck,
+  settings: Settings,
+  shieldCheck: ShieldCheck,
+  rocket: Rocket,
+  refresh: RefreshCw,
+};
+
+const cases: PortfolioCard[] = [
+  { id: 1, platform: "Adobe Commerce", platformColor: "#FF0000", platformSym: "Ac", type: "Performance", bg: "#fff5f5", icon: ShoppingBag, client: "UK Fashion Retailer", title: "Checkout Load Cut by 53% — Adobe Commerce", problem: "8.4-second checkout losing 30% of shoppers before payment", result: "53% faster", resultLabel: "checkout speed", tags: ["Adobe Commerce", "Performance"], href: "#" },
+  { id: 2, platform: "Shopify Plus", platformColor: "#96BF48", platformSym: "Sh", type: "Migration", bg: "#f5fbee", icon: PackageCheck, client: "B2B Distributor", title: "40,000 Orders Migrated — Zero Downtime", problem: "Magento 1 end-of-life with 10 years of order history at risk", result: "0 hrs", resultLabel: "downtime on launch", tags: ["Shopify Plus", "Migration"], href: "#" },
+  { id: 3, platform: "SAP Integration", platformColor: "#6366F1", platformSym: "API", type: "Integration", bg: "#f5f3ff", icon: Settings, client: "Manufacturing Brand", title: "£80K/Year Saved via ERP Sync", problem: "Staff manually reconciling 1,200+ daily orders between Shopify and SAP", result: "£80K/yr", resultLabel: "manual cost removed", tags: ["Integration", "SAP"], href: "#" },
+  { id: 4, platform: "Adobe Commerce", platformColor: "#FF0000", platformSym: "Ac", type: "Support", bg: "#fff5f5", icon: ShieldCheck, client: "Health & Beauty Brand", title: "6 Critical Security Patches Applied — Live in 48h", problem: "6 outstanding Adobe security patches including a critical RCE vulnerability", result: "48hrs", resultLabel: "to fully patched & live", tags: ["Adobe Commerce", "Security"], href: "#" },
+  { id: 5, platform: "Shopify", platformColor: "#96BF48", platformSym: "Sh", type: "Build", bg: "#f5fbee", icon: Rocket, client: "UK DTC Startup", title: "First Store Launched — £120K Revenue Month 1", problem: "Founder needed a production-ready Shopify store in 3 weeks, no technical team", result: "£120K", resultLabel: "revenue in launch month", tags: ["Shopify", "Build"], href: "#" },
+  { id: 6, platform: "Salesforce Integration", platformColor: "#00A1E0", platformSym: "Sf", type: "Integration", bg: "#f0f9ff", icon: RefreshCw, client: "SaaS Company", title: "Shopify ↔ Salesforce CRM Sync in Real Time", problem: "No connection between Shopify order data and Salesforce — sales team flying blind", result: "<5s", resultLabel: "order-to-CRM sync time", tags: ["Integration", "Salesforce"], href: "#" },
 ];
 
-const allTags = ["All", "Adobe Commerce", "Shopify", "Shopify Plus", "Migration", "Performance", "Integration", "Build", "Security", "SAP", "Salesforce"];
+function attachProjectIcons(items: ApiPortfolioCard[]) {
+  return items.map((item) => ({
+    ...item,
+    icon: projectIconMap[item.iconKey || "shoppingBag"] || ShoppingBag,
+  }));
+}
 
 export default function CaseStudiesPage() {
   const [active, setActive] = useState("All");
+  const [caseItems, setCaseItems] = useState<PortfolioCard[]>(cases);
 
-  const filtered = active === "All" ? cases : cases.filter(c => c.tags.includes(active));
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadProjects() {
+      try {
+        const response = await fetch("/api/content", { cache: "no-store" });
+        const data = (await response.json()) as { projects?: ApiPortfolioCard[] };
+
+        if (!cancelled && data.projects?.length) {
+          setCaseItems(attachProjectIcons(data.projects));
+        }
+      } catch (error) {
+        console.warn("Unable to load portfolio from GraphQL.", error);
+      }
+    }
+
+    loadProjects();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const allTags = useMemo(() => {
+    const tags = caseItems.flatMap((item) => item.tags);
+    return ["All", ...Array.from(new Set(tags))];
+  }, [caseItems]);
+
+  const filtered = active === "All" ? caseItems : caseItems.filter(c => c.tags.includes(active));
 
   return (
     <div style={{ background: "var(--color-white)", minHeight: "100vh" }}>
@@ -112,7 +177,7 @@ export default function CaseStudiesPage() {
                     <div style={{ fontSize: 28, fontWeight: 800, color: c.platformColor, letterSpacing: "-0.02em", lineHeight: 1 }}>{c.result}</div>
                     <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 500, marginTop: 3 }}>{c.resultLabel}</div>
                   </div>
-                  <a href="#" style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, fontWeight: 600, color: c.platformColor, textDecoration: "none", transition: "gap 0.2s" }}
+                  <a href={c.href || "#"} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, fontWeight: 600, color: c.platformColor, textDecoration: "none", transition: "gap 0.2s" }}
                   onMouseEnter={(e) => (e.currentTarget.style.gap = "10px")}
                   onMouseLeave={(e) => (e.currentTarget.style.gap = "5px")}>
                     Read <ArrowRight size={12} />
@@ -147,12 +212,12 @@ export default function CaseStudiesPage() {
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, position: "relative" }}>
-              <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, background: "var(--color-brand)", color: "var(--color-white)", padding: "14px 28px", borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: "none", transition: "all 0.2s", whiteSpace: "nowrap" }}
+              <Link href="/contact-us" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, background: "var(--color-brand)", color: "var(--color-white)", padding: "14px 28px", borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: "none", transition: "all 0.2s", whiteSpace: "nowrap" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--color-brand-hover)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--color-brand)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
                 Book Free Discovery Call <ArrowRight size={15} />
               </Link>
-              <Link href="/services/audits" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, border: "1.5px solid rgba(255, 255, 255, 0.15)", color: "var(--color-white)", padding: "14px 28px", borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: "none", transition: "all 0.2s", whiteSpace: "nowrap" }}
+              <Link href="/services/technical-audits" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, border: "1.5px solid rgba(255, 255, 255, 0.15)", color: "var(--color-white)", padding: "14px 28px", borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: "none", transition: "all 0.2s", whiteSpace: "nowrap" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)"; (e.currentTarget as HTMLElement).style.color = "var(--color-brand)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255, 255, 255, 0.15)"; (e.currentTarget as HTMLElement).style.color = "var(--color-white)"; }}>
                 Start With a £499 Audit

@@ -185,7 +185,7 @@ export function PricingTable({ tiers, color }: { tiers: PricingTier[]; color: st
               ))}
             </ul>
           </div>
-          <a href="/contact" style={{
+          <a href="/contact-us" style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
             width: "100%", padding: "12px 0", borderRadius: 9,
             fontSize: 14, fontWeight: 600, textDecoration: "none",

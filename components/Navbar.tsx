@@ -6,11 +6,11 @@ import Image from 'next/image';
 
 
 const services = [
-  { name: "Adobe Commerce & Magento", href: "/services/adobe-commerce" },
-  { name: "Shopify Development", href: "/services/shopify" },
-  { name: "Magento → Shopify Migration", href: "/services/migration" },
-  { name: "Technical Audits", href: "/services/audits" },
-  { name: "Systems Integration", href: "/services/integrations" },
+  { name: "Adobe Commerce & Magento", href: "/services/adobe-commerce-development-support" },
+  { name: "Shopify Development", href: "/services/shopify-development-support" },
+  { name: "Magento → Shopify Migration", href: "/services/magento-to-shopify-migration" },
+  { name: "Technical Audits", href: "/services/technical-audits" },
+  { name: "Systems Integration", href: "/services/third-party-integrations" },
 ];
 
 export default function Navbar() {
@@ -131,7 +131,7 @@ export default function Navbar() {
 
           {/* CTA */}
           <div style={{ display: "flex", alignItems: "center", gap: 16 }} className="hide-mobile">
-            <a href="/contact" style={{
+            <a href="/contact-us" style={{
               display: "inline-flex", alignItems: "center",
               padding: "10px 22px", borderRadius: 8,
               background: "var(--color-brand)", color: "var(--color-white)",
@@ -173,7 +173,7 @@ export default function Navbar() {
               { label: "Testimonials", href: "/testimonials" },
               { label: "About", href: "/about" },
               { label: "Insights", href: "/insights" },
-              { label: "Contact", href: "/contact" },
+              { label: "Contact", href: "/contact-us" },
             ].map((item) => (
               <Link key={item.label} href={item.href}
                 style={{
@@ -184,7 +184,7 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/contact" style={{
+            <Link href="/contact-us" style={{
               marginTop: 12, padding: "12px 0", borderRadius: 8,
               background: "var(--color-brand)", color: "var(--color-white)", textAlign: "center",
               fontSize: 15, fontWeight: 600, textDecoration: "none",

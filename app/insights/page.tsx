@@ -1,20 +1,48 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowRight, Calendar, ChevronRight, Clock, Inbox, Mail, PenLine, Settings, ShieldCheck, ShoppingBag, Shuffle, Star, Store, TrendingUp } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 
-const posts = [
-  { id: 1, tag: "Adobe Commerce", tagColor: "#FF0000", tagBg: "#fff5f5", title: "Why Your Magento Checkout Is Losing You 30% of Conversions", excerpt: "The most common performance bottlenecks on Adobe Commerce stores aren't obvious — and fixing them doesn't require a full rebuild. Here's where to look first.", date: "12 Nov 2024", readTime: "5 min", featured: true, icon: ShoppingBag },
-  { id: 2, tag: "Migration", tagColor: "#F46F25", tagBg: "#fff8f0", title: "The Magento to Shopify Migration Checklist We Actually Use", excerpt: "After 40+ platform migrations, we've refined a process that protects your SEO, your data, and your sanity. Here's exactly what it covers and why.", date: "28 Oct 2024", readTime: "8 min", featured: false, icon: Shuffle },
-  { id: 3, tag: "Shopify", tagColor: "#96BF48", tagBg: "#f5fbee", title: "Shopify Plus vs Adobe Commerce: A Straight-Talking Guide", excerpt: "We work with both platforms every day. This isn't a sales pitch — it's an honest comparison for technical decision-makers who need the right answer.", date: "15 Oct 2024", readTime: "6 min", featured: false, icon: Store },
-  { id: 4, tag: "Integration", tagColor: "#6366F1", tagBg: "#f5f3ff", title: "Why Off-The-Shelf Integration Apps Keep Breaking", excerpt: "Generic Shopify apps work until your business has real complexity. Here's why custom middleware beats app-stack integrations every time.", date: "3 Oct 2024", readTime: "7 min", featured: false, icon: Settings },
-  { id: 5, tag: "Adobe Commerce", tagColor: "#FF0000", tagBg: "#fff5f5", title: "Adobe Commerce Security Patches: What They Are and Why They Can't Wait", excerpt: "A plain-English guide to Adobe Commerce security patches — what APSB notices mean, how to read severity ratings, and how to apply patches safely.", date: "20 Sep 2024", readTime: "4 min", featured: false, icon: ShieldCheck },
-  { id: 6, tag: "Shopify", tagColor: "#96BF48", tagBg: "#f5fbee", title: "Building a High-Converting Shopify Store: What Actually Moves the Needle", excerpt: "After 80+ Shopify builds, we know which decisions drive conversion and which ones agencies spend time on that buyers don't notice or care about.", date: "5 Sep 2024", readTime: "6 min", featured: false, icon: TrendingUp },
-];
+type BlogPostCard = {
+  id: number | string;
+  tag: string;
+  tagColor: string;
+  tagBg: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  featured: boolean;
+  icon: LucideIcon;
+  iconKey?: keyof typeof postIconMap;
+  slug?: string;
+  href?: string;
+};
 
-const categories = ["All", "Adobe Commerce", "Shopify", "Migration", "Integration"];
+type ApiBlogPostCard = Omit<BlogPostCard, "icon"> & {
+  iconKey?: keyof typeof postIconMap;
+};
+
+const postIconMap = {
+  shoppingBag: ShoppingBag,
+  shuffle: Shuffle,
+  store: Store,
+  settings: Settings,
+  shieldCheck: ShieldCheck,
+  trendingUp: TrendingUp,
+};
+
+const posts: BlogPostCard[] = [
+  { id: 1, tag: "Adobe Commerce", tagColor: "#FF0000", tagBg: "#fff5f5", title: "Why Your Magento Checkout Is Losing You 30% of Conversions", excerpt: "The most common performance bottlenecks on Adobe Commerce stores aren't obvious — and fixing them doesn't require a full rebuild. Here's where to look first.", date: "12 Nov 2024", readTime: "5 min", featured: true, icon: ShoppingBag, href: "#" },
+  { id: 2, tag: "Migration", tagColor: "#F46F25", tagBg: "#fff8f0", title: "The Magento to Shopify Migration Checklist We Actually Use", excerpt: "After 40+ platform migrations, we've refined a process that protects your SEO, your data, and your sanity. Here's exactly what it covers and why.", date: "28 Oct 2024", readTime: "8 min", featured: false, icon: Shuffle, href: "#" },
+  { id: 3, tag: "Shopify", tagColor: "#96BF48", tagBg: "#f5fbee", title: "Shopify Plus vs Adobe Commerce: A Straight-Talking Guide", excerpt: "We work with both platforms every day. This isn't a sales pitch — it's an honest comparison for technical decision-makers who need the right answer.", date: "15 Oct 2024", readTime: "6 min", featured: false, icon: Store, href: "#" },
+  { id: 4, tag: "Integration", tagColor: "#6366F1", tagBg: "#f5f3ff", title: "Why Off-The-Shelf Integration Apps Keep Breaking", excerpt: "Generic Shopify apps work until your business has real complexity. Here's why custom middleware beats app-stack integrations every time.", date: "3 Oct 2024", readTime: "7 min", featured: false, icon: Settings, href: "#" },
+  { id: 5, tag: "Adobe Commerce", tagColor: "#FF0000", tagBg: "#fff5f5", title: "Adobe Commerce Security Patches: What They Are and Why They Can't Wait", excerpt: "A plain-English guide to Adobe Commerce security patches — what APSB notices mean, how to read severity ratings, and how to apply patches safely.", date: "20 Sep 2024", readTime: "4 min", featured: false, icon: ShieldCheck, href: "#" },
+  { id: 6, tag: "Shopify", tagColor: "#96BF48", tagBg: "#f5fbee", title: "Building a High-Converting Shopify Store: What Actually Moves the Needle", excerpt: "After 80+ Shopify builds, we know which decisions drive conversion and which ones agencies spend time on that buyers don't notice or care about.", date: "5 Sep 2024", readTime: "6 min", featured: false, icon: TrendingUp, href: "#" },
+];
 
 const heroStats = [
   { value: "48", label: "Articles published", color: "var(--color-brand)" },
@@ -25,9 +53,53 @@ const heroStats = [
 
 
 
+function attachPostIcons(items: ApiBlogPostCard[]) {
+  return items.map((item, index) => ({
+    ...item,
+    featured: index === 0,
+    icon: postIconMap[item.iconKey || "shoppingBag"] || ShoppingBag,
+  }));
+}
+
 export default function InsightsPage() {
   const [active, setActive] = useState("All");
-  const filtered = active === "All" ? posts : posts.filter(p => p.tag === active);
+  const [postItems, setPostItems] = useState<BlogPostCard[]>(posts);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadPosts() {
+      try {
+        const response = await fetch("/api/content", { cache: "no-store" });
+        const data = (await response.json()) as { posts?: ApiBlogPostCard[] };
+
+        if (!cancelled && data.posts?.length) {
+          setPostItems(attachPostIcons(data.posts));
+        }
+      } catch (error) {
+        console.warn("Unable to load blog posts from GraphQL.", error);
+      }
+    }
+
+    loadPosts();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const categories = useMemo(() => {
+    const tags = postItems.map((post) => post.tag).filter(Boolean);
+    return ["All", ...Array.from(new Set(tags))];
+  }, [postItems]);
+
+  const currentHeroStats = [
+    { ...heroStats[0], value: String(Math.max(postItems.length, Number(heroStats[0].value))) },
+    { ...heroStats[1], value: String(Math.max(categories.length - 1, Number(heroStats[1].value))) },
+    heroStats[2],
+  ];
+
+  const filtered = active === "All" ? postItems : postItems.filter(p => p.tag === active);
   const [featured, ...rest] = filtered;
   const FeaturedIcon = featured?.icon;
 
@@ -59,7 +131,7 @@ export default function InsightsPage() {
             </div>
 
             <div className="blog-hero-stats" style={{ position: "relative", minHeight: 360 }}>
-              {heroStats.map((stat, index) => (
+              {currentHeroStats.map((stat, index) => (
                 <div key={stat.label} className={`blog-hero-stat-card blog-hero-stat-card--${index + 1}`} style={{
                   background: "var(--color-bg-soft)",
                   border: "1.5px solid var(--color-border)",
@@ -126,7 +198,7 @@ export default function InsightsPage() {
                 </div>
                 <h2 style={{ fontSize: 22, fontWeight: 800, color: "var(--color-ink)", lineHeight: 1.3, marginBottom: 14, letterSpacing: "-0.01em" }}>{featured.title}</h2>
                 <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--color-muted)", marginBottom: 24 }}>{featured.excerpt}</p>
-                <a href="#" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand)", color: "var(--color-white)", padding: "11px 20px", borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: "none", width: "fit-content", transition: "background 0.2s" }}
+                <a href={featured.href || "#"} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand)", color: "var(--color-white)", padding: "11px 20px", borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: "none", width: "fit-content", transition: "background 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.background = "var(--color-brand-hover)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "var(--color-brand)")}>
                   Read Article <ArrowRight size={14} />
@@ -157,7 +229,7 @@ export default function InsightsPage() {
                     </div>
                     <h3 style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)", lineHeight: 1.4, marginBottom: 9 }}>{post.title}</h3>
                     <p style={{ fontSize: 12, lineHeight: 1.7, color: "var(--color-muted)", marginBottom: 16 }}>{post.excerpt}</p>
-                    <a href="#" style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, fontWeight: 600, color: post.tagColor, textDecoration: "none", transition: "gap 0.2s" }}
+                    <a href={post.href || "#"} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, fontWeight: 600, color: post.tagColor, textDecoration: "none", transition: "gap 0.2s" }}
                     onMouseEnter={e => (e.currentTarget.style.gap = "9px")}
                     onMouseLeave={e => (e.currentTarget.style.gap = "5px")}>
                       Read Article <ArrowRight size={12} />

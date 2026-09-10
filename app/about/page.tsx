@@ -88,7 +88,7 @@ export default function AboutPage() {
                 We started because too many UK merchants were stuck with agencies that sold them platforms they couldn&apos;t maintain. We built the team that fixes those platforms — and builds ones that don&apos;t break.
               </p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <Link href="/contact" style={{
+                <Link href="/contact-us" style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
                   background: "var(--color-brand)", color: "var(--color-white)",
                   padding: "13px 24px", borderRadius: 9,

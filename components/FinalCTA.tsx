@@ -20,9 +20,9 @@ export default function FinalCTA({
   highlight = "Adobe Commerce platform?",
   description = "No jargon. No hard sell. A direct conversation with a senior Adobe Commerce engineer about your specific platform and what it needs.",
   primaryLabel = "Book Free Consultation",
-  primaryHref = "/contact",
+  primaryHref = "/contact-us",
   secondaryLabel = "Start With a £499 Audit",
-  secondaryHref = "/services/audits",
+  secondaryHref = "/services/technical-audits",
 }: FinalCTAProps) {
   return (
     <section style={{

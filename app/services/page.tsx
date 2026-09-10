@@ -9,8 +9,8 @@ import { SectionLabel } from "@/components/services/ServiceComponents";
 const services = [
   {
     bg: "#fff5f5",
-    href: "/services/adobe-commerce",
-    image: "/assets/services/adobe-commerce-engineering.jpg",
+    href: "/services/adobe-commerce-development-support",
+    image: "/assets/services/adobe-commerce-development-support-engineering.jpg",
     imageAlt: "Adobe Commerce engineers discussing a store build",
     title: "Adobe Commerce (Magento) Engineering",
     desc: "Experienced backend engineering, security patching, performance optimisation, and custom module development for Adobe Commerce and Magento 2 stores.",
@@ -18,8 +18,8 @@ const services = [
   },
   {
     bg: "#f5fbee",
-    href: "/services/shopify",
-    image: "/assets/services/shopify-store-development.jpg",
+    href: "/services/shopify-development-support",
+    image: "/assets/services/shopify-development-support-store-development.jpg",
     imageAlt: "Shopify project planning session",
     title: "Shopify Store Launch & Development",
     desc: "End-to-end Shopify and Shopify Plus store builds for startups, growing brands, and enterprise clients. Custom themes, integrations, and conversion-focused development.",
@@ -27,8 +27,8 @@ const services = [
   },
   {
     bg: "#fff8f0",
-    href: "/services/migration",
-    image: "/assets/services/adobe-commerce-app-builder.jpg",
+    href: "/services/magento-to-shopify-migration",
+    image: "/assets/services/adobe-commerce-development-support-app-builder.jpg",
     imageAlt: "Adobe Commerce App Builder migration planning",
     title: "Adobe Commerce App Builder",
     desc: "Full platform migration handling all products, orders, customers, SEO redirects, and third-party integrations — with zero data loss and no downtime on launch day.",
@@ -36,7 +36,7 @@ const services = [
   },
   {
     bg: "#f0f9ff",
-    href: "/services/audits",
+    href: "/services/technical-audits",
     image: "/assets/services/technical-audit-service.jpg",
     imageAlt: "Technical audit review meeting",
     title: "Technical Audit Service",
@@ -45,7 +45,7 @@ const services = [
   },
   {
     bg: "#f5f3ff",
-    href: "/services/integrations",
+    href: "/services/third-party-integrations",
     image: "/assets/services/enterprise-systems-integration.jpg",
     imageAlt: "Enterprise systems integration workshop",
     title: "Enterprise Systems Integration",
@@ -231,7 +231,7 @@ export default function ServicesPage() {
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, position: "relative" }}>
-              <a href="/contact" style={{
+              <a href="/contact-us" style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
                 background: "var(--color-brand)", color: "var(--color-white)",
                 padding: "14px 28px", borderRadius: 9,
@@ -248,7 +248,7 @@ export default function ServicesPage() {
               }}>
                 Book Free Discovery Call <ArrowRight size={15} />
               </a>
-              <a href="/services/audits" style={{
+              <a href="/services/technical-audits" style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
                 border: "1.5px solid rgba(255, 255, 255, 0.15)", color: "var(--color-white)",
                 padding: "14px 28px", borderRadius: 9,

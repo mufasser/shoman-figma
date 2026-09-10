@@ -1,7 +1,44 @@
 "use client";
+import { useEffect, useState } from "react";
 import { ArrowRight, PackageCheck, Settings, ShoppingBag } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const cases = [
+type CaseStudyPreview = {
+  tag: string;
+  platform: string;
+  platformColor: string;
+  title: string;
+  description: string;
+  metric: string;
+  metricLabel: string;
+  image: LucideIcon;
+  bg: string;
+  href: string;
+};
+
+type ApiCaseStudy = {
+  platform: string;
+  platformColor: string;
+  type: string;
+  title: string;
+  problem: string;
+  result: string;
+  resultLabel: string;
+  bg: string;
+  href?: string;
+  iconKey?: "shoppingBag" | "packageCheck" | "settings" | "shieldCheck" | "rocket" | "refresh";
+};
+
+const previewIconMap = {
+  shoppingBag: ShoppingBag,
+  packageCheck: PackageCheck,
+  settings: Settings,
+  shieldCheck: ShoppingBag,
+  rocket: PackageCheck,
+  refresh: Settings,
+};
+
+const cases: CaseStudyPreview[] = [
   {
     tag: "Performance",
     platform: "Adobe Commerce",
@@ -12,6 +49,7 @@ const cases = [
     metricLabel: "faster checkout",
     image: ShoppingBag,
     bg: "#fff5f5",
+    href: "#",
   },
   {
     tag: "Migration",
@@ -23,6 +61,7 @@ const cases = [
     metricLabel: "downtime on launch",
     image: PackageCheck,
     bg: "#fff8f0",
+    href: "#",
   },
   {
     tag: "Integration",
@@ -34,11 +73,51 @@ const cases = [
     metricLabel: "manual cost removed",
     image: Settings,
     bg: "#f5f3ff",
+    href: "#",
   },
 ];
 
+function normalizePreviewCases(items: ApiCaseStudy[]) {
+  return items.slice(0, 3).map((item) => ({
+    tag: item.type,
+    platform: item.platform,
+    platformColor: item.platformColor,
+    title: item.title,
+    description: item.problem,
+    metric: item.result,
+    metricLabel: item.resultLabel,
+    image: previewIconMap[item.iconKey || "shoppingBag"] || ShoppingBag,
+    bg: item.bg,
+    href: item.href || "#",
+  }));
+}
+
 export default function CaseStudies() {
-  const FeaturedIcon = cases[0].image;
+  const [caseItems, setCaseItems] = useState(cases);
+  const FeaturedIcon = caseItems[0].image;
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadCases() {
+      try {
+        const response = await fetch("/api/content", { cache: "no-store" });
+        const data = (await response.json()) as { projects?: ApiCaseStudy[] };
+
+        if (!cancelled && data.projects?.length) {
+          setCaseItems(normalizePreviewCases(data.projects));
+        }
+      } catch (error) {
+        console.warn("Unable to load portfolio previews from GraphQL.", error);
+      }
+    }
+
+    loadCases();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <section style={{ background: "var(--color-bg-soft)", padding: "96px 0" }}>
@@ -76,8 +155,8 @@ export default function CaseStudies() {
 
           {/* Large featured card */}
           <div style={{
-            background: cases[0].bg,
-            border: `1.5px solid ${cases[0].platformColor}20`,
+            background: caseItems[0].bg,
+            border: `1.5px solid ${caseItems[0].platformColor}20`,
             borderRadius: 20,
             padding: 36,
             display: "flex", flexDirection: "column", justifyContent: "space-between",
@@ -87,7 +166,7 @@ export default function CaseStudies() {
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-            (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 48px ${cases[0].platformColor}20`;
+            (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 48px ${caseItems[0].platformColor}20`;
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
@@ -97,16 +176,16 @@ export default function CaseStudies() {
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
                 <span style={{
                   fontSize: 10, fontWeight: 700, letterSpacing: "0.1em",
-                  textTransform: "uppercase", color: cases[0].platformColor,
-                  background: cases[0].platformColor + "15",
+                  textTransform: "uppercase", color: caseItems[0].platformColor,
+                  background: caseItems[0].platformColor + "15",
                   padding: "4px 10px", borderRadius: 100,
-                }}>{cases[0].tag}</span>
-                <span style={{ fontSize: 11, color: "var(--color-subtle)", fontWeight: 500 }}>{cases[0].platform}</span>
+                }}>{caseItems[0].tag}</span>
+                <span style={{ fontSize: 11, color: "var(--color-subtle)", fontWeight: 500 }}>{caseItems[0].platform}</span>
               </div>
 
               <div style={{
                 width: 72, height: 72, borderRadius: 16,
-                background: cases[0].platformColor + "14", color: cases[0].platformColor,
+                background: caseItems[0].platformColor + "14", color: caseItems[0].platformColor,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 marginBottom: 20,
               }}><FeaturedIcon size={34} strokeWidth={2.2} /></div>
@@ -114,23 +193,23 @@ export default function CaseStudies() {
               <h3 style={{
                 fontSize: 24, fontWeight: 800, color: "var(--color-ink)",
                 lineHeight: 1.25, letterSpacing: "-0.02em", marginBottom: 16,
-              }}>{cases[0].title}</h3>
+              }}>{caseItems[0].title}</h3>
 
               <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--color-copy)", marginBottom: 28 }}>
-                {cases[0].description}
+                {caseItems[0].description}
               </p>
             </div>
 
             <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
               <div>
-                <div style={{ fontSize: 40, fontWeight: 800, color: cases[0].platformColor, letterSpacing: "-0.03em" }}>
-                  {cases[0].metric}
+                <div style={{ fontSize: 40, fontWeight: 800, color: caseItems[0].platformColor, letterSpacing: "-0.03em" }}>
+                  {caseItems[0].metric}
                 </div>
-                <div style={{ fontSize: 12, color: "var(--color-muted)", fontWeight: 500 }}>{cases[0].metricLabel}</div>
+                <div style={{ fontSize: 12, color: "var(--color-muted)", fontWeight: 500 }}>{caseItems[0].metricLabel}</div>
               </div>
-              <a href="#" style={{
+              <a href={caseItems[0].href} style={{
                 display: "inline-flex", alignItems: "center", gap: 6,
-                fontSize: 13, fontWeight: 600, color: cases[0].platformColor,
+                fontSize: 13, fontWeight: 600, color: caseItems[0].platformColor,
                 textDecoration: "none",
               }}>
                 Read story <ArrowRight size={14} />
@@ -139,7 +218,7 @@ export default function CaseStudies() {
           </div>
 
           {/* Two smaller cards */}
-          {cases.slice(1).map((c) => {
+          {caseItems.slice(1).map((c) => {
             const Icon = c.image;
             return (
             <div key={c.title} style={{
@@ -194,7 +273,7 @@ export default function CaseStudies() {
                   </div>
                   <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 500 }}>{c.metricLabel}</div>
                 </div>
-                <a href="#" style={{
+                <a href={c.href} style={{
                   display: "inline-flex", alignItems: "center", gap: 5,
                   fontSize: 12, fontWeight: 600, color: c.platformColor,
                   textDecoration: "none",
@@ -209,7 +288,7 @@ export default function CaseStudies() {
 
         {/* View all */}
         <div style={{ textAlign: "center", marginTop: 48 }}>
-          <a href="#" style={{
+          <a href="/portfolio" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
             border: "1.5px solid var(--color-border)", borderRadius: 10,
             padding: "12px 24px",

@@ -119,7 +119,7 @@ export default function ServiceLayout({
               }}>{heroSub}</p>
 
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <a href="/services/audits" style={{
+                <a href="/services/technical-audits" style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
                   background: "var(--color-brand)", color: "var(--color-white)",
                   padding: "13px 24px", borderRadius: 9,
@@ -218,7 +218,7 @@ export default function ServiceLayout({
             No jargon. No hard sell. A direct conversation with a senior engineer who understands your platform.
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-            <a href="/contact" style={{
+            <a href="/contact-us" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
               background: "var(--color-brand)", color: "var(--color-white)",
               padding: "14px 28px", borderRadius: 9,
@@ -235,7 +235,7 @@ export default function ServiceLayout({
             }}>
               Book Free Consultation <ArrowRight size={15} />
             </a>
-            <a href="/contact" style={{
+            <a href="/contact-us" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
               border: "1.5px solid rgba(255, 255, 255, 0.15)",
               color: "var(--color-white)",

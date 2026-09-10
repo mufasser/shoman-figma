@@ -128,7 +128,7 @@ export default function AuditsPage() {
               </div>
               <h3 style={{ fontSize: 24, fontWeight: 800, color: "var(--color-ink)", marginBottom: 14, letterSpacing: "-0.02em" }}>{active.title}</h3>
               <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--color-copy)", marginBottom: 28 }}>{active.desc}</p>
-              <a href="/contact" style={{
+              <a href="/contact-us" style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 background: COLOR, color: "var(--color-white)",
                 padding: "12px 22px", borderRadius: 9,
@@ -343,7 +343,7 @@ export default function AuditsPage() {
                     ))}
                   </ul>
                 </div>
-                <a href="/contact" style={{
+                <a href="/contact-us" style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
                   width: "100%", padding: "12px 0", borderRadius: 9,
                   fontSize: 14, fontWeight: 600, textDecoration: "none",

@@ -19,7 +19,7 @@ const footerHrefs: Record<string, string> = {
   Portfolio: "/portfolio",
   Testimonials: "/testimonials",
   Blog: "/insights",
-  "Contact Us": "/contact",
+  "Contact Us": "/contact-us",
 };
 
 const socialLinks: { label: string; href: string; icon: LucideIcon }[] = [

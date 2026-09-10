@@ -1,8 +1,35 @@
 "use client";
-import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
-const testimonials = [
+type TestimonialPreview = {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  initial: string;
+  color: string;
+  platform: string;
+  rating: number;
+  avatar?: string;
+};
+
+type ApiTestimonial = {
+  quote: string;
+  author: string;
+  role: string;
+  initials: string;
+  color: string;
+  platform: string;
+  rating: number;
+  avatar?: string;
+};
+
+type TestimonialsProps = {
+  initialTestimonials?: ApiTestimonial[];
+};
+
+const testimonials: TestimonialPreview[] = [
   {
     quote:
       "Working with Shoman Solutions has been a fantastic experience, and I wouldn't hesitate to recommend them. Throughout our engagement, Shoman Solutions consistently delivered high-quality Adobe Commerce (Magento) development...",
@@ -13,6 +40,7 @@ const testimonials = [
     initial: "MJ",
     color: "#FF0000",
     platform: "Adobe Commerce",
+    rating: 5,
   },
   {
     quote:
@@ -23,6 +51,7 @@ const testimonials = [
     initial: "SJ",
     color: "#96BF48",
     platform: "Magento",
+    rating: 5,
   },
   {
     quote:
@@ -33,16 +62,58 @@ const testimonials = [
     initial: "P",
     color: "#0284C7",
     platform: "Technical Audit",
+    rating: 5,
   },
 ];
 
-export default function Testimonials() {
+function normalizePreviewTestimonials(items: ApiTestimonial[]) {
+  return items.slice(0, 6).map((item) => ({
+    quote: item.quote,
+    name: item.author,
+    role: item.role,
+    company: item.platform,
+    initial: item.initials,
+    color: item.color,
+    platform: item.platform,
+    rating: item.rating || 5,
+    avatar: item.avatar,
+  }));
+}
+
+export default function Testimonials({ initialTestimonials = [] }: TestimonialsProps) {
   const [active, setActive] = useState(0);
+  const [testimonialItems, setTestimonialItems] = useState<TestimonialPreview[]>(
+    initialTestimonials.length ? normalizePreviewTestimonials(initialTestimonials) : testimonials
+  );
 
-  const prev = () => setActive((a) => (a - 1 + testimonials.length) % testimonials.length);
-  const next = () => setActive((a) => (a + 1) % testimonials.length);
+  useEffect(() => {
+    let cancelled = false;
 
-  const t = testimonials[active];
+    async function loadTestimonials() {
+      try {
+        const response = await fetch("/api/content", { cache: "no-store" });
+        const data = (await response.json()) as { testimonials?: ApiTestimonial[] };
+
+        if (!cancelled && data.testimonials?.length) {
+          setTestimonialItems(normalizePreviewTestimonials(data.testimonials));
+          setActive(0);
+        }
+      } catch (error) {
+        console.warn("Unable to load homepage testimonials from GraphQL.", error);
+      }
+    }
+
+    loadTestimonials();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const prev = () => setActive((a) => (a - 1 + testimonialItems.length) % testimonialItems.length);
+  const next = () => setActive((a) => (a + 1) % testimonialItems.length);
+
+  const t = testimonialItems[active];
 
   return (
     <section style={{ background: "var(--color-white)", padding: "96px 0", overflow: "hidden" }}>
@@ -79,25 +150,25 @@ export default function Testimonials() {
 
             {/* Avatar cluster */}
             <div style={{ display: "flex", alignItems: "center", marginTop: 32 }}>
-              {testimonials.map((t, i) => (
+              {testimonialItems.map((t, i) => (
                 <div key={i} style={{
                   width: 44, height: 44, borderRadius: "50%",
-                  background: t.color,
+                  background: t.avatar ? `url(${t.avatar}) center / cover` : t.color,
                   border: "3px solid var(--color-white)",
                   marginLeft: i === 0 ? 0 : -12,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: 16, fontWeight: 800, color: "var(--color-white)",
                   cursor: "pointer",
-                  zIndex: testimonials.length - i,
+                  zIndex: testimonialItems.length - i,
                   transition: "transform 0.2s",
                 }}
                 onClick={() => setActive(i)}
                 onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-4px)")}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
-                >{t.initial}</div>
+                >{!t.avatar && t.initial}</div>
               ))}
               <span style={{ marginLeft: 16, fontSize: 13, color: "var(--color-muted)", fontWeight: 500 }}>
-                {testimonials.length} clients · 5★ average
+                {testimonialItems.length} clients · 5 star average
               </span>
             </div>
           </div>
@@ -133,8 +204,8 @@ export default function Testimonials() {
 
               {/* Stars */}
               <div style={{ display: "flex", gap: 4, marginBottom: 20 }}>
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} style={{ color: "var(--color-brand)", fontSize: 16 }}>★</span>
+                {Array.from({ length: Math.max(1, Math.min(5, Math.round(t.rating))) }).map((_, i) => (
+                  <Star key={i} size={16} color="var(--color-brand)" fill="currentColor" strokeWidth={0} />
                 ))}
               </div>
 
@@ -151,10 +222,10 @@ export default function Testimonials() {
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <div style={{
                     width: 44, height: 44, borderRadius: "50%",
-                    background: t.color,
+                    background: t.avatar ? `url(${t.avatar}) center / cover` : t.color,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: 18, fontWeight: 800, color: "var(--color-white)",
-                  }}>{t.initial}</div>
+                  }}>{!t.avatar && t.initial}</div>
                   <div>
                     <div style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)" }}>{t.name}</div>
                     <div style={{ fontSize: 12, color: "var(--color-muted)" }}>{t.role} · {t.company}</div>
@@ -189,7 +260,7 @@ export default function Testimonials() {
 
               {/* Dot indicators */}
               <div style={{ display: "flex", gap: 6, marginTop: 20 }}>
-                {testimonials.map((_, i) => (
+                {testimonialItems.map((_, i) => (
                   <button key={i} onClick={() => setActive(i)} style={{
                     width: active === i ? 20 : 6, height: 6,
                     borderRadius: 3,
