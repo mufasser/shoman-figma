@@ -265,7 +265,7 @@ export function CommunityBanner() {
         </div>
 
         <h2 style={{
-          fontSize: "clamp(28px, 3vw, 48px)",
+          fontSize: "clamp(28px, 2vw, 48px)",
           fontWeight: 800, 
           lineHeight: 1.15,
           letterSpacing: "-0.02em",

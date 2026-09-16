@@ -6,6 +6,7 @@ import { CalendarDays, ChevronRight, Mail } from "lucide-react";
 import Link from "next/link";
 import { CommunityBanner } from "@/components/BlogAndCTA";
 import Image from "next/image";
+import LogoTicker from "@/components/LogoTicker";
 
 export default function ContactPage() {
   return (
@@ -51,6 +52,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <LogoTicker />
 
       {/* Form + info */}
       <section style={{ background: "var(--color-bg-soft)", padding: "64px 24px" }}>
