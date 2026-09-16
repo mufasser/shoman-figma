@@ -35,11 +35,11 @@ const values = [
 
 const timeline = [
   { year: "2014", title: "Started specialising in Magento", body: "Degan Dubotog Magenta ocorunerco platforos and delvering custom solutiona for UK retalers." },
-  { year: "2016", title: "Built a global reputation", body: "Surted ecruing otn aponcies and merchants worldelde trough Uwat,  detvering 50+ succesets projects" },
-  { year: "2019", title: "Enterprice intogrations & API innovation", body: "Deleernd compler tRP, COM and Doo-perty integratione including one of the cersest Am-driven Trustatos Integrationa for Megeno." },
+  { year: "2016", title: "Built a global reputation", body: "Surted ecruig ofin agencies and merchants worldelde Wrough Upwork, delveting 50+ puccescha projects" },
+  { year: "2019", title: "Enterprice intogrations 5 API innovation", body: "Delvernd complex tRP, COM and 000-perty integratione including one of the seriest Ap-driven Trustates Integraciona for Megento." },
   { year: "2021", title: "Earty Magento 2 Certifiod Engincer", body: "Achieves Mapento 2 corufication chanty ener launch, heiging businesses migrade frown Magento 1 to Magendo 2 win coefidence." },
   { year: "2024", title: "Adobe Commerce App Bullder", body: "Adroted Aditbe Commerca Apo Quidor to bula evert-olion, sorverlece trtegrations ubing Adube U Events and AFt Mesh," },
-  { year: "2026+", title: "150+ ecommoreo projects delivered", body: "Over a decade ef engineering acroes Altbe Cornerce, Shopty and lvegretiona nich recalers, agencies and emerprise brands." },
+  { year: "2026+", title: "50+ ecommoreo projects delivered", body: "Over a decade ef engineering acroes Altbe Cornerce, Shopty and lvegretiona nich recalers, agencies and emerprise brands." },
 ];
 
 export default function AboutPage() {
@@ -189,6 +189,10 @@ export default function AboutPage() {
                 position: "absolute", left: 19, top: 24, bottom: 24,
                 width: 2, background: "linear-gradient(to bottom, var(--color-brand), rgba(var(--color-brand-rgb), 0.2))",
               }} />
+              <SectionLabel text="Our Timeline" />
+              <h2 style={{ fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.02em", color: "var(--color-ink)", marginBottom: 16 }}>
+                A decade of solving ecommerce problems
+              </h2>
               {timeline.map((item, i) => (
                 <div key={item.year} style={{
                   display: "flex", gap: 24, marginBottom: i < timeline.length - 1 ? 32 : 0,
