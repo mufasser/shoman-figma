@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import LogoTicker from "@/components/LogoTicker";
 import Image from "next/image";
+import AboutTestimonialsWidget from "@/components/AboutTestimonialsWidget";
 
 const team = [
   { initial: "S", name: "Shoman", role: "Founder & Lead Engineer", color: "#ec7323", years: "10+ yrs", platforms: "Adobe Commerce · Shopify Plus" },
@@ -187,12 +188,23 @@ export default function AboutPage() {
             <div style={{ position: "relative" }}>
               <div style={{
                 position: "absolute", left: 19, top: 24, bottom: 24,
-                width: 2, background: "linear-gradient(to bottom, var(--color-brand), rgba(var(--color-brand-rgb), 0.2))",
+                width: 2, 
+                background: "linear-gradient(to bottom, var(--color-brand), rgba(var(--color-brand-rgb), 0.2))",
               }} />
-              <SectionLabel text="Our Timeline" />
-              <h2 style={{ fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.02em", color: "var(--color-ink)", marginBottom: 16 }}>
-                A decade of solving ecommerce problems
-              </h2>
+              
+              <div style={{padding: "6px 16px 6px 65px",}}>
+                <SectionLabel text="Our Timeline" />
+                <h2 style={{ 
+                  fontSize: "clamp(26px, 3vw, 38px)", 
+                  fontWeight: 800, 
+                  lineHeight: 1.2, 
+                  letterSpacing: "-0.02em", 
+                  color: "var(--color-ink)", 
+                  marginBottom: 16 }}>
+                  A decade of solving ecommerce problems
+                </h2>
+              </div>
+
               {timeline.map((item, i) => (
                 <div key={item.year} style={{
                   display: "flex", gap: 24, marginBottom: i < timeline.length - 1 ? 32 : 0,
@@ -394,6 +406,8 @@ export default function AboutPage() {
           <style jsx>{`@media(max-width:768px){.quality-grid{grid-template-columns:1fr!important;gap:40px!important}}`}</style>
         </div>
       </section>
+
+      <AboutTestimonialsWidget />
 
       <FinalCTA />
 

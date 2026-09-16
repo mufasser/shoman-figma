@@ -252,20 +252,26 @@ export function CommunityBanner() {
 
       <div style={{ maxWidth: 600, margin: "0 auto", position: "relative" }}>
         <div style={{
-          display: "inline-flex", alignItems: "center", gap: 8,
+          display: "inline-flex", 
+          alignItems: "center", gap: 8,
           background: "rgba(var(--color-brand-rgb), 0.1)",
           border: "1px solid rgba(var(--color-brand-rgb), 0.2)",
-          borderRadius: 100, padding: "6px 16px", marginBottom: 24,
+          borderRadius: 100, 
+          padding: "6px 16px 6px 65px", 
+          marginBottom: 24,
         }}>
           <Rocket size={14} color="var(--color-brand)" strokeWidth={2.2} />
           <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>Free discovery call — no commitment</span>
         </div>
 
         <h2 style={{
-          fontSize: "clamp(28px, 4vw, 48px)",
-          fontWeight: 800, lineHeight: 1.15,
+          fontSize: "clamp(28px, 3vw, 48px)",
+          fontWeight: 800, 
+          lineHeight: 1.15,
           letterSpacing: "-0.02em",
-          color: "var(--color-white)", marginBottom: 16,
+          color: "var(--color-white)", 
+          marginBottom: 16,
+          paddingLeft: "65px",
         }}>
           Ready to build ecommerce<br />
           <span style={{ color: "var(--color-brand)" }}>that actually performs?</span>
