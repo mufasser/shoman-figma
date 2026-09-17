@@ -32,6 +32,7 @@ type RawProject = {
   featuredImage?: {
     node?: {
       featuredImage?: string | null;
+      altText?: string | null;
     } | null;
   } | null;
   projectFields?: {
@@ -94,6 +95,8 @@ type RawPost = {
 };
 
 export type PortfolioItem = {
+  image?: string;
+  imageAlt?: string;
   id: string;
   platform: string;
   platformColor: string;
@@ -366,6 +369,8 @@ function normalizeProject(project: RawProject, index: number): PortfolioItem {
     resultLabel: "project status",
     tags: Array.from(new Set([palette.platform, type])),
     href: project.projectFields?.projectLink || "#",
+    image: project.featuredImage?.node?.featuredImage || undefined,
+    imageAlt: stripHtml(project.featuredImage?.node?.altText) || title,
   };
 }
 

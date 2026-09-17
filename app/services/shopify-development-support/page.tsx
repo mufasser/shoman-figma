@@ -204,7 +204,14 @@ export default function ShopifyPage() {
       <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <SectionLabel text="Project Packages" />
+            {/* <SectionLabel text="Project Packages" /> */}
+            <div style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)",
+                borderRadius: 100, padding: "6px 14px", marginBottom: 20,
+              }}>
+              <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>Project Packages</span>
+            </div>
             <SectionHeading>Transparent project pricing</SectionHeading>
           </div>
           <PricingTable color={COLOR} tiers={[

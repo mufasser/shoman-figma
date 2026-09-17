@@ -79,8 +79,8 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-export default function AboutTestimonialsWidget() {
-  const [testimonials, setTestimonials] = useState<AboutTestimonial[]>(fallbackTestimonials);
+export default function AboutTestimonialsWidget({ initialTestimonials, title = "What our clients say", eyebrow = "Client Voices" }: { initialTestimonials?: TestimonialItem[]; title?: string; eyebrow?: string } = {}) {
+  const [testimonials, setTestimonials] = useState<AboutTestimonial[]>(initialTestimonials?.length ? normalizeTestimonials(initialTestimonials) : fallbackTestimonials);
 
   useEffect(() => {
     let cancelled = false;
@@ -117,10 +117,10 @@ export default function AboutTestimonialsWidget() {
         <div className="about-testimonials__heading">
           <div className="about-testimonials__eyebrow">
             <span />
-            Client Voices
+            {eyebrow}
             <span />
           </div>
-          <h2 id="about-testimonials-title">What our clients say</h2>
+          <h2 id="about-testimonials-title">{title}</h2>
         </div>
 
         <div className="about-testimonials__grid">

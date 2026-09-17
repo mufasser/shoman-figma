@@ -125,7 +125,7 @@ interface PricingTier {
   cta: string;
   highlight?: boolean;
 }
-export function PricingTable({ tiers, color }: { tiers: PricingTier[]; color: string }) {
+export function PricingTable({ tiers, color, compact = false }: { tiers: PricingTier[]; color: string; compact?: boolean }) {
   return (
     <div style={{
       display: "grid",
@@ -162,13 +162,13 @@ export function PricingTable({ tiers, color }: { tiers: PricingTier[]; color: st
           }}>{tier.name}</div>
           <div style={{ marginBottom: 6 }}>
             <span style={{
-              fontSize: 36, fontWeight: 800, color: tier.highlight ? "var(--color-white)" : "var(--color-ink)",
+              fontSize: compact ? 30 : 36, fontWeight: 800, color: tier.highlight ? "var(--color-white)" : "var(--color-ink)",
               letterSpacing: "-0.03em",
             }}>{tier.price}</span>
             {tier.period && <span style={{ fontSize: 13, color: tier.highlight ? "var(--color-subtle)" : "var(--color-muted)", marginLeft: 4 }}>{tier.period}</span>}
           </div>
-          <p style={{ fontSize: 13, lineHeight: 1.65, color: tier.highlight ? "var(--color-subtle)" : "var(--color-muted)", marginBottom: 24, minHeight: 48 }}>{tier.desc}</p>
-          <div style={{ borderTop: `1px solid ${tier.highlight ? "var(--color-ink-2)" : "var(--color-bg-muted)"}`, paddingTop: 20, marginBottom: 24 }}>
+          <p style={{ fontSize: compact ? 12 : 13, lineHeight: 1.65, color: tier.highlight ? "var(--color-subtle)" : "var(--color-muted)", marginBottom: compact ? 18 : 24, minHeight: 48 }}>{tier.desc}</p>
+          <div style={{ borderTop: `1px solid ${tier.highlight ? "var(--color-ink-2)" : "var(--color-bg-muted)"}`, paddingTop: compact ? 16 : 20, marginBottom: compact ? 20 : 24 }}>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
               {tier.features.map((f) => (
                 <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>

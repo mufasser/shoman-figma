@@ -7,7 +7,8 @@ projects {
       status
       featuredImage {
         node {
-          featuredImage:guid
+          featuredImage:sourceUrl
+          altText
         }
       }
       projectFields{
