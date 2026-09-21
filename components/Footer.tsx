@@ -48,7 +48,13 @@ export default function Footer() {
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
               <Link key="Home" href="/"
                 style={{ paddingBottom: 2 }}>
-                <Image src="/logo-light.svg" alt="Shoman Logo" width={120} height={36} />
+                <Image
+                  src="/logo-light.svg"
+                  alt="Shoman Logo"
+                  width={120}
+                  height={31}
+                  style={{ width: 120, height: "auto" }}
+                />
               </Link>
             </div>
 

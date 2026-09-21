@@ -54,7 +54,14 @@ export default function Navbar() {
             <Link key="Home" href="/"
                 className=""
                 style={{ paddingBottom: 2 }}>
-              <Image src='/logo.png' alt="Shoman Logo" width={120} height={36} loading="eager" />
+              <Image
+                src="/logo.png"
+                alt="Shoman Logo"
+                width={120}
+                height={31}
+                loading="eager"
+                style={{ width: 120, height: "auto" }}
+              />
             </Link>
 
 
