@@ -87,7 +87,7 @@ export default function ContactPage() {
               <h3 style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)", marginBottom: 14 }}>Or reach us directly</h3>
               {[
                 { icon: Mail, label: "Email", value: "hello@shomansolutions.com", href: "mailto:hello@shomansolutions.com" },
-                { icon: CalendarDays, label: "Book a call", value: "30-min discovery — Calendly", href: "#" },
+                { icon: CalendarDays, label: "Book a call", value: "30-min discovery — Calendly", href: "https://calendly.com/shoaib-shomansolutions/30min" },
               ].map((c) => {
                 const Icon = c.icon;
                 return (
