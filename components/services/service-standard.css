@@ -260,7 +260,7 @@
   color: var(--color-brand);
 }
 
-.service-layout .service-section-label {
+.service-section-label {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -272,27 +272,27 @@
   text-transform: uppercase;
 }
 
-.service-layout .service-section-label > span {
+.service-section-label > span {
   display: inline-block;
   width: 20px;
   height: 2px;
   background: var(--color-brand);
 }
 
-.service-layout .service-section-label--centered {
+.service-section-label--centered {
   justify-content: center;
   text-align: center;
 }
 
-.service-layout .service-section-heading {
+.service-section-heading {
   margin-bottom: 48px;
 }
 
-.service-layout .service-section-heading--with-copy {
+.service-section-heading--with-copy {
   margin-bottom: 8px;
 }
 
-.service-layout .service-section-heading__title {
+.service-section-heading__title {
   color: var(--color-ink);
   font-size: clamp(24px, 3vw, 36px);
   font-weight: 800;
@@ -300,7 +300,7 @@
   letter-spacing: -.02em;
 }
 
-.service-layout .service-section-heading__copy {
+.service-section-heading__copy {
   max-width: 600px;
   margin: 12px 0 40px;
   color: var(--color-copy);
@@ -544,16 +544,16 @@
   color: var(--color-white);
 }
 
-.service-layout .service-faq-list {
+.service-faq-list {
   display: flex;
   flex-direction: column;
 }
 
-.service-layout .service-faq-list > div {
+.service-faq-list > div {
   border-bottom: 1px solid var(--color-border);
 }
 
-.service-layout .service-faq-list button {
+.service-faq-list button {
   display: flex;
   width: 100%;
   align-items: center;
@@ -566,14 +566,14 @@
   text-align: left;
 }
 
-.service-layout .service-faq-list button > span:first-child {
+.service-faq-list button > span:first-child {
   color: var(--color-ink);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.4;
 }
 
-.service-layout .service-faq-list__icon {
+.service-faq-list__icon {
   display: flex;
   width: 28px;
   height: 28px;
@@ -586,20 +586,20 @@
   transition: color .2s, background-color .2s;
 }
 
-.service-layout .service-faq-list .is-open .service-faq-list__icon {
+.service-faq-list .is-open .service-faq-list__icon {
   background: var(--color-brand);
   color: var(--color-white);
 }
 
-.service-layout .service-faq-list__icon svg {
+.service-faq-list__icon svg {
   transition: transform .25s;
 }
 
-.service-layout .service-faq-list .is-open .service-faq-list__icon svg {
+.service-faq-list .is-open .service-faq-list__icon svg {
   transform: rotate(180deg);
 }
 
-.service-layout .service-faq-list__answer {
+.service-faq-list__answer {
   max-width: 700px;
   padding-bottom: 20px;
   color: var(--color-copy);
