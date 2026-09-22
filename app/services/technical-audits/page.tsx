@@ -3,10 +3,10 @@ import { useState } from "react";
 import ServiceLayout from "@/components/services/ServiceLayout";
 import {
   SectionLabel, SectionHeading, Checklist,
-  FAQ, OutcomeCards, TwoCol,
+  FAQ, OutcomeCards, PricingTable, TwoCol,
 } from "@/components/services/ServiceComponents";
-import { ArrowRight, Check, ClipboardList, Microscope, ShieldCheck, Shuffle, TrendingUp, Wrench, Zap } from "lucide-react";
-import FinalCTA from "@/components/FinalCTA";
+import { ArrowRight, ClipboardList, Microscope, ShieldCheck, Shuffle, TrendingUp, Wrench, Zap } from "lucide-react";
+import type { CSSProperties } from "react";
 
 const COLOR = "#0284C7";
 const BG = "#f0f9ff";
@@ -83,32 +83,26 @@ export default function AuditsPage() {
       ctaText="Order Your Audit — From £499"
       secondaryCta="See What's Included"
       breadcrumb="Technical Audits"
+      heroImage="/assets/services/Technical-Audit-Service-hero-section.png"
+      heroImageAlt="Technical ecommerce audit and performance analysis"
+      heroImageWidth={978}
+      heroImageHeight={856}
+      standardized
     >
       {/* Audit type tabs */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <section className="service-content-section service-content-section--soft">
+        <div className="service-content-container">
           <SectionLabel text="Audit Types" />
           <SectionHeading sub="Three specialist audit types. Choose the one that matches your current need — or order all three.">
             Three audits, three different problems solved
           </SectionHeading>
 
           {/* Tab switcher */}
-          <div style={{
-            display: "flex", gap: 8, marginBottom: 32,
-            background: "var(--color-white)", border: "1px solid var(--color-border)",
-            borderRadius: 12, padding: 6, width: "fit-content",
-          }} className="tabs-wrap">
+          <div className="audit-tabs">
             {auditTypes.map((a) => {
               const Icon = a.icon;
               return (
-              <button key={a.id} onClick={() => setActiveTab(a.id)} style={{
-                display: "flex", alignItems: "center", gap: 8,
-                padding: "10px 18px", borderRadius: 8, border: "none",
-                fontSize: 13, fontWeight: 600, cursor: "pointer",
-                background: activeTab === a.id ? COLOR : "transparent",
-                color: activeTab === a.id ? "var(--color-white)" : "var(--color-muted)",
-                transition: "all 0.2s",
-              }}>
+              <button className={activeTab === a.id ? "is-active" : undefined} key={a.id} onClick={() => setActiveTab(a.id)}>
                 <Icon size={15} strokeWidth={2.2} /> {a.label}
               </button>
               );
@@ -116,60 +110,32 @@ export default function AuditsPage() {
           </div>
 
           {/* Active tab content */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "start" }} className="tab-grid">
+          <div className="audit-tab-panel">
             <div>
-              <div style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                background: BG, border: `1px solid ${COLOR}30`,
-                borderRadius: 100, padding: "5px 14px", marginBottom: 16,
-              }}>
-                <ActiveIcon size={15} color={COLOR} strokeWidth={2.2} />
-                <span style={{ fontSize: 12, fontWeight: 600, color: COLOR }}>{active.label}</span>
+              <div className="audit-tab-panel__badge">
+                <ActiveIcon size={15} strokeWidth={2.2} />
+                <span>{active.label}</span>
               </div>
-              <h3 style={{ fontSize: 24, fontWeight: 800, color: "var(--color-ink)", marginBottom: 14, letterSpacing: "-0.02em" }}>{active.title}</h3>
-              <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--color-copy)", marginBottom: 28 }}>{active.desc}</p>
-              <a href="/contact-us" style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                background: COLOR, color: "var(--color-white)",
-                padding: "12px 22px", borderRadius: 9,
-                fontSize: 14, fontWeight: 600, textDecoration: "none",
-                transition: "all 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "#0369a1";
-                (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = COLOR;
-                (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-              }}>
+              <h3>{active.title}</h3>
+              <p>{active.desc}</p>
+              <a className="audit-tab-panel__cta" href="/contact-us">
                 Order This Audit <ArrowRight size={15} />
               </a>
             </div>
-            <div style={{
-              background: "var(--color-white)", border: "1.5px solid var(--color-border)",
-              borderTop: `4px solid ${COLOR}`,
-              borderRadius: 14, padding: 28,
-            }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--color-subtle)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 16 }}>
+            <div className="audit-tab-panel__review">
+              <div className="audit-tab-panel__review-title">
                 What&apos;s reviewed
               </div>
               <Checklist color={COLOR} items={active.includes} />
             </div>
           </div>
 
-          <style jsx>{`
-            @media(max-width:768px){
-              .tab-grid{grid-template-columns:1fr!important}
-              .tabs-wrap{flex-direction:column;width:100%!important}
-            }
-          `}</style>
         </div>
       </section>
 
       {/* Sample report */}
-      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <section className="service-content-section">
+        <div className="service-content-container">
           <TwoCol
             left={
               <>
@@ -177,7 +143,7 @@ export default function AuditsPage() {
                 <SectionHeading sub="Not an automated scan. A senior engineer writes every audit by hand, with real findings and specific recommendations.">
                   An actionable PDF report — not a dashboard
                 </SectionHeading>
-                <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 28 }}>
+                <div className="audit-deliverables">
                   {[
                     { icon: ClipboardList, title: "Executive summary", body: "A clear top-10 priority list written for both technical and non-technical readers. You know exactly what to fix first and why." },
                     { icon: Microscope, title: "Detailed findings", body: "Every issue documented with the specific file, query, or configuration causing it — not a generic description." },
@@ -186,15 +152,11 @@ export default function AuditsPage() {
                   ].map((f) => {
                     const Icon = f.icon;
                     return (
-                    <div key={f.title} style={{ display: "flex", gap: 14 }}>
-                      <div style={{
-                        width: 40, height: 40, borderRadius: 10,
-                        background: BG, display: "flex", alignItems: "center",
-                        justifyContent: "center", color: COLOR, flexShrink: 0,
-                      }}><Icon size={19} strokeWidth={2.2} /></div>
+                    <div className="audit-deliverable" key={f.title}>
+                      <div className="audit-deliverable__icon"><Icon size={19} strokeWidth={2.2} /></div>
                       <div>
-                        <div style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)", marginBottom: 4 }}>{f.title}</div>
-                        <div style={{ fontSize: 13, lineHeight: 1.65, color: "var(--color-muted)" }}>{f.body}</div>
+                        <div className="audit-deliverable__title">{f.title}</div>
+                        <div className="audit-deliverable__body">{f.body}</div>
                       </div>
                     </div>
                     );
@@ -203,50 +165,43 @@ export default function AuditsPage() {
               </>
             }
             right={
-              <div style={{ background: "var(--color-ink)", borderRadius: 16, overflow: "hidden" }}>
+              <div className="audit-report">
                 {/* Mock PDF report preview */}
-                <div style={{ background: COLOR, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ color: "var(--color-white)", fontSize: 13, fontWeight: 700 }}>Audit Report — example.com</span>
-                  <span style={{ color: "rgba(255, 255, 255, 0.6)", fontSize: 11 }}>5 pages · PDF</span>
+                <div className="audit-report__header">
+                  <span>Audit Report — example.com</span>
+                  <small>5 pages · PDF</small>
                 </div>
-                <div style={{ padding: 24 }}>
-                  <div style={{ marginBottom: 20 }}>
-                    <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Executive Summary</div>
+                <div className="audit-report__body">
+                  <div className="audit-report__summary">
+                    <div className="audit-report__section-title">Executive Summary</div>
                     {[
                       { label: "Critical issues", count: 2, color: "#ef4444" },
                       { label: "High priority", count: 5, color: "#f97316" },
                       { label: "Medium priority", count: 8, color: "#eab308" },
                       { label: "Low priority", count: 12, color: "#10b981" },
                     ].map((s) => (
-                      <div key={s.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                        <span style={{ fontSize: 12, color: "var(--color-subtle)" }}>{s.label}</span>
-                        <span style={{
-                          fontSize: 12, fontWeight: 700, color: s.color,
-                          background: s.color + "20", padding: "2px 10px", borderRadius: 100,
-                        }}>{s.count} found</span>
+                      <div className="audit-report__summary-row" key={s.label}>
+                        <span>{s.label}</span>
+                        <strong style={{ "--status-color": s.color } as CSSProperties}>{s.count} found</strong>
                       </div>
                     ))}
                   </div>
-                  <div style={{ borderTop: "1px solid var(--color-ink-2)", paddingTop: 18 }}>
-                    <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Top Priority Findings</div>
+                  <div className="audit-report__findings">
+                    <div className="audit-report__section-title">Top Priority Findings</div>
                     {[
                       { title: "Missing security patch SUPEE-11346", severity: "CRITICAL", color: "#ef4444" },
                       { title: "Checkout query running 4.2s without index", severity: "CRITICAL", color: "#ef4444" },
                       { title: "Admin session timeout not configured", severity: "HIGH", color: "#f97316" },
                     ].map((f) => (
-                      <div key={f.title} style={{ marginBottom: 10, padding: "10px 12px", background: "#162032", borderRadius: 8 }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", gap: 8 }}>
-                          <span style={{ fontSize: 12, color: "var(--color-border)", lineHeight: 1.4 }}>{f.title}</span>
-                          <span style={{
-                            fontSize: 9, fontWeight: 700, color: f.color,
-                            background: f.color + "20", padding: "2px 7px", borderRadius: 100,
-                            whiteSpace: "nowrap", alignSelf: "flex-start",
-                          }}>{f.severity}</span>
+                      <div className="audit-report__finding" key={f.title}>
+                        <div>
+                          <span>{f.title}</span>
+                          <strong style={{ "--status-color": f.color } as CSSProperties}>{f.severity}</strong>
                         </div>
                       </div>
                     ))}
                   </div>
-                  <div style={{ marginTop: 16, fontSize: 11, color: "var(--color-copy)", textAlign: "center" }}>
+                  <div className="audit-report__note">
                     This is a preview. Real reports contain 20–40 detailed findings.
                   </div>
                 </div>
@@ -257,14 +212,16 @@ export default function AuditsPage() {
       </section>
 
       {/* Pricing */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
+      <section className="service-content-section service-content-section--soft">
+        <div className="service-content-container">
+          <div className="service-centered-heading">
             <SectionLabel text="Pricing" />
             <SectionHeading>Fixed, transparent pricing</SectionHeading>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="price-grid">
-            {[
+          <PricingTable
+            color={COLOR}
+            popularLabel="MOST ORDERED"
+            tiers={[
               {
                 name: "Self-Audit Checklist",
                 price: "Free",
@@ -304,78 +261,14 @@ export default function AuditsPage() {
                 cta: "Get a Quote",
                 highlight: false,
               },
-            ].map((tier) => (
-              <div key={tier.name} style={{
-                background: tier.highlight ? "var(--color-ink)" : "var(--color-white)",
-                border: tier.highlight ? `2px solid ${COLOR}` : "1.5px solid var(--color-border)",
-                borderRadius: 16, padding: "28px 24px",
-                position: "relative",
-                transition: "transform 0.2s, box-shadow 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 48px ${COLOR}20`;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              }}>
-                {tier.highlight && (
-                  <div style={{
-                    position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)",
-                    background: COLOR, color: "var(--color-white)",
-                    fontSize: 11, fontWeight: 700, padding: "4px 14px", borderRadius: 100,
-                  }}>MOST ORDERED</div>
-                )}
-                <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: tier.highlight ? COLOR : "var(--color-subtle)", marginBottom: 10 }}>{tier.name}</div>
-                <div style={{ fontSize: 36, fontWeight: 800, color: tier.highlight ? "var(--color-white)" : "var(--color-ink)", letterSpacing: "-0.03em", marginBottom: 4 }}>{tier.price}</div>
-                {(tier as { period?: string }).period && <div style={{ fontSize: 12, color: "var(--color-subtle)", marginBottom: 8 }}>{(tier as { period?: string }).period}</div>}
-                <p style={{ fontSize: 13, lineHeight: 1.65, color: tier.highlight ? "var(--color-subtle)" : "var(--color-muted)", marginBottom: 24, minHeight: 52 }}>{tier.desc}</p>
-                <div style={{ borderTop: `1px solid ${tier.highlight ? "var(--color-ink-2)" : "var(--color-bg-muted)"}`, paddingTop: 20, marginBottom: 24 }}>
-                  <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
-                    {tier.features.map((f) => (
-                      <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
-                        <span style={{ width: 18, height: 18, borderRadius: "50%", background: COLOR + "20", border: `1.5px solid ${COLOR}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                          <Check size={10} color={COLOR} strokeWidth={2.5} />
-                        </span>
-                        <span style={{ fontSize: 13, color: tier.highlight ? "var(--color-border-strong)" : "var(--color-copy)", lineHeight: 1.5 }}>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <a href="/contact-us" style={{
-                  display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
-                  width: "100%", padding: "12px 0", borderRadius: 9,
-                  fontSize: 14, fontWeight: 600, textDecoration: "none",
-                  background: tier.highlight ? COLOR : "transparent",
-                  color: tier.highlight ? "var(--color-white)" : COLOR,
-                  border: `1.5px solid ${COLOR}`,
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  if (!tier.highlight) {
-                    (e.currentTarget as HTMLElement).style.background = COLOR;
-                    (e.currentTarget as HTMLElement).style.color = "var(--color-white)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!tier.highlight) {
-                    (e.currentTarget as HTMLElement).style.background = "transparent";
-                    (e.currentTarget as HTMLElement).style.color = COLOR;
-                  }
-                }}>
-                  {tier.cta} <ArrowRight size={14} />
-                </a>
-              </div>
-            ))}
-          </div>
-          <style jsx>{`@media(max-width:768px){.price-grid{grid-template-columns:1fr!important}}`}</style>
+            ]}
+          />
         </div>
       </section>
 
       {/* Outcomes */}
-      <section style={{ background: "var(--color-white)", padding: "64px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <section className="service-content-section">
+        <div className="service-content-container">
           <SectionLabel text="Audit Outcomes" />
           <SectionHeading sub="What clients do with their audit results.">After the audit</SectionHeading>
           <OutcomeCards color={COLOR} items={[
@@ -388,9 +281,9 @@ export default function AuditsPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 800, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
+      <section className="service-content-section service-content-section--soft">
+        <div className="service-content-container service-content-container--narrow">
+          <div className="service-centered-heading">
             <SectionLabel text="FAQ" />
             <SectionHeading>Audit questions answered</SectionHeading>
           </div>
@@ -402,7 +295,7 @@ export default function AuditsPage() {
           ]} />
         </div>
       </section>
-      <FinalCTA />
+      {/* <FinalCTA /> */}
     </ServiceLayout>
     
   );

@@ -35,7 +35,6 @@ export default function WhyChooseUs() {
 
   const years = useCountUp(10, 1500, started);
   const projects = useCountUp(50, 1800, started);
-  const speed = useCountUp(40, 1600, started);
   const satisfaction = useCountUp(100, 1400, started);
 
   return (

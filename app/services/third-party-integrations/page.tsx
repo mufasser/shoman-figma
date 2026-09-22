@@ -5,6 +5,7 @@ import {
   FAQ, ProcessSteps, OutcomeCards, TwoCol,
 } from "@/components/services/ServiceComponents";
 import { AlertTriangle, CircleDollarSign, DatabaseZap, PackageX, Puzzle, RefreshCw } from "lucide-react";
+import type { CSSProperties } from "react";
 
 const COLOR = "#6366F1";
 const BG = "#f5f3ff";
@@ -24,10 +25,15 @@ export default function IntegrationsPage() {
       ctaText="Describe Your Integration"
       secondaryCta="See How It Works"
       breadcrumb="Systems Integration"
+      heroImage="/assets/services/Enterprise-Systems-Integration.webp"
+      heroImageAlt="Enterprise ecommerce systems and API integration"
+      heroImageWidth={576}
+      heroImageHeight={447}
+      standardized
     >
       {/* Pain points */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <section className="service-content-section service-content-section--soft">
+        <div className="service-content-container">
           <SectionLabel text="The Problem With Off-The-Shelf Apps" />
           <SectionHeading sub="Generic integration apps work for simple setups. The moment your business has real complexity, they break down — and you pay for it in manual work, errors, and missed orders.">
             Why businesses come to us for integrations
@@ -44,13 +50,13 @@ export default function IntegrationsPage() {
       </section>
 
       {/* Platforms we integrate */}
-      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <section className="service-content-section">
+        <div className="service-content-container">
           <SectionLabel text="Systems We Connect" />
           <SectionHeading sub="We've built integrations across every major enterprise platform. If it has an API — or even if it doesn't — we can connect it.">
             Platforms & systems we integrate daily
           </SectionHeading>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 48 }} className="platforms-grid">
+          <div className="integration-platforms-grid">
             {[
               { category: "ERP", color: "#0070F3", items: [
                 { name: "SAP Business One", sym: "SAP", color: "#0070F3" },
@@ -82,51 +88,28 @@ export default function IntegrationsPage() {
                 { name: "Gorgias", sym: "Go", color: "#F59E0B" },
               ]},
             ].map((cat) => (
-              <div key={cat.category} style={{
-                background: "var(--color-bg-soft)", border: "1px solid var(--color-border)",
-                borderRadius: 14, padding: 20,
-              }}>
-                <div style={{
-                  fontSize: 11, fontWeight: 700, color: cat.color,
-                  letterSpacing: "0.08em", textTransform: "uppercase",
-                  marginBottom: 14, paddingBottom: 10,
-                  borderBottom: `2px solid ${cat.color}`,
-                }}>{cat.category}</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <div className="integration-platform-card" key={cat.category} style={{ "--item-color": cat.color } as CSSProperties}>
+                <div className="integration-platform-card__category">{cat.category}</div>
+                <div className="integration-platform-card__list">
                   {cat.items.map((item) => (
-                    <div key={item.name} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{
-                        width: 24, height: 24, borderRadius: 5,
-                        background: item.color,
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 7, fontWeight: 800, color: "var(--color-white)", flexShrink: 0,
-                      }}>{item.sym}</div>
-                      <span style={{ fontSize: 12, color: "var(--color-copy)", fontWeight: 500 }}>{item.name}</span>
+                    <div className="integration-platform-card__item" key={item.name}>
+                      <div className="integration-platform-card__symbol" style={{ "--item-color": item.color } as CSSProperties}>{item.sym}</div>
+                      <span>{item.name}</span>
                     </div>
                   ))}
                 </div>
               </div>
             ))}
           </div>
-          <div style={{
-            background: BG, border: `1px solid ${COLOR}25`,
-            borderLeft: `4px solid ${COLOR}`,
-            borderRadius: 10, padding: "16px 20px",
-            fontSize: 14, color: "var(--color-copy)",
-          }}>
-            <strong style={{ color: COLOR }}>Don&apos;t see your system?</strong> If it has an API, a database, or even a CSV export, we&apos;ve almost certainly built an integration for something similar. <a href="/contact-us" style={{ color: COLOR, fontWeight: 600 }}>Tell us what you&apos;re connecting →</a>
+          <div className="integration-platform-callout">
+            <strong>Don&apos;t see your system?</strong> If it has an API, a database, or even a CSV export, we&apos;ve almost certainly built an integration for something similar. <a href="/contact-us">Tell us what you&apos;re connecting →</a>
           </div>
-
-          <style jsx>{`
-            @media(max-width:900px){.platforms-grid{grid-template-columns:1fr 1fr!important}}
-            @media(max-width:600px){.platforms-grid{grid-template-columns:1fr!important}}
-          `}</style>
         </div>
       </section>
 
       {/* How it works */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <section className="service-content-section service-content-section--soft">
+        <div className="service-content-container">
           <TwoCol
             left={
               <>
@@ -147,8 +130,8 @@ export default function IntegrationsPage() {
             right={
               <div>
                 <SectionLabel text="What's Included" />
-                <div style={{ marginBottom: 20 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, color: "var(--color-ink)", marginBottom: 8 }}>
+                <div className="integration-included-heading">
+                  <h3>
                     Everything in a custom integration
                   </h3>
                 </div>
@@ -164,10 +147,8 @@ export default function IntegrationsPage() {
                   "Post-launch monitoring period (30 days)",
                   "Optional ongoing maintenance retainer",
                 ]} />
-                <div style={{
-                  marginTop: 28, background: "var(--color-ink)", borderRadius: 12, padding: 20,
-                }}>
-                  <div style={{ fontSize: 11, color: "var(--color-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>
+                <div className="integration-health-monitor">
+                  <div className="integration-health-monitor__title">
                     Integration health monitor
                   </div>
                   {[
@@ -176,17 +157,11 @@ export default function IntegrationsPage() {
                     { label: "Pricing sync", value: "Real-time", status: "✓", color: "#10b981" },
                     { label: "Last error", value: "14 days ago", status: "!", color: "#f97316" },
                   ].map((m) => (
-                    <div key={m.label} style={{
-                      display: "flex", justifyContent: "space-between", alignItems: "center",
-                      padding: "8px 0", borderBottom: "1px solid var(--color-ink-2)",
-                    }}>
-                      <span style={{ fontSize: 12, color: "var(--color-subtle)" }}>{m.label}</span>
-                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-border)" }}>{m.value}</span>
-                        <span style={{
-                          fontSize: 10, fontWeight: 700, color: m.color,
-                          background: m.color + "20", padding: "2px 7px", borderRadius: 100,
-                        }}>{m.status}</span>
+                    <div className="integration-health-monitor__row" key={m.label}>
+                      <span>{m.label}</span>
+                      <div>
+                        <strong>{m.value}</strong>
+                        <small style={{ "--status-color": m.color } as CSSProperties}>{m.status}</small>
                       </div>
                     </div>
                   ))}
@@ -198,8 +173,8 @@ export default function IntegrationsPage() {
       </section>
 
       {/* Outcomes */}
-      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <section className="service-content-section">
+        <div className="service-content-container">
           <SectionLabel text="Integration Outcomes" />
           <SectionHeading sub="What businesses gain when their systems actually talk to each other.">
             Results from real integration projects
@@ -214,9 +189,9 @@ export default function IntegrationsPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
-        <div style={{ maxWidth: 800, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
+      <section className="service-content-section service-content-section--soft">
+        <div className="service-content-container service-content-container--narrow">
+          <div className="service-centered-heading">
             <SectionLabel text="FAQ" />
             <SectionHeading>Integration questions answered</SectionHeading>
           </div>

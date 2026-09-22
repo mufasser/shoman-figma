@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import "./home-sections.css";
 
 type TestimonialPreview = {
   quote: string;
@@ -116,58 +118,37 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
   const t = testimonialItems[active];
 
   return (
-    <section style={{ background: "var(--color-white)", padding: "96px 0", overflow: "hidden" }}>
-      <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+    <section className="home-testimonials">
+      <div className="home-section-container">
 
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1.6fr",
-          gap: 80, alignItems: "center",
-        }} className="testi-grid">
+        <div className="home-testimonials__grid">
 
           {/* Left — decorative */}
           <div>
-            <div style={{
-              fontSize: 12, fontWeight: 700, color: "var(--color-brand)",
-              letterSpacing: "0.1em", textTransform: "uppercase",
-              marginBottom: 12, display: "flex", alignItems: "center", gap: 8,
-            }}>
-              <span style={{ width: 24, height: 2, background: "var(--color-brand)", display: "inline-block" }} />
+            <div className="home-section-eyebrow">
+              <span />
               Testimonials
             </div>
-            <h2 style={{
-              fontSize: "clamp(28px, 3.5vw, 40px)",
-              fontWeight: 800, lineHeight: 1.2,
-              letterSpacing: "-0.02em", color: "var(--color-ink)",
-              marginBottom: 24,
-            }}>
+            <h2 className="home-testimonials__title">
               Hear what our clients say about &nbsp;
-              <span style={{ color: "var(--color-brand)" }}>working with us.</span>
+              <span>working with us.</span>
             </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.7, color: "var(--color-muted)" }}>
+            <p className="home-testimonials__intro">
               Every client relationship starts with a technical conversation. These are the outcomes they came back to tell us about.
             </p>
 
             {/* Avatar cluster */}
-            <div style={{ display: "flex", alignItems: "center", marginTop: 32 }}>
+            <div className="home-testimonials__avatars">
               {testimonialItems.map((t, i) => (
-                <div key={i} style={{
-                  width: 44, height: 44, borderRadius: "50%",
-                  background: t.avatar ? `url(${t.avatar}) center / cover` : t.color,
-                  border: "3px solid var(--color-white)",
-                  marginLeft: i === 0 ? 0 : -12,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 16, fontWeight: 800, color: "var(--color-white)",
-                  cursor: "pointer",
-                  zIndex: testimonialItems.length - i,
-                  transition: "transform 0.2s",
-                }}
+                <button key={i} type="button" aria-label={`Show testimonial from ${t.name}`} className="home-testimonials__avatar" style={{
+                  "--testimonial-color": t.color,
+                  "--testimonial-avatar": t.avatar ? `url(${t.avatar})` : "none",
+                  "--testimonial-z": testimonialItems.length - i,
+                } as CSSProperties}
                 onClick={() => setActive(i)}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-4px)")}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
-                >{!t.avatar && t.initial}</div>
+                >{!t.avatar && t.initial}</button>
               ))}
-              <span style={{ marginLeft: 16, fontSize: 13, color: "var(--color-muted)", fontWeight: 500 }}>
+              <span className="home-testimonials__avatar-note">
                 {testimonialItems.length} clients · 5 star average
               </span>
             </div>
@@ -175,83 +156,43 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
 
           {/* Right — testimonial card */}
           <div>
-            <div style={{
-              background: "var(--color-bg-soft)",
-              border: "1.5px solid var(--color-border)",
-              borderRadius: 20,
-              padding: 40,
-              position: "relative",
-            }}>
+            <div className="home-testimonials__card" style={{
+              "--testimonial-color": t.color,
+              "--testimonial-avatar": t.avatar ? `url(${t.avatar})` : "none",
+            } as CSSProperties}>
               {/* Quote mark */}
-              <div style={{
-                position: "absolute", top: 24, right: 32,
-                fontSize: 80, fontWeight: 900, color: "var(--color-brand)",
-                opacity: 0.12, lineHeight: 1,
-                fontFamily: "var(--font-serif)",
-              }}>&quot;</div>
+              <div className="home-testimonials__quote-mark">&quot;</div>
 
               {/* Platform badge */}
-              <div style={{
-                display: "inline-flex", alignItems: "center", gap: 6,
-                background: t.color + "15",
-                border: `1px solid ${t.color}30`,
-                borderRadius: 100, padding: "4px 12px",
-                marginBottom: 24,
-              }}>
-                <span style={{ width: 8, height: 8, borderRadius: "50%", background: t.color, display: "inline-block" }} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: t.color }}>{t.platform}</span>
+              <div className="home-testimonials__platform">
+                <span />
+                <strong>{t.platform}</strong>
               </div>
 
               {/* Stars */}
-              <div style={{ display: "flex", gap: 4, marginBottom: 20 }}>
+              <div className="home-testimonials__stars">
                 {Array.from({ length: Math.max(1, Math.min(5, Math.round(t.rating))) }).map((_, i) => (
                   <Star key={i} size={16} color="var(--color-brand)" fill="currentColor" strokeWidth={0} />
                 ))}
               </div>
 
-              <blockquote style={{
-                fontSize: 17, lineHeight: 1.75, color: "var(--color-ink-2)",
-                fontStyle: "italic", marginBottom: 28,
-                borderLeft: "3px solid var(--color-brand)",
-                paddingLeft: 20,
-              }}>
+              <blockquote className="home-testimonials__quote">
                 &quot;{t.quote}&quot;
               </blockquote>
 
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <div style={{
-                    width: 44, height: 44, borderRadius: "50%",
-                    background: t.avatar ? `url(${t.avatar}) center / cover` : t.color,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 18, fontWeight: 800, color: "var(--color-white)",
-                  }}>{!t.avatar && t.initial}</div>
+              <div className="home-testimonials__footer">
+                <div className="home-testimonials__author">
+                  <div className="home-testimonials__author-avatar">{!t.avatar && t.initial}</div>
                   <div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)" }}>{t.name}</div>
-                    <div style={{ fontSize: 12, color: "var(--color-muted)" }}>{t.role} · {t.company}</div>
+                    <div className="home-testimonials__author-name">{t.name}</div>
+                    <div className="home-testimonials__author-role">{t.role} · {t.company}</div>
                   </div>
                 </div>
 
                 {/* Arrows */}
-                <div style={{ display: "flex", gap: 8 }}>
+                <div className="home-testimonials__controls">
                   {[{ action: prev, icon: <ChevronLeft size={16} /> }, { action: next, icon: <ChevronRight size={16} /> }].map((btn, i) => (
-                    <button key={i} onClick={btn.action} style={{
-                      width: 40, height: 40, borderRadius: "50%",
-                      border: "1.5px solid var(--color-border)", background: "var(--color-white)",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      cursor: "pointer", color: "var(--color-ink)",
-                      transition: "all 0.2s",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "var(--color-brand)";
-                      (e.currentTarget as HTMLElement).style.color = "var(--color-white)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "var(--color-white)";
-                      (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
-                    }}>
+                    <button key={i} onClick={btn.action} aria-label={i === 0 ? "Previous testimonial" : "Next testimonial"} className="home-carousel-control home-testimonials__control">
                       {btn.icon}
                     </button>
                   ))}
@@ -259,15 +200,9 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
               </div>
 
               {/* Dot indicators */}
-              <div style={{ display: "flex", gap: 6, marginTop: 20 }}>
+              <div className="home-testimonials__dots">
                 {testimonialItems.map((_, i) => (
-                  <button key={i} onClick={() => setActive(i)} style={{
-                    width: active === i ? 20 : 6, height: 6,
-                    borderRadius: 3,
-                    background: active === i ? "var(--color-brand)" : "var(--color-border-strong)",
-                    border: "none", cursor: "pointer",
-                    transition: "all 0.3s",
-                  }} />
+                  <button key={i} aria-label={`Show testimonial ${i + 1}`} aria-current={active === i ? "true" : undefined} onClick={() => setActive(i)} className={`home-testimonials__dot${active === i ? " is-active" : ""}`} />
                 ))}
               </div>
             </div>
@@ -275,11 +210,6 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
         </div>
       </div>
 
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .testi-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-        }
-      `}</style>
     </section>
   );
 }

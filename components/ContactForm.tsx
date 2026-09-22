@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import type { CSSProperties, FormEvent } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, ChevronDown, Loader2, X } from "lucide-react";
+import "./contact-form.css";
 
 export type ContactFormValues = {
   name: string;
@@ -35,27 +36,6 @@ type ContactFormProps = {
   onSubmit?: (values: ContactFormValues, payload: unknown) => void | Promise<unknown>;
   onSuccess?: (response: unknown, values: ContactFormValues) => void;
   onError?: (error: Error, values: ContactFormValues) => void;
-};
-
-const INPUT_STYLE: CSSProperties = {
-  width: "100%",
-  padding: "12px 14px",
-  border: "1.5px solid var(--color-border)",
-  borderRadius: 8,
-  fontSize: 14,
-  color: "var(--color-ink)",
-  background: "var(--color-white)",
-  outline: "none",
-  transition: "border-color 0.2s",
-  fontFamily: "inherit",
-};
-
-const LABEL_STYLE: CSSProperties = {
-  display: "block",
-  fontSize: 13,
-  fontWeight: 600,
-  color: "var(--color-ink)",
-  marginBottom: 6,
 };
 
 const serviceOptions = [
@@ -235,30 +215,23 @@ export default function ContactForm({
 
   if (submitted) {
     return (
-      <div style={{
-        background: "var(--color-white)",
-        border: "1.5px solid var(--color-border)",
-        borderRadius: compact ? 16 : 20,
-        padding: compact ? "36px 24px" : "64px 36px",
-        textAlign: "center",
-        boxShadow: compact ? "0 24px 70px rgba(15, 23, 42, 0.08)" : undefined,
-      }}>
-        <div style={{ width: 64, height: 64, borderRadius: "50%", background: "var(--color-success-soft)", border: "2px solid var(--color-success)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+      <div className={`contact-form-card contact-form-success${compact ? " is-compact" : ""}`}>
+        <div className="contact-form-success__icon">
           <Check size={28} color="var(--color-success)" strokeWidth={2.5} />
         </div>
-        <h2 style={{ fontSize: 24, fontWeight: 800, color: "var(--color-ink)", marginBottom: 12 }}>{successTitle}</h2>
-        <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--color-muted)", marginBottom: 28, maxWidth: 430, margin: "0 auto 28px" }}>
+        <h2 className="contact-form-success__title">{successTitle}</h2>
+        <p className="contact-form-success__message">
           {successMessage(values, submitResponse)}
         </p>
         {showResponseDetails && responseOutput && (
-          <div style={{ textAlign: "left", background: "var(--color-bg-soft)", border: "1px solid var(--color-border)", borderRadius: 12, padding: 14, margin: "0 auto 24px", maxWidth: 460 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "var(--color-subtle)", marginBottom: 8, textTransform: "uppercase" }}>API response</div>
-            <pre style={{ margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word", color: "var(--color-muted)", fontSize: 12, lineHeight: 1.5, maxHeight: 180, overflow: "auto" }}>
+          <div className="contact-form-response">
+            <div className="contact-form-response__label">API response</div>
+            <pre className="contact-form-response__output">
               {responseOutput}
             </pre>
           </div>
         )}
-        <Link href={backHref} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand)", color: "var(--color-white)", padding: "12px 24px", borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
+        <Link href={backHref} className="contact-form-back">
           {backLabel} <ArrowRight size={14} />
         </Link>
       </div>
@@ -266,20 +239,14 @@ export default function ContactForm({
   }
 
   return (
-    <div style={{
-      background: "var(--color-white)",
-      border: "1.5px solid var(--color-border)",
-      borderRadius: compact ? 16 : 20,
-      padding: compact ? "24px" : "40px 36px",
-      boxShadow: compact ? "0 24px 70px rgba(15, 23, 42, 0.08)" : undefined,
-    }}>
-      <h2 style={{ fontSize: compact ? 18 : 20, fontWeight: 800, color: "var(--color-ink)", marginBottom: 6 }}>{title}</h2>
-      <p style={{ fontSize: compact ? 12 : 13, color: "var(--color-muted)", marginBottom: compact ? 20 : 28, lineHeight: 1.65 }}>{subtitle}</p>
+    <div className={`contact-form-card${compact ? " is-compact" : ""}`}>
+      <h2 className="contact-form-card__title">{title}</h2>
+      <p className="contact-form-card__subtitle">{subtitle}</p>
 
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
+        <div className="contact-form-two-col">
           <div>
-            <label style={LABEL_STYLE}>Full Name *</label>
+            <label className="contact-form-label">Full Name *</label>
             <input
               required
               name="name"
@@ -287,31 +254,27 @@ export default function ContactForm({
               placeholder="Your full name"
               value={form.name}
               onChange={(event) => updateField("name", event.target.value)}
-              style={INPUT_STYLE}
-              onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-              onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+              className="contact-form-control"
             />
           </div>
           {!compact && (
             <div>
-              <label style={LABEL_STYLE}>Company Name</label>
+              <label className="contact-form-label">Company Name</label>
               <input
                 name="company"
                 type="text"
                 placeholder="Your company"
                 value={form.company}
                 onChange={(event) => updateField("company", event.target.value)}
-                style={INPUT_STYLE}
-                onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-                onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+                className="contact-form-control"
               />
             </div>
           )}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
+        <div className="contact-form-two-col">
           <div>
-            <label style={LABEL_STYLE}>Email Address *</label>
+            <label className="contact-form-label">Email Address *</label>
             <input
               required
               name="email"
@@ -319,31 +282,27 @@ export default function ContactForm({
               placeholder="you@company.com"
               value={form.email}
               onChange={(event) => updateField("email", event.target.value)}
-              style={INPUT_STYLE}
-              onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-              onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+              className="contact-form-control"
             />
           </div>
           {!compact && (
             <div>
-              <label style={LABEL_STYLE}>Phone Number</label>
+              <label className="contact-form-label">Phone Number</label>
               <input
                 name="phone"
                 type="tel"
                 placeholder="123-456-7890"
                 value={form.phone}
                 onChange={(event) => updateField("phone", event.target.value)}
-                style={INPUT_STYLE}
-                onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-                onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+                className="contact-form-control"
               />
             </div>
           )}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }} className="contact-form-two-col">
-          <div ref={dropdownRef} style={{ position: "relative" }}>
-            <label id={`${servicesId}-label`} style={LABEL_STYLE}>Services interested in</label>
+        <div className="contact-form-two-col">
+          <div ref={dropdownRef} className="contact-form-services">
+            <label id={`${servicesId}-label`} className="contact-form-label">Services interested in</label>
             <button
               type="button"
               className="services-trigger"
@@ -404,14 +363,12 @@ export default function ContactForm({
 
           {!compact && (
             <div>
-              <label style={LABEL_STYLE}>Business Stage</label>
+              <label className="contact-form-label">Business Stage</label>
               <select
                 name="stage"
                 value={form.stage}
                 onChange={(event) => updateField("stage", event.target.value)}
-                style={{ ...INPUT_STYLE, color: form.stage ? "var(--color-ink)" : "var(--color-subtle)" }}
-                onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-                onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+                className={`contact-form-control${form.stage ? "" : " is-placeholder"}`}
               >
                 <option value="">Select stage</option>
                 <option>Startup (pre-launch)</option>
@@ -423,22 +380,20 @@ export default function ContactForm({
           )}
         </div>
 
-        <div style={{ marginBottom: compact ? 18 : 24 }}>
-          <label style={LABEL_STYLE}>Tell Us What You Need</label>
+        <div className="contact-form-message">
+          <label className="contact-form-label">Tell Us What You Need</label>
           <textarea
             name="message"
             placeholder="Describe your current situation and what you're trying to achieve. The more detail, the better our first call will be..."
             value={form.message}
             onChange={(event) => updateField("message", event.target.value)}
             rows={compact ? 3 : 4}
-            style={{ ...INPUT_STYLE, resize: "vertical", minHeight: compact ? 86 : 100 }}
-            onFocus={(event) => (event.currentTarget.style.borderColor = "var(--color-brand)")}
-            onBlur={(event) => (event.currentTarget.style.borderColor = "var(--color-border)")}
+            className="contact-form-control contact-form-textarea"
           />
         </div>
 
         {submitError && (
-          <p role="alert" style={{ background: "#fef2f2", border: "1px solid #fecaca", color: "#b91c1c", borderRadius: 10, padding: "10px 12px", fontSize: 13, lineHeight: 1.5, marginBottom: 14 }}>
+          <p role="alert" className="contact-form-error">
             {submitError}
           </p>
         )}
@@ -446,33 +401,7 @@ export default function ContactForm({
         <button
           type="submit"
           disabled={submitting}
-          style={{
-            width: "100%",
-            padding: "14px 0",
-            borderRadius: 9,
-            background: submitting ? "var(--color-brand-hover)" : "var(--color-brand)",
-            color: "var(--color-white)",
-            border: "none",
-            fontSize: 15,
-            fontWeight: 700,
-            cursor: submitting ? "not-allowed" : "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 8,
-            transition: "all 0.2s",
-            opacity: submitting ? 0.78 : 1,
-          }}
-          onMouseEnter={(event) => {
-            if (submitting) return;
-            event.currentTarget.style.background = "var(--color-brand-hover)";
-            event.currentTarget.style.transform = "translateY(-1px)";
-          }}
-          onMouseLeave={(event) => {
-            if (submitting) return;
-            event.currentTarget.style.background = "var(--color-brand)";
-            event.currentTarget.style.transform = "translateY(0)";
-          }}
+          className="contact-form-submit"
         >
           {submitting ? (
             <>
@@ -485,180 +414,11 @@ export default function ContactForm({
             </>
           )}
         </button>
-        <p style={{ textAlign: "center", fontSize: 12, color: "var(--color-subtle)", marginTop: 12, marginBottom: 0 }}>
+        <p className="contact-form-note">
           {apiEndpoint ? "Your enquiry will be sent securely to our team." : footerNote}
         </p>
       </form>
 
-      <style jsx>{`
-        .services-trigger {
-          width: 100%;
-          min-height: 47px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-          padding: 12px 14px;
-          border: 1.5px solid var(--color-border);
-          border-radius: 8px;
-          background: var(--color-white);
-          color: var(--color-ink);
-          cursor: pointer;
-          font-family: inherit;
-          font-size: 14px;
-          text-align: left;
-          transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .services-trigger:hover,
-        .services-trigger:focus {
-          border-color: var(--color-brand);
-          box-shadow: 0 0 0 3px rgba(var(--color-brand-rgb), 0.08);
-          outline: none;
-        }
-
-        .services-summary {
-          color: var(--color-subtle);
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .services-summary.is-selected {
-          color: var(--color-ink);
-          font-weight: 600;
-        }
-
-        .services-chevron {
-          color: var(--color-muted);
-          flex-shrink: 0;
-          transition: transform 0.2s;
-        }
-
-        .services-chevron.is-open {
-          transform: rotate(180deg);
-        }
-
-        .service-chips {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
-          margin-top: 8px;
-        }
-
-        .service-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          max-width: 100%;
-          padding: 5px 8px;
-          border: 1px solid var(--color-border);
-          border-radius: 999px;
-          background: var(--color-bg-soft);
-          color: var(--color-muted);
-          cursor: pointer;
-          font-size: 11px;
-          font-weight: 600;
-          font-family: inherit;
-        }
-
-        .services-menu {
-          position: absolute;
-          z-index: 30;
-          top: calc(100% + 8px);
-          left: 0;
-          right: 0;
-          padding: 8px;
-          border: 1.5px solid var(--color-border);
-          border-radius: 14px;
-          background: var(--color-white);
-          box-shadow: 0 18px 60px rgba(15, 23, 42, 0.16);
-        }
-
-        .services-menu__top {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 4px 6px 8px;
-          color: var(--color-subtle);
-          font-size: 11px;
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-
-        .services-menu__top button {
-          border: 0;
-          background: transparent;
-          color: var(--color-brand);
-          cursor: pointer;
-          font: inherit;
-          padding: 0;
-        }
-
-        .service-option {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px;
-          border-radius: 10px;
-          color: var(--color-muted);
-          cursor: pointer;
-          font-size: 13px;
-          font-weight: 600;
-          transition: background 0.16s, color 0.16s;
-        }
-
-        .service-option:hover,
-        .service-option.is-checked {
-          background: var(--color-bg-soft);
-          color: var(--color-ink);
-        }
-
-        .service-option input {
-          position: absolute;
-          opacity: 0;
-          pointer-events: none;
-        }
-
-        .service-option__box {
-          width: 20px;
-          height: 20px;
-          border-radius: 6px;
-          border: 1.5px solid var(--color-border);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--color-white);
-          background: var(--color-white);
-          flex-shrink: 0;
-        }
-
-        .service-option.is-checked .service-option__box {
-          border-color: var(--service-color);
-          background: var(--service-color);
-        }
-
-        .submit-spinner {
-          animation: contactSpin 0.8s linear infinite;
-        }
-
-        @keyframes contactSpin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @media(max-width:600px) {
-          .contact-form-two-col {
-            grid-template-columns: 1fr !important;
-          }
-
-          .services-menu {
-            position: static;
-            margin-top: 8px;
-          }
-        }
-      `}</style>
     </div>
   );
 }

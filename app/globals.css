@@ -46,6 +46,14 @@
 
   --shadow-brand-card: 0 12px 40px rgba(var(--color-brand-rgb), 0.12);
 
+  /* Shared layout rhythm */
+  --layout-max-wide: 1240px;
+  --layout-max-service: 1240px;
+  --layout-gutter: 24px;
+  --layout-gutter-mobile: 20px;
+  --section-space: 72px;
+  --section-space-mobile: 48px;
+
   --orange: var(--color-brand);
   --orange-dark: var(--color-brand-hover);
   --orange-light: var(--color-brand-soft);

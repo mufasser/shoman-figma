@@ -1,5 +1,5 @@
 .portfolio-page { background: var(--color-white); }
-.portfolio-container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+.portfolio-container { max-width: var(--layout-max-wide, 1240px); margin: 0 auto; padding: 0 var(--layout-gutter, 24px); }
 .portfolio-hero { padding: 124px 0 58px; border-bottom: 1px solid var(--color-border); }
 .portfolio-breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; margin-bottom: 30px; }
 .portfolio-breadcrumb a { color: var(--color-subtle); text-decoration: none; }

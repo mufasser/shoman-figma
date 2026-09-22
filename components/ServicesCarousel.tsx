@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import "./home-sections.css";
 
 const services = [
   {
@@ -138,172 +140,76 @@ export default function ServicesCarousel() {
   }
 
   return (
-    <section id="services" style={{ background: "var(--color-bg-soft)", padding: "96px 0" }}>
-      <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
+    <section id="services" className="services-carousel">
+      <div className="home-section-container">
 
         {/* Section header */}
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 48, flexWrap: "wrap", gap: 24 }}>
+        <div className="services-carousel__header">
           <div>
-            <div style={{
-              fontSize: 12, fontWeight: 700, color: "var(--color-brand)",
-              letterSpacing: "0.1em", textTransform: "uppercase",
-              marginBottom: 12, display: "flex", alignItems: "center", gap: 8,
-            }}>
-              <span style={{ width: 24, height: 2, background: "var(--color-brand)", display: "inline-block" }} />
+            <div className="home-section-eyebrow">
+              <span />
               Our Services
             </div>
-            <h2 style={{
-              fontSize: "clamp(28px, 4vw, 44px)",
-              fontWeight: 800, lineHeight: 1.15,
-              letterSpacing: "-0.02em", color: "var(--color-ink)",
-              maxWidth: 520,
-            }}>
+            <h2 className="services-carousel__title">
               Engineering services for every stage of your eCommerce journey
             </h2>
           </div>
 
           {/* Arrow controls */}
-          <div style={{ display: "flex", gap: 12 }}>
-            <button onClick={prev} aria-label="Previous service" style={{
-              width: 48, height: 48, borderRadius: "50%",
-              border: "1.5px solid var(--color-border)",
-              background: "var(--color-white)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              cursor: "pointer", color: "var(--color-ink)",
-              transition: "all 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "var(--color-brand)";
-              (e.currentTarget as HTMLElement).style.color = "var(--color-white)";
-              (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "var(--color-white)";
-              (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
-              (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
-            }}>
+          <div className="home-carousel-controls">
+            <button onClick={prev} aria-label="Previous service" className="home-carousel-control">
               <ChevronLeft size={20} />
             </button>
-            <button onClick={next} aria-label="Next service" style={{
-                width: 48, height: 48, borderRadius: "50%",
-                border: "1.5px solid var(--color-border)",
-                background: "var(--color-white)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", color: "var(--color-ink)",
-                transition: "all 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "var(--color-brand)";
-                (e.currentTarget as HTMLElement).style.color = "var(--color-white)";
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--color-brand)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "var(--color-white)";
-                (e.currentTarget as HTMLElement).style.color = "var(--color-ink)";
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
-              }}>
+            <button onClick={next} aria-label="Next service" className="home-carousel-control">
               <ChevronRight size={20} />
             </button>
           </div>
         </div>
 
         {/* Cards grid */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${visible}, 1fr)`,
-          gap: 20,
-        }}>
+        <div className="services-carousel__grid" style={{ "--visible-services": visible } as CSSProperties}>
           {visibleIndices.map((idx, pos) => {
             const s = services[idx];
             const isFirst = pos === 0;
             return (
               <div
                 key={`${idx}-${pos}`}
-                className="service-card"
+                className={`services-carousel__card${isFirst ? " is-active" : ""}`}
                 style={{
-                  background: "var(--color-white)",
-                  borderRadius: 16,
-                  padding: "28px 24px",
-                  border: `1px solid ${isFirst ? s.accentColor + "40" : "var(--color-border)"}`,
-                  borderTop: `4px solid ${s.accentColor}`,
-                  opacity: isFirst ? 1 : 0.85,
-                  transform: isFirst ? "scale(1)" : "scale(0.98)",
-                  transition: "all 0.3s ease",
-                  cursor: "pointer",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = "1";
-                  (e.currentTarget as HTMLElement).style.transform = "scale(1) translateY(-4px)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = isFirst ? "1" : "0.85";
-                  (e.currentTarget as HTMLElement).style.transform = isFirst ? "scale(1)" : "scale(0.98)";
-                }}
+                  "--service-accent": s.accentColor,
+                  "--service-accent-soft": s.bgAccent,
+                  "--service-border": isFirst ? `${s.accentColor}40` : "var(--color-border)",
+                } as CSSProperties}
               >
                 {/* Platform badge */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-                  <div style={{
-                    display: "inline-flex", alignItems: "center", gap: 8,
-                    background: s.bgAccent, borderRadius: 100,
-                    padding: "4px 12px",
-                  }}>
-                    <div style={{
-                      width: 20, height: 20, borderRadius: 4,
-                      background: s.platformColor,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: 8, fontWeight: 800, color: "var(--color-white)",
-                    }}>{s.platformSymbol}</div>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: s.accentColor }}>{s.label}</span>
+                <div className="services-carousel__card-meta">
+                  <div className="services-carousel__card-badge">
+                    <div className="services-carousel__card-symbol">{s.platformSymbol}</div>
+                    <span>{s.label}</span>
                   </div>
-                  <span style={{
-                    fontSize: 11, fontWeight: 600, color: "var(--color-subtle)",
-                    background: "var(--color-bg-muted)", borderRadius: 4, padding: "2px 8px",
-                  }}>
+                  <span className="services-carousel__card-number">
                     0{s.id}
                   </span>
                 </div>
 
-                <h3 style={{
-                  fontSize: 17, fontWeight: 700, lineHeight: 1.3,
-                  color: "var(--color-ink)", marginBottom: 12, letterSpacing: "-0.01em",
-                }}>
+                <h3 className="services-carousel__card-title">
                   {s.title}
                 </h3>
 
-                <p style={{
-                  fontSize: 13, lineHeight: 1.65, color: "var(--color-muted)", marginBottom: 20,
-                }}>
+                <p className="services-carousel__card-description">
                   {s.description}
                 </p>
 
-                <ul style={{ listStyle: "none", marginBottom: 24 }}>
+                <ul className="services-carousel__card-list">
                   {s.bullets.map((b) => (
-                    <li key={b} style={{
-                      display: "flex", alignItems: "flex-start", gap: 8,
-                      fontSize: 12, color: "var(--color-copy)", marginBottom: 8, lineHeight: 1.5,
-                    }}>
-                      <span style={{
-                        width: 16, height: 16, borderRadius: "50%",
-                        background: s.bgAccent, border: `1.5px solid ${s.accentColor}`,
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        flexShrink: 0, marginTop: 1,
-                        fontSize: 9, color: s.accentColor, fontWeight: 700,
-                      }}>✓</span>
+                    <li key={b}>
+                      <span>✓</span>
                       {b}
                     </li>
                   ))}
                 </ul>
 
-                <a href="#contact" style={{
-                  display: "inline-flex", alignItems: "center", gap: 6,
-                  fontSize: 13, fontWeight: 600, color: s.accentColor,
-                  textDecoration: "none",
-                  transition: "gap 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.gap = "10px")}
-                onMouseLeave={(e) => (e.currentTarget.style.gap = "6px")}>
+                <a href="#contact" className="services-carousel__card-link">
                   Learn more <ArrowRight size={14} />
                 </a>
               </div>
@@ -312,18 +218,14 @@ export default function ServicesCarousel() {
         </div>
 
         {/* Dot indicators */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 36 }}>
+        <div className="home-carousel-dots">
           {services.map((_, i) => (
             <button
               key={i}
+              aria-label={`Show service ${i + 1}`}
+              aria-current={active === i ? "true" : undefined}
               onClick={() => { setActive(i); if (intervalRef.current) clearInterval(intervalRef.current); }}
-              style={{
-                width: active === i ? 24 : 8,
-                height: 8, borderRadius: 4,
-                background: active === i ? "var(--color-brand)" : "var(--color-border-strong)",
-                border: "none", cursor: "pointer",
-                transition: "all 0.3s ease",
-              }}
+              className={`home-carousel-dot${active === i ? " is-active" : ""}`}
             />
           ))}
         </div>

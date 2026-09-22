@@ -9,6 +9,7 @@ import { Blog, CommunityBanner } from "@/components/BlogAndCTA";
 import Footer from "@/components/Footer";
 import { FAQ, SectionCenteredLabel, SectionHeading } from "@/components/services/ServiceComponents";
 import { getContentPayload } from "@/app/graphql/content";
+import "@/components/home-sections.css";
 
 export const dynamic = "force-dynamic";
 
@@ -27,9 +28,9 @@ export default async function Home() {
       <Blog />
       <CommunityBanner />
       {/* FAQ */}
-            <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
-              <div style={{ maxWidth: 800, margin: "0 auto" }}>
-                <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <section className="home-faq">
+              <div className="home-faq__inner">
+                <div className="home-faq__header">
                   <SectionCenteredLabel text="FAQ" />
                   <SectionHeading>Shoman solutions questions answered</SectionHeading>
                 </div>
