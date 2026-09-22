@@ -1,18 +1,10 @@
 "use client";
-import { useState } from "react";
-import { ArrowRight, CheckCircle2, MapPin } from "lucide-react";
+import { CheckCircle2, MapPin } from "lucide-react";
+import EmailCaptureForm from "./EmailCaptureForm";
 import HeroPlatformLogos from "./HeroPlatformLogos";
 import "./site-shell.css";
 
 export default function Hero() {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Thanks! We'll reach out to ${email} shortly.`);
-    setEmail("");
-  };
-
   return (
     <section className="home-hero">
       {/* Background decoration */}
@@ -52,18 +44,7 @@ export default function Hero() {
             </p>
 
             {/* Email CTA form */}
-            <form className="home-hero__form" onSubmit={handleSubmit}>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                required
-              />
-              <button type="submit">
-                Get Started <ArrowRight size={14} />
-              </button>
-            </form>
+            <EmailCaptureForm variant="hero" />
 
             {/* Trust signals */}
             <div className="home-hero__trust">

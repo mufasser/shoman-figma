@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from 'next/image';
-import { BriefcaseBusiness, Code2, Mail, Phone } from "lucide-react";
+import { BriefcaseBusiness, Code2, Mail, Phone, FolderGit } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./site-shell.css";
 // import LogoLight from '@/public/logo-light.svg';
@@ -24,9 +24,9 @@ const footerHrefs: Record<string, string> = {
 };
 
 const socialLinks: { label: string; href: string; icon: LucideIcon }[] = [
-  { label: "LinkedIn", href: "#", icon: BriefcaseBusiness },
-  { label: "Phone", href: "#", icon: Phone },
-  { label: "Code", href: "#", icon: Code2 },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/shoman-solutions", icon: BriefcaseBusiness },
+  { label: "Phone", href: "tel:+447412215015", icon: Phone },
+  // { label: "Code", href: "#", icon: FolderGit },
   { label: "Email", href: "mailto:hello@shomansolutions.com", icon: Mail },
 ];
 

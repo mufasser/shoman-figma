@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, Clock, Rocket, ShoppingBag, Shuffle, Store } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
+import EmailCaptureForm from "./EmailCaptureForm";
 
 type BlogPreviewPost = {
   tag: string;
@@ -282,31 +283,7 @@ export function CommunityBanner() {
         </p>
 
         <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
-          <div style={{
-            display: "flex", background: "rgba(255, 255, 255, 0.06)",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
-            borderRadius: 10, overflow: "hidden",
-          }}>
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              style={{
-                padding: "14px 20px", fontSize: 14, background: "transparent",
-                border: "none", outline: "none", color: "var(--color-white)", width: 260,
-              }}
-            />
-            <button style={{
-              padding: "14px 20px", background: "var(--color-brand)", border: "none",
-              cursor: "pointer", fontSize: 14, fontWeight: 600, color: "var(--color-white)",
-              display: "flex", alignItems: "center", gap: 6,
-              transition: "background 0.2s",
-              whiteSpace: "nowrap",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--color-brand-hover)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--color-brand)")}>
-              Get Started <ArrowRight size={14} />
-            </button>
-          </div>
+          <EmailCaptureForm variant="banner" />
         </div>
 
         <p style={{ marginTop: 16, fontSize: 12, color: "var(--color-copy)" }}>
