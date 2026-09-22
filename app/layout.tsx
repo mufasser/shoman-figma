@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import CalendlyFloatingButton from "@/components/CalendlyFloatingButton";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-XSJH59ZVSR";
@@ -19,7 +20,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CalendlyFloatingButton />
+      </body>
       <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </html>
   );
