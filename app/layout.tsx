@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-XSJH59ZVSR";
 
 export const metadata: Metadata = {
   title: "Shoman Solutions — Ecommerce Engineering Built Right",
@@ -17,6 +20,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body>{children}</body>
+      <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </html>
   );
 }
