@@ -1,7 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import "./calendly-floating-button.css";
 
-const CALENDLY_URL = "https://calendly.com/shoaib-shomansolutions/can";
+const CALENDLY_URL = "https://calendly.com/shoaib-shomansolutions/30min";
 
 export default function CalendlyFloatingButton() {
   return (
