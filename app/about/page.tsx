@@ -35,13 +35,14 @@ const values = [
 ];
 
 const timeline = [
-  { year: "2014", title: "Started specialising in Magento", body: "Degan Dubotog Magenta ocorunerco platforos and delvering custom solutiona for UK retalers." },
-  { year: "2016", title: "Built a global reputation", body: "Surted ecruig ofin agencies and merchants worldelde Wrough Upwork, delveting 50+ puccescha projects" },
-  { year: "2019", title: "Enterprice intogrations 5 API innovation", body: "Delvernd complex tRP, COM and 000-perty integratione including one of the seriest Ap-driven Trustates Integraciona for Megento." },
-  { year: "2021", title: "Earty Magento 2 Certifiod Engincer", body: "Achieves Mapento 2 corufication chanty ener launch, heiging businesses migrade frown Magento 1 to Magendo 2 win coefidence." },
-  { year: "2024", title: "Adobe Commerce App Bullder", body: "Adroted Aditbe Commerca Apo Quidor to bula evert-olion, sorverlece trtegrations ubing Adube U Events and AFt Mesh," },
-  { year: "2026+", title: "50+ ecommoreo projects delivered", body: "Over a decade ef engineering acroes Altbe Cornerce, Shopty and lvegretiona nich recalers, agencies and emerprise brands." },
+  { year: "2014", title: "Started specialising in Magento", body: "Began building Magento ecommerce platforms and delivering custom solutions for UK retailers." },
+  { year: "2016", title: "Built a global reputation", body: "Started acring on agencies and merchants worldwide through Upwork, delivering 50. successful projects." },
+  { year: "2017", title: "Enterprise Integrations & API Innovation: Delivered complex ERP, CRM, and third-party integrations, including one of the earliest API-driven Trustpilot integrations for Magento." },
+  { year: "2019", title: "Expert Magento 2 Certified Engineer", body: " Enterprise Integrations & API Innovation: Delivered complex ERP, CRM, and third-party integrations, including one of the earliest API-driven Trustpilot integrations for Magento." },
+  { year: "2022", title: "Adobe Commerce App Builder", body: "Leveraging Adobe Commerce App Builder to construct event-driven, serverless, multi-tenant integrations using Adobe I/O Events and API Mesh." },
+  { year: "2026+", title: "150+ ecommerce projects delivered", body: "Over a decade of engineering across Adobe Commerce, Shopify and integrations with retailers, agencies and enterprise brands." },
 ];
+
 
 export default function AboutPage() {
   return (
