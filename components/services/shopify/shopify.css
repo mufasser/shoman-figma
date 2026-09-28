@@ -158,7 +158,8 @@
   .sh-hero h1 { font-size: 34px; }
   .sh-hero__content > p { font-size: 15px; }
   .sh-hero__actions { align-items: stretch; flex-direction: column; }
-  .sh-audience-grid, .sh-capability-grid, .sh-integration-grid, .sh-outcome-grid, .sh-related-grid { grid-template-columns: minmax(0, 1fr); }
+  .sh-audience-grid, .sh-capability-grid, .sh-integration-grid, .sh-outcome-grid, .sh-related-grid { grid-template-columns: minmax(1fr, 1fr); }
+
   .sh-audience-grid article { min-height: 0; }
   .sh-integration-callout { grid-template-columns: minmax(0, 1fr); }
   .sh-integration-callout span { grid-column: auto; grid-row: auto; }

@@ -124,7 +124,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services list */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
+      <section className="section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div className="services-card-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 24 }}>
             {services.map((s) => (
@@ -200,7 +200,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Not sure section */}
-      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
+      <section className="section-padding-gutter" style={{ background: "var(--color-white)" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{
             background: "var(--color-ink)", borderRadius: 20,

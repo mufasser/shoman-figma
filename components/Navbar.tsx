@@ -119,7 +119,7 @@ export default function Navbar() {
               { label: "Testimonials", href: "/testimonials" },
               { label: "About", href: "/about" },
               { label: "Insights", href: "/insights" },
-              { label: "Contact", href: "/contact-us" },
+              // { label: "Contact", href: "/contact-us" },
             ].map((item) => (
               <Link key={item.label} href={item.href}
                 onClick={() => setMenuOpen(false)}>

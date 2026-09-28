@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import type { CSSProperties } from "react";
+import type { CSSProperties, TouchEvent } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import "./home-sections.css";
 
@@ -101,6 +101,8 @@ export default function ServicesCarousel() {
   const [active, setActive] = useState(0);
   const [visible, setVisible] = useState(4);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const swiped = useRef(false);
 
   useEffect(() => {
     const updateVisible = () => {
@@ -131,6 +133,24 @@ export default function ServicesCarousel() {
   const next = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setActive((prev) => (prev + 1) % services.length);
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+    swiped.current = false;
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (!touchStart.current || !event.changedTouches[0]) return;
+    const deltaX = event.changedTouches[0].clientX - touchStart.current.x;
+    const deltaY = event.changedTouches[0].clientY - touchStart.current.y;
+    touchStart.current = null;
+
+    if (Math.abs(deltaX) < 50 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+    swiped.current = true;
+    if (deltaX < 0) next();
+    else prev();
   };
 
   // Build visible indices (circular)
@@ -167,7 +187,19 @@ export default function ServicesCarousel() {
         </div>
 
         {/* Cards grid */}
-        <div className="services-carousel__grid" style={{ "--visible-services": visible } as CSSProperties}>
+        <div
+          className="services-carousel__grid"
+          style={{ "--visible-services": visible } as CSSProperties}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={() => { touchStart.current = null; }}
+          onClickCapture={(event) => {
+            if (swiped.current) {
+              event.preventDefault();
+              swiped.current = false;
+            }
+          }}
+        >
           {visibleIndices.map((idx, pos) => {
             const s = services[idx];
             const isFirst = pos === 0;

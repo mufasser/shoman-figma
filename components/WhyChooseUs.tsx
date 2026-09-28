@@ -38,7 +38,7 @@ export default function WhyChooseUs() {
   const satisfaction = useCountUp(100, 1400, started);
 
   return (
-    <section ref={sectionRef} style={{ background: "var(--color-white)", padding: "96px 0" }}>
+    <section ref={sectionRef} className="section-padding-full" style={{ background: "var(--color-white)" }}>
       <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
         <div style={{
           display: "grid",
@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
         }} className="why-grid">
 
           {/* Left */}
-          <div>
+          <div className="why-content">
             <div style={{
               fontSize: 12, fontWeight: 700, color: "var(--color-brand)",
               letterSpacing: "0.1em", textTransform: "uppercase",
@@ -74,7 +74,7 @@ export default function WhyChooseUs() {
             </p>
 
             {/* Stats row */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 36 }}>
+            <div className="why-stats" style={{ display: "grid", gap: 20, marginBottom: 36 }}>
               {[
                 { value: years, suffix: "+", label: "Years experience", color: "var(--color-brand)" },
                 { value: projects, suffix: "+", label: "Projects delivered", color: "#0284c7" },
@@ -87,11 +87,10 @@ export default function WhyChooseUs() {
                   padding: "20px",
                   border: "1px solid var(--color-border)",
                 }}>
-                  <div style={{
-                    fontSize: 36, fontWeight: 800,
-                    color: stat.color, letterSpacing: "-0.03em", lineHeight: 1,
-                    marginBottom: 6,
-                  }}>
+                  <div
+                    className={`why-stat-value${typeof stat.value === "string" ? " why-stat-value--long" : ""}`}
+                    style={{ color: stat.color }}
+                  >
                     {stat.value}{stat.suffix}
                   </div>
                   <div style={{ fontSize: 12, color: "var(--color-muted)", fontWeight: 500 }}>{stat.label}</div>
@@ -207,9 +206,18 @@ export default function WhyChooseUs() {
       </div>
 
       <style jsx>{`
+        .why-content { min-width: 0; }
+        .why-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .why-stat-value { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px; }
         @media (max-width: 768px) {
           .why-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .why-visual { display: none; }
+        }
+        @media (max-width: 480px) {
+          .why-stat-value--long { font-size: 20px; }
+        }
+        @media (max-width: 360px) {
+          .why-stats { grid-template-columns: 1fr; }
         }
       `}</style>
     </section>

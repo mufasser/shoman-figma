@@ -165,7 +165,7 @@ export default function AboutPage() {
       <LogoTicker />
 
       {/* Our story / timeline */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
+      <section className="our-story_timeline">
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "start" }} className="story-grid">
             <div>
@@ -231,7 +231,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section style={{ background: "var(--color-white)", display: "none", padding: "80px 24px" }}>
+      <section className="our-team section-padding-gutter" style={{ background: "var(--color-white)", display: "none" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
             <SectionLabel text="The Team" />
@@ -292,7 +292,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
+      <section className="our-values section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="Our Values" />
@@ -348,7 +348,7 @@ export default function AboutPage() {
       </section>
 
       {/* Quality promise */}
-      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
+      <section className="quality-promise section-padding-gutter" style={{ background: "var(--color-white)" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="quality-grid">
             <div>

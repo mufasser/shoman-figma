@@ -76,6 +76,7 @@
   display: grid;
   grid-template-columns: repeat(var(--visible-services), minmax(0, 1fr));
   gap: 20px;
+  touch-action: pan-y;
 }
 
 .services-carousel__card {
@@ -235,7 +236,7 @@
   }
 
   .services-carousel {
-    padding: var(--section-space-mobile, 48px) 0;
+    padding: 32px 0;
   }
 }
 
@@ -442,7 +443,7 @@
 
 @media (max-width: 768px) {
   .home-testimonials {
-    padding: var(--section-space-mobile, 48px) 0;
+    padding: 32px 0;
   }
 
   .home-testimonials__grid {
@@ -686,7 +687,7 @@
 
 @media (max-width: 768px) {
   .home-cases {
-    padding: var(--section-space-mobile, 48px) 0;
+    padding: 32px 0;
   }
 
   .home-cases__header,

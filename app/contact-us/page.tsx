@@ -33,7 +33,7 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="contact-hero-media" aria-hidden="true">
+            <div className="contact-hero-media home-hero__visual" aria-hidden="true">
               <Image
                 src="/hero/hero-contact.webp"
                 alt=""

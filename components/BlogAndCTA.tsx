@@ -106,7 +106,7 @@ export function Blog() {
   }, []);
 
   return (
-    <section style={{ background: "var(--color-bg-soft)", padding: "96px 0" }}>
+    <section className="section-padding-full" style={{ background: "var(--color-bg-soft)" }}>
       <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px" }}>
 
         {/* Header */}
@@ -241,7 +241,7 @@ export function Blog() {
 
 export function CommunityBanner() {
   return (
-    <section style={{ background: "var(--color-ink)", padding: "80px 24px", textAlign: "center", position: "relative", overflow: "hidden" }}>
+    <section className="section-padding-gutter" style={{ background: "var(--color-ink)", textAlign: "center", position: "relative", overflow: "hidden" }}>
       {/* Background decoration */}
       <div style={{
         position: "absolute", top: "50%", left: "50%",
@@ -272,7 +272,6 @@ export function CommunityBanner() {
           letterSpacing: "-0.02em",
           color: "var(--color-white)", 
           marginBottom: 16,
-          paddingLeft: "65px",
         }}>
           Ready to build ecommerce<br />
           <span style={{ color: "var(--color-brand)" }}>that actually performs?</span>

@@ -36,7 +36,7 @@ export default function WhiteLabelPage() {
       breadcrumb="White-Label Partnerships"
     >
       {/* Problems we solve */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
+      <section className="section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Agency Problems We Solve" />
           <SectionHeading sub="Every problem below is one we hear from agency partners in the first conversation. If any of these sound familiar, we should talk.">
@@ -54,7 +54,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* How it works */}
-      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
+      <section className="section-padding-gutter" style={{ background: "var(--color-white)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -133,7 +133,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* What you get */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
+      <section className="section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -199,7 +199,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* Outcomes */}
-      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
+      <section className="section-padding-gutter" style={{ background: "var(--color-white)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionLabel text="Partnership Results" />
           <SectionHeading sub="What agencies gain when they add our team to their roster.">
@@ -215,7 +215,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* Partner enquiry box */}
-      <section style={{ background: "var(--color-bg-soft)", padding: "80px 24px" }}>
+      <section className="section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <SectionLabel text="Start a Partnership" />
@@ -317,7 +317,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "var(--color-white)", padding: "80px 24px" }}>
+      <section className="section-padding-gutter" style={{ background: "var(--color-white)" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionLabel text="FAQ" />

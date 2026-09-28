@@ -17,6 +17,7 @@
   max-width: var(--layout-max-wide, 1240px);
   margin: 0 auto;
   padding: 0 var(--layout-gutter, 24px);
+  background: var(--color-white);
 }
 
 .site-navbar__row {
@@ -414,7 +415,7 @@
   }
 
   .site-footer__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -606,5 +607,22 @@
 
   .home-hero__visual {
     display: none;
+  }
+  .contact-grid{
+        gap: 15px !important;
+  }
+  .service-layout .service-standard-hero__title {
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.3;
+  }
+  .our-story_timeline,
+  .our-values{
+    background: var(--color-bg-soft);
+    padding: 32px 24px;
+  }
+  .our-team,
+  .quality-promise{
+    background: var(--color-white);
+    padding: 32px 24px;
   }
 }

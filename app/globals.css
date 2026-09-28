@@ -83,6 +83,24 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.section-padding-gutter {
+  padding: 80px 24px;
+}
+
+.section-padding-full {
+  padding: 96px 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding-gutter {
+    padding: 32px 24px;
+  }
+
+  .section-padding-full {
+    padding: 32px 0;
+  }
+}
+
 /* Ticker animation */
 @keyframes ticker {
   0% { transform: translateX(0); }
