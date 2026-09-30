@@ -3,6 +3,7 @@ import ServiceLayout from "@/components/services/ServiceLayout";
 import {
   SectionLabel, SectionHeading, PainGrid, Checklist,
   FAQ, ProcessSteps, OutcomeCards, TwoCol,
+  SectionCenteredLabel,
 } from "@/components/services/ServiceComponents";
 import { AlertTriangle, CircleDollarSign, DatabaseZap, PackageX, Puzzle, RefreshCw } from "lucide-react";
 import type { CSSProperties } from "react";
@@ -78,6 +79,8 @@ export default function IntegrationsPage() {
                 { name: "Linnworks", sym: "Lw", color: "var(--color-success)" },
                 { name: "Mintsoft", sym: "Ms", color: "#6366F1" },
                 { name: "ChannelAdvisor", sym: "CA", color: "var(--color-brand)" },
+                { name: "Recurly", sym: "RE", color: "#ffd706" },
+                { name: "RecurlyJS", sym: "RJS", color: "#E42527" },
                 { name: "Custom WMS", sym: "WM", color: "var(--color-muted)" },
               ]},
               { category: "Search & Marketing", color: "#5468FF", items: [
@@ -192,7 +195,7 @@ export default function IntegrationsPage() {
       <section className="service-content-section service-content-section--soft">
         <div className="service-content-container service-content-container--narrow">
           <div className="service-centered-heading">
-            <SectionLabel text="FAQ" />
+            <SectionCenteredLabel text="FAQ" />
             <SectionHeading>Integration questions answered</SectionHeading>
           </div>
           <FAQ items={[

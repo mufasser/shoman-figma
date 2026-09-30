@@ -138,7 +138,7 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
             </p>
 
             {/* Avatar cluster */}
-            <div className="home-testimonials__avatars">
+            {/* <div className="home-testimonials__avatars">
               {testimonialItems.map((t, i) => (
                 <button key={i} type="button" aria-label={`Show testimonial from ${t.name}`} className="home-testimonials__avatar" style={{
                   "--testimonial-color": t.color,
@@ -151,7 +151,7 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
               <span className="home-testimonials__avatar-note">
                 {testimonialItems.length} clients · 5 star average
               </span>
-            </div>
+            </div> */}
           </div>
 
           {/* Right — testimonial card */}

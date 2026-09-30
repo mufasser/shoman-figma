@@ -168,11 +168,11 @@ export default function ServiceLayout({
           <p>
             No jargon. No hard sell. A direct conversation with a senior engineer who understands your platform.
           </p>
-          <div className="service-standard-final-cta__actions">
-            <a className="service-standard-final-cta__primary" href="https://calendly.com/shoaib-shomansolutions/30min">
+          <div className="final-cta__actions">
+            <a className="final-cta__primary" href="https://calendly.com/shoaib-shomansolutions/30min">
               Book Free Consultation <ArrowRight size={15} />
             </a>
-            <a className="service-standard-final-cta__secondary" href="/services">
+            <a className="final-cta__secondary" href="/services">
               View All Services
             </a>
           </div>

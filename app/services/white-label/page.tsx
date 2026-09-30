@@ -3,6 +3,7 @@ import ServiceLayout from "@/components/services/ServiceLayout";
 import {
   SectionLabel, SectionHeading, PainGrid, Checklist,
   FAQ, ProcessSteps, OutcomeCards, TwoCol,
+  SectionCenteredLabel,
 } from "@/components/services/ServiceComponents";
 import {
   CalendarClock,
@@ -320,7 +321,7 @@ export default function WhiteLabelPage() {
       <section className="section-padding-gutter" style={{ background: "var(--color-white)" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <SectionLabel text="FAQ" />
+            <SectionCenteredLabel text="FAQ" />
             <SectionHeading>Partnership questions answered</SectionHeading>
           </div>
           <FAQ items={[

@@ -32,6 +32,7 @@ export default async function Home() {
               <div className="home-faq__inner">
                 <div className="home-faq__header">
                   <SectionCenteredLabel text="FAQ" />
+                  
                   <SectionHeading>Shoman solutions questions answered</SectionHeading>
                 </div>
                 <FAQ items={[

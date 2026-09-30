@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ServiceLayout from "@/components/services/ServiceLayout";
 import {
-  SectionLabel, SectionHeading, Checklist,
+  SectionLabel, SectionCenteredLabel, SectionHeading, Checklist,
   FAQ, OutcomeCards, PricingTable, TwoCol,
 } from "@/components/services/ServiceComponents";
 import { ArrowRight, ClipboardList, Microscope, ShieldCheck, Shuffle, TrendingUp, Wrench, Zap } from "lucide-react";
@@ -284,7 +284,7 @@ export default function AuditsPage() {
       <section className="service-content-section service-content-section--soft">
         <div className="service-content-container service-content-container--narrow">
           <div className="service-centered-heading">
-            <SectionLabel text="FAQ" />
+            <SectionCenteredLabel text="FAQ" />
             <SectionHeading>Audit questions answered</SectionHeading>
           </div>
           <FAQ items={[

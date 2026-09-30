@@ -286,7 +286,7 @@ export function CommunityBanner() {
         </div>
 
         <p style={{ marginTop: 16, fontSize: 12, color: "var(--color-copy)" }}>
-          Or <a href="/contact-us" style={{ color: "var(--color-brand)", textDecoration: "none", fontWeight: 600 }}>book a 30-min call directly →</a>
+          Or <a href="https://calendly.com/shoaib-shomansolutions/30min" style={{ color: "var(--color-brand)", textDecoration: "none", fontWeight: 600 }}>book a 30-min call directly →</a>
         </p>
       </div>
     </section>

@@ -339,7 +339,7 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
               </div>
             </div>
 
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} className="hero-image-wrapper">
               <Image
                 src="/hero/testimonial-hero-image.png"
                 alt="Client testimonial messages illustration"
@@ -492,7 +492,7 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
         </div>
       </section>
 
-      <section style={{ background: "var(--color-white)", padding: "64px 24px" }}>
+      {/* <section style={{ background: "var(--color-white)", padding: "64px 24px" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 28 }}>
             <span style={{ width: 20, height: 2, background: BRAND }} />
@@ -522,9 +522,9 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
             })}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section style={{ background: "var(--color-bg-soft)", borderTop: "1.5px solid var(--color-border)", padding: "64px 24px 88px" }}>
+      {/* <section style={{ background: "var(--color-bg-soft)", borderTop: "1.5px solid var(--color-border)", padding: "64px 24px 88px" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 36 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
@@ -562,7 +562,7 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
           </div>
 
         </div>
-      </section>
+      </section> */}
 
       <FinalCTA />
 
