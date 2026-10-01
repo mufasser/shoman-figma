@@ -215,7 +215,7 @@ export default function AuditsPage() {
       <section className="service-content-section service-content-section--soft">
         <div className="service-content-container">
           <div className="service-centered-heading">
-            <SectionLabel text="Pricing" />
+            <SectionCenteredLabel text="Pricing" />
             <SectionHeading>Fixed, transparent pricing</SectionHeading>
           </div>
           <PricingTable

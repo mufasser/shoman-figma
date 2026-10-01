@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { assurances, coverage, onboarding, pricing, workflow } from "./data";
 import MigrationEstimator from "./MigrationEstimator";
+import { SectionCenteredLabel } from "../ServiceComponents";
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return <div className="mg-eyebrow"><span />{children}</div>;
@@ -148,7 +149,11 @@ export function MigrationWorkflow() {
   return (
     <section className="mg-section mg-workflow" id="workflow">
       <div className="mg-container">
-        <div className="mg-intro mg-intro--center"><Eyebrow>Migration workflow</Eyebrow><h2>From first scan to final Shopify launch.</h2><p>Every run is repeatable. Every failure is recoverable. Every record can be traced.</p></div>
+        <div className="mg-intro mg-intro--center">
+          <SectionCenteredLabel text="Migration workflow" />
+          <h2>From first scan to final Shopify launch.</h2>
+          <p>Every run is repeatable. Every failure is recoverable. Every record can be traced.</p>
+          </div>
         <div className="mg-workflow-grid">
           {workflow.map(({ number, icon: Icon, title, description }) => (
             <article key={title}><span className="mg-workflow__number">{number}</span><span className="mg-workflow__icon"><Icon size={21} /></span><div><h3>{title}</h3><p>{description}</p></div></article>
@@ -163,7 +168,9 @@ export function MigrationPricing() {
   return (
     <section className="mg-section mg-section--soft" id="pricing">
       <div className="mg-container">
-        <div className="mg-intro mg-intro--center"><Eyebrow>Pricing</Eyebrow><h2>Pricing that scales with record volume and risk.</h2><p>Start with the route that matches your dataset. We confirm scope after the automated data scan.</p></div>
+        <div className="mg-intro mg-intro--center">
+          <SectionCenteredLabel text="Pricing" />
+          <h2>Pricing that scales with record volume and risk.</h2><p>Start with the route that matches your dataset. We confirm scope after the automated data scan.</p></div>
         <div className="mg-pricing-grid">
           {pricing.map((plan) => (
             <article key={plan.name} className={plan.featured ? "is-featured" : undefined}>

@@ -380,6 +380,26 @@
   line-height: 1.75;
 }
 
+.home-testimonials__read-more {
+  display: block;
+  margin: -16px 0 24px 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-brand);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.home-testimonials__read-more:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
 .home-testimonials__footer {
   display: flex;
   flex-wrap: wrap;

@@ -2,7 +2,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FinalCTA from "@/components/FinalCTA";
-import { SectionLabel } from "@/components/services/ServiceComponents";
+import { SectionCenteredLabel, SectionLabel } from "@/components/services/ServiceComponents";
 import {
   ArrowRight,
   ChevronRight,
@@ -296,7 +296,7 @@ export default function AboutPage() {
       <section className="our-values section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <SectionLabel text="Our Values" />
+            <SectionCenteredLabel text="Our Values" />
             <h2 style={{ fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.02em", color: "var(--color-ink)" }}>
               Three principles. Non-negotiable.
             </h2>

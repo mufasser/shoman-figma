@@ -31,6 +31,14 @@ type TestimonialsProps = {
   initialTestimonials?: ApiTestimonial[];
 };
 
+const QUOTE_PREVIEW_LENGTH = 210;
+
+function getQuotePreview(quote: string) {
+  if (quote.length <= QUOTE_PREVIEW_LENGTH) return quote;
+  const cut = quote.lastIndexOf(" ", QUOTE_PREVIEW_LENGTH);
+  return `${quote.slice(0, cut > 0 ? cut : QUOTE_PREVIEW_LENGTH).trimEnd()}…`;
+}
+
 const testimonials: TestimonialPreview[] = [
   {
     quote:
@@ -84,6 +92,7 @@ function normalizePreviewTestimonials(items: ApiTestimonial[]) {
 
 export default function Testimonials({ initialTestimonials = [] }: TestimonialsProps) {
   const [active, setActive] = useState(0);
+  const [quoteExpanded, setQuoteExpanded] = useState(false);
   const [testimonialItems, setTestimonialItems] = useState<TestimonialPreview[]>(
     initialTestimonials.length ? normalizePreviewTestimonials(initialTestimonials) : testimonials
   );
@@ -99,6 +108,7 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
         if (!cancelled && data.testimonials?.length) {
           setTestimonialItems(normalizePreviewTestimonials(data.testimonials));
           setActive(0);
+          setQuoteExpanded(false);
         }
       } catch (error) {
         console.warn("Unable to load homepage testimonials from GraphQL.", error);
@@ -112,10 +122,15 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
     };
   }, []);
 
-  const prev = () => setActive((a) => (a - 1 + testimonialItems.length) % testimonialItems.length);
-  const next = () => setActive((a) => (a + 1) % testimonialItems.length);
+  const showTestimonial = (index: number) => {
+    setActive(index);
+    setQuoteExpanded(false);
+  };
+  const prev = () => showTestimonial((active - 1 + testimonialItems.length) % testimonialItems.length);
+  const next = () => showTestimonial((active + 1) % testimonialItems.length);
 
   const t = testimonialItems[active];
+  const hasLongQuote = t.quote.length > QUOTE_PREVIEW_LENGTH;
 
   return (
     <section className="home-testimonials">
@@ -177,8 +192,18 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
               </div>
 
               <blockquote className="home-testimonials__quote">
-                &quot;{t.quote}&quot;
+                &quot;{hasLongQuote && !quoteExpanded ? getQuotePreview(t.quote) : t.quote}&quot;
               </blockquote>
+              {hasLongQuote && (
+                <button
+                  type="button"
+                  className="home-testimonials__read-more"
+                  aria-expanded={quoteExpanded}
+                  onClick={() => setQuoteExpanded((expanded) => !expanded)}
+                >
+                  {quoteExpanded ? "Read less" : "Read more"}
+                </button>
+              )}
 
               <div className="home-testimonials__footer">
                 <div className="home-testimonials__author">
@@ -202,7 +227,7 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
               {/* Dot indicators */}
               <div className="home-testimonials__dots">
                 {testimonialItems.map((_, i) => (
-                  <button key={i} aria-label={`Show testimonial ${i + 1}`} aria-current={active === i ? "true" : undefined} onClick={() => setActive(i)} className={`home-testimonials__dot${active === i ? " is-active" : ""}`} />
+                  <button key={i} aria-label={`Show testimonial ${i + 1}`} aria-current={active === i ? "true" : undefined} onClick={() => showTestimonial(i)} className={`home-testimonials__dot${active === i ? " is-active" : ""}`} />
                 ))}
               </div>
             </div>

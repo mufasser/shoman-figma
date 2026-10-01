@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, ChevronRight, Star } from "lucide-react";
-import { PricingTable } from "@/components/services/ServiceComponents";
+import { PricingTable, SectionCenteredLabel, SectionHeading } from "@/components/services/ServiceComponents";
 import { included, outcomes, painPoints, related, services, steps, tiers } from "./data";
 import { AdobeFAQ, VersionTabs } from "./AdobeInteractions";
 
@@ -43,11 +43,18 @@ export function AdobeProcess() {
 }
 
 export function AdobePricing() {
-  return <section className="ac-section ac-section--soft ac-pricing" id="pricing"><div className="ac-container"><SectionIntro eyebrow="Retainer Packages" title="Choose your support level" description="All plans include code ownership, NDA, staging environment, and a dedicated senior engineer. 30-day notice period — no lock-in." centered /><PricingTable color="#ff0000" tiers={tiers} compact /></div></section>;
+  return <section className="ac-section ac-section--soft ac-pricing" id="pricing"><div className="ac-container">
+    <SectionIntro eyebrow="Retainer Packages" title="Choose your support level" description="All plans include code ownership, NDA, staging environment, and a dedicated senior engineer. 30-day notice period — no lock-in." centered />
+    <PricingTable color="#ff0000" tiers={tiers} compact /></div></section>;
 }
 
 export function AdobeQuestions() {
-  return <section className="ac-section ac-faq" id="faq"><div className="ac-container"><SectionIntro eyebrow="FAQ" title="Questions we hear most" centered /><AdobeFAQ /></div></section>;
+  return <section className="ac-section ac-faq" id="faq"><div className="ac-container">
+    <div className="service-centered-heading">
+      <SectionCenteredLabel text="FAQ" />
+      <SectionHeading>Questions we hear most</SectionHeading>
+    </div>
+  <AdobeFAQ /></div></section>;
 }
 
 export function AdobeRelated() {
