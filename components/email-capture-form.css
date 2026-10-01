@@ -67,6 +67,22 @@
   line-height: 1.5;
 }
 
+.email-capture__privacy {
+  margin-top: 8px;
+  color: var(--color-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.email-capture__privacy a {
+  color: var(--color-brand);
+  text-underline-offset: 2px;
+}
+
+.email-capture--banner .email-capture__privacy {
+  color: var(--color-subtle);
+}
+
 .email-capture--hero .email-capture__feedback--success {
   color: #047857;
 }

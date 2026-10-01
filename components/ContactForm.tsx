@@ -415,7 +415,7 @@ export default function ContactForm({
           )}
         </button>
         <p className="contact-form-note">
-          {apiEndpoint ? "Your enquiry will be sent securely to our team." : footerNote}
+          {apiEndpoint ? "Your enquiry will be sent securely to our team." : footerNote} See our <Link href="/privacy-policy">Privacy Policy</Link>.
         </p>
       </form>
 

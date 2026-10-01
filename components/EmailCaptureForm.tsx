@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useId, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
@@ -88,6 +90,7 @@ export default function EmailCaptureForm({ variant }: EmailCaptureFormProps) {
           {feedback.message}
         </p>
       )}
+      <p className="email-capture__privacy">We use your email to respond. <Link href="/privacy-policy">Privacy Policy</Link></p>
     </div>
   );
 }

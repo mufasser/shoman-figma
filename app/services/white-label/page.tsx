@@ -219,7 +219,7 @@ export default function WhiteLabelPage() {
       <section className="section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <SectionLabel text="Start a Partnership" />
+            <SectionCenteredLabel text="Start a Partnership" />
             <SectionHeading sub="Tell us about your agency and the type of work you'd like to refer or sub-contract. We'll come back to you within 24 hours.">
               Partnership enquiry
             </SectionHeading>

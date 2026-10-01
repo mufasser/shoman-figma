@@ -166,7 +166,7 @@ export default function AboutPage() {
       <LogoTicker />
 
       {/* Our story / timeline */}
-      <section className="our-story_timeline">
+      <section className="our-story_timeline section-padding-gutter">
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "start" }} className="story-grid">
             <div>

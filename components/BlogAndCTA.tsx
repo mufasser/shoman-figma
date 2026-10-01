@@ -258,7 +258,7 @@ export function CommunityBanner() {
           background: "rgba(var(--color-brand-rgb), 0.1)",
           border: "1px solid rgba(var(--color-brand-rgb), 0.2)",
           borderRadius: 100, 
-          padding: "6px 16px 6px 65px", 
+          padding: "6px 16px 6px 16px", 
           marginBottom: 24,
         }}>
           <Rocket size={14} color="var(--color-brand)" strokeWidth={2.2} />

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import CalendlyFloatingButton from "@/components/CalendlyFloatingButton";
+import CookiePreferences from "@/components/CookiePreferences";
 import "./globals.css";
-
-const GA_MEASUREMENT_ID = "G-XSJH59ZVSR";
 
 export const metadata: Metadata = {
   title: "Shoman Solutions — Ecommerce Engineering Built Right",
@@ -23,8 +21,8 @@ export default function RootLayout({
       <body>
         {children}
         <CalendlyFloatingButton />
+        <CookiePreferences />
       </body>
-      <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </html>
   );
 }

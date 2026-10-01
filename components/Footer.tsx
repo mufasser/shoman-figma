@@ -3,14 +3,15 @@ import Link from "next/link";
 import Image from 'next/image';
 import { BriefcaseBusiness, Code2, Mail, Phone, FolderGit } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { CookieSettingsButton } from "./CookiePreferences";
 import "./site-shell.css";
 // import LogoLight from '@/public/logo-light.svg';
 // import LogoLight from '@/public/logo-light.svg'
 
 const links = {
   Pages: ["Home", "About", "Services", "Portfolio", "Testimonials", "Blog"],
-  Company: ["Terms & Conditions", "Privacy Policy", "Cookies", "Careers"],
-  Community: ["Help Centre", "Contact Us", "Support", "FAQs"],
+  Company: ["Terms & Conditions", "Privacy Policy", "Cookies", "Contact Us"],
+  Services: ["Adobe Commerce Development", "Shopify Development", "Magento to Shopify Migration", "Technical Audits", "Systems Integration", "White Label"],
 };
 
 const footerHrefs: Record<string, string> = {
@@ -21,6 +22,15 @@ const footerHrefs: Record<string, string> = {
   Testimonials: "/testimonials",
   Blog: "/insights",
   "Contact Us": "/contact-us",
+  "Terms & Conditions": "/terms-and-conditions",
+  "Privacy Policy": "/privacy-policy",
+  Cookies: "/cookies",
+  "Adobe Commerce Development": "/services/adobe-commerce-development-support",
+  "Shopify Development": "/services/shopify-development-support",
+  "Magento to Shopify Migration": "/services/magento-to-shopify-migration",
+  "Technical Audits": "/services/technical-audits",
+  "Systems Integration": "/services/third-party-integrations",
+  "White Label": "/services/white-label",
 };
 
 const socialLinks: { label: string; href: string; icon: LucideIcon }[] = [
@@ -92,6 +102,7 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} Shoman Solutions Ltd · Built in the UK
           </p>
+          <CookieSettingsButton className="site-footer__cookie-settings">Cookie settings</CookieSettingsButton>
           <p>
             Designed and Developed by <a href="https://www.shomansolutions.com">Shoman Solutions</a>.
           </p>
