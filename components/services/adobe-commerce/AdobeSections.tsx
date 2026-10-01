@@ -33,7 +33,7 @@ export function AdobeEngagement() {
 }
 
 export function AdobeVersions() {
-  return <section className="ac-section ac-section--soft ac-versions" id="versions"><div className="ac-container"><SectionIntro eyebrow="Platform Versions" title="Magento 1, Magento 2, or Adobe Commerce?" description="We work across all versions. Here's what you need to know about each and what we recommend depending on where you are today." /><VersionTabs /></div></section>;
+  return <section className="ac-section ac-section--soft ac-versions" id="versions"><div className="ac-container"><SectionIntro eyebrow="Platform Versions" title="Adobe Commerce, Magento 2 or Magento" description="We work across all versions. Here's what you need to know about each and what we recommend depending on where you are today." /><VersionTabs /></div></section>;
 }
 
 export function AdobeProcess() {

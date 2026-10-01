@@ -2,7 +2,7 @@ import { AlertTriangle, Ban, Gauge, PhoneOff, Puzzle, ShieldAlert, ShieldCheck, 
 
 export const navigation = [
   { id: "pain", label: "Pain Points" }, { id: "included", label: "What's Included" },
-  { id: "versions", label: "M1 vs M2 vs AC" }, { id: "process", label: "Our Process" },
+  { id: "versions", label: "AC VS M2 vs M" }, { id: "process", label: "Our Process" },
   { id: "pricing", label: "Pricing" }, { id: "faq", label: "FAQ" },
 ];
 
