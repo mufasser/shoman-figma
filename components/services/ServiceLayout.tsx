@@ -22,6 +22,7 @@ interface ServiceLayoutProps {
   ctaText: string;
   ctaHref?: string;
   secondaryCta?: string;
+  secondaryCtaHref?: string;
   breadcrumb: string;
   heroImage?: string;
   heroImageAlt?: string;
@@ -53,6 +54,7 @@ export default function ServiceLayout({
   heroSub,
   ctaText,
   secondaryCta,
+  secondaryCtaHref = "#overview",
   breadcrumb,
   heroImage,
   heroImageAlt = "",
@@ -109,7 +111,7 @@ export default function ServiceLayout({
                   {ctaText} <ArrowRight size={15} />
                 </a>
                 {secondaryCta && (
-                  <a className="service-standard-button" href="#overview">
+                  <a className="service-standard-button" href={secondaryCtaHref}>
                     {secondaryCta}
                   </a>
                 )}

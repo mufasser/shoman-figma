@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from 'next/image';
-import { BriefcaseBusiness, Code2, Mail, Phone, FolderGit } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { CookieSettingsButton } from "./CookiePreferences";
 import "./site-shell.css";
@@ -12,9 +12,11 @@ const links = {
   Pages: ["Home", "About", "Services", "Portfolio", "Testimonials", "Blog"],
   Company: ["Terms & Conditions", "Privacy Policy", "Cookies", "Contact Us"],
   Services: ["Adobe Commerce Development", "Shopify Development", "Magento to Shopify Migration", "Technical Audits", "Systems Integration", "White Label"],
-};
+} as const;
 
-const footerHrefs: Record<string, string> = {
+type FooterLink = (typeof links)[keyof typeof links][number];
+
+const footerHrefs: Record<FooterLink, string> = {
   Home: "/",
   About: "/about",
   Services: "/services",
@@ -34,9 +36,7 @@ const footerHrefs: Record<string, string> = {
 };
 
 const socialLinks: { label: string; href: string; icon: LucideIcon }[] = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/shoman-solutions", icon: BriefcaseBusiness },
   { label: "Phone", href: "tel:+447412215015", icon: Phone },
-  // { label: "Code", href: "#", icon: FolderGit },
   { label: "Email", href: "mailto:hello@shomansolutions.com", icon: Mail },
 ];
 
@@ -87,7 +87,7 @@ export default function Footer() {
               <ul>
 	                {items.map((item) => (
 	                  <li key={item}>
-	                    <Link href={footerHrefs[item] || "#"}>
+	                    <Link href={footerHrefs[item]}>
 	                      {item}
 	                    </Link>
 	                  </li>

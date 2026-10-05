@@ -42,7 +42,7 @@ const posts: BlogPreviewPost[] = [
     readTime: "5 min read",
     num: "01",
     icon: ShoppingBag,
-    href: "#",
+    href: "/services/adobe-commerce-development-support",
   },
   {
     tag: "Migration",
@@ -54,7 +54,7 @@ const posts: BlogPreviewPost[] = [
     readTime: "8 min read",
     num: "02",
     icon: Shuffle,
-    href: "#",
+    href: "/services/magento-to-shopify-migration",
   },
   {
     tag: "Shopify",
@@ -66,7 +66,7 @@ const posts: BlogPreviewPost[] = [
     readTime: "6 min read",
     num: "03",
     icon: Store,
-    href: "#",
+    href: "/services/shopify-development-support",
   },
 ];
 
@@ -75,7 +75,7 @@ function normalizePreviewPosts(items: ApiBlogPreviewPost[]) {
     ...item,
     num: String(index + 1).padStart(2, "0"),
     icon: blogIconMap[item.iconKey || "shoppingBag"] || ShoppingBag,
-    href: item.href || "#",
+    href: item.href && item.href !== "#" ? item.href : "/services",
   }));
 }
 
@@ -160,7 +160,7 @@ export function Blog() {
               overflow: "hidden",
               border: "1px solid var(--color-border)",
               transition: "box-shadow 0.25s, transform 0.25s",
-              cursor: "pointer",
+              cursor: "default",
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 40px rgba(0, 0, 0, 0.08)";
@@ -212,13 +212,13 @@ export function Blog() {
                       <Clock size={11} /> {post.readTime}
                     </span>
                   </div>
-                  <a href={post.href} style={{
+                  <Link href={post.href} style={{
                     display: "flex", alignItems: "center", gap: 4,
                     fontSize: 12, fontWeight: 600, color: "var(--color-brand)",
                     textDecoration: "none",
                   }}>
-                    Read <ArrowRight size={12} />
-                  </a>
+                    {post.href.startsWith("/insights/") ? "Read" : "Explore service"} <ArrowRight size={12} />
+                  </Link>
                 </div>
               </div>
             </article>

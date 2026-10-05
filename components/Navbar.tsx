@@ -64,14 +64,25 @@ export default function Navbar() {
               className="services-menu-trigger"
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setServicesOpen(false);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setServicesOpen(false);
+              }}
             >
               <button
+                type="button"
                 className="nav-link"
+                aria-expanded={servicesOpen}
+                aria-controls="desktop-services-dropdown"
+                onClick={() => setServicesOpen(true)}
               >
                 Services <ChevronDown size={14} />
               </button>
               {servicesOpen && (
-                <div className="services-dropdown">
+                <div id="desktop-services-dropdown" className="services-dropdown">
+                  <Link href="/services">All Services</Link>
                   {services.map((s) => (
                     <Link key={s.name} href={s.href}>{s.name}</Link>
                   ))}

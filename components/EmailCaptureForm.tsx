@@ -8,10 +8,11 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import "./email-capture-form.css";
 
 type EmailCaptureFormProps = {
-  variant: "hero" | "banner";
+  variant: "hero" | "banner" | "newsletter";
+  submitLabel?: string;
 };
 
-export default function EmailCaptureForm({ variant }: EmailCaptureFormProps) {
+export default function EmailCaptureForm({ variant, submitLabel = "Get Started" }: EmailCaptureFormProps) {
   const inputId = useId();
   const submittingRef = useRef(false);
   const [email, setEmail] = useState("");
@@ -78,7 +79,7 @@ export default function EmailCaptureForm({ variant }: EmailCaptureFormProps) {
           {submitting ? (
             <>Sending <Loader2 size={14} className="email-capture__spinner" aria-hidden="true" /></>
           ) : (
-            <>Get Started <ArrowRight size={14} aria-hidden="true" /></>
+            <>{submitLabel} <ArrowRight size={14} aria-hidden="true" /></>
           )}
         </button>
       </form>

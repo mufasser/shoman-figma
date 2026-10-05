@@ -11,6 +11,27 @@
   max-width: 100%;
 }
 
+.email-capture--newsletter {
+  width: 100%;
+}
+
+.email-capture--newsletter .email-capture__banner-form {
+  border-color: var(--color-border);
+  background: var(--color-bg-soft);
+}
+
+.email-capture--newsletter .email-capture__banner-form input {
+  color: var(--color-ink);
+}
+
+.email-capture--newsletter .email-capture__feedback--success {
+  color: #047857;
+}
+
+.email-capture--newsletter .email-capture__feedback--error {
+  color: #b42318;
+}
+
 .email-capture__banner-form {
   display: flex;
   max-width: 100%;

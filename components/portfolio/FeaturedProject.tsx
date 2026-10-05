@@ -18,7 +18,7 @@ export default function FeaturedProject({ href }: { href?: string }) {
         <p>Adobe Commerce store losing 30% of shoppers before payment. Unoptimised queries, missing database indices, and extension conflicts were compounding. We rebuilt the caching layer, rewrote the checkout queries, and resolved all extension conflicts in a single sprint.</p>
         <div className="featured-project__tags">{["Varnish Caching", "DB Optimisation", "Extension Audit", "Core Web Vitals"].map(tag => <span key={tag}>{tag}</span>)}</div>
         <Quote className="featured-project__quote" size={36} fill="currentColor" strokeWidth={0} aria-hidden="true" />
-        <div className="featured-project__footer"><span>UK Fashion Retailer · Adobe Commerce 2.4</span>{href ? <a href={href}>Read Full Case Study<ArrowRight size={16} /></a> : <span className="featured-project__link">Read Full Case Study<ArrowRight size={16} /></span>}</div>
+        <div className="featured-project__footer"><span>UK Fashion Retailer · Adobe Commerce 2.4</span><a href={href || "#all-projects"}>{href ? "Read Full Case Study" : "Explore Projects"}<ArrowRight size={16} /></a></div>
       </div>
       <dl className="featured-project__metrics">{metrics.map(metric => <div key={metric.label} className={`featured-project__metric featured-project__metric--${metric.tone}`}><div><dd>{metric.value}</dd><dt>{metric.label}</dt></div><span>{metric.comparison}</span></div>)}</dl>
     </article>

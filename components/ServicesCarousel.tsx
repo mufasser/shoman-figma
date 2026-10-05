@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import type { CSSProperties, TouchEvent } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import "./home-sections.css";
 
 const services = [
@@ -22,6 +23,7 @@ const services = [
     ],
     accentColor: "#FF0000",
     bgAccent: "#fff5f5",
+    href: "/services/adobe-commerce-development-support",
   },
   {
     id: 2,
@@ -29,7 +31,7 @@ const services = [
     platformColor: "#F46F25",
     platformSymbol: "M→",
     label: "Platform Migration",
-    title: "Adobe Commerce App Builder",
+    title: "Magento to Shopify Migration",
     description:
       "Full store migration — products, orders, data, SEO, integrations — with zero data loss and no downtime on launch day.",
     bullets: [
@@ -40,6 +42,7 @@ const services = [
     ],
     accentColor: "#F46F25",
     bgAccent: "#fff8f0",
+    href: "/services/magento-to-shopify-migration",
   },
   {
     id: 3,
@@ -58,6 +61,7 @@ const services = [
     ],
     accentColor: "#96BF48",
     bgAccent: "#f5fbee",
+    href: "/services/shopify-development-support",
   },
   {
     id: 4,
@@ -65,7 +69,7 @@ const services = [
     platformColor: "#0284C7",
     platformSymbol: "Au",
     label: "Fixed-Fee Service",
-    title: "Systems Integrations",
+    title: "Technical Audits",
     description:
       "Prioritised, expert-written PDF report on your store's security, performance, checkout health, and migration complexity.",
     bullets: [
@@ -76,6 +80,7 @@ const services = [
     ],
     accentColor: "#0284C7",
     bgAccent: "#f0f9ff",
+    href: "/services/technical-audits",
   },
   {
     id: 5,
@@ -94,6 +99,7 @@ const services = [
     ],
     accentColor: "#6366F1",
     bgAccent: "#f5f3ff",
+    href: "/services/third-party-integrations",
   },
 ];
 
@@ -241,9 +247,9 @@ export default function ServicesCarousel() {
                   ))}
                 </ul>
 
-                <a href="#contact" className="services-carousel__card-link">
+                <Link href={s.href} className="services-carousel__card-link">
                   Learn more <ArrowRight size={14} />
-                </a>
+                </Link>
               </div>
             );
           })}

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Calendar, ChevronRight, Clock, Inbox, Mail, PenLine, Settings, ShieldCheck, ShoppingBag, Shuffle, Star, Store, TrendingUp } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
+import EmailCaptureForm from "@/components/EmailCaptureForm";
 
 type BlogPostCard = {
   id: number | string;
@@ -36,12 +37,12 @@ const postIconMap = {
 };
 
 const posts: BlogPostCard[] = [
-  { id: 1, tag: "Adobe Commerce", tagColor: "#FF0000", tagBg: "#fff5f5", title: "Why Your Magento Checkout Is Losing You 30% of Conversions", excerpt: "The most common performance bottlenecks on Adobe Commerce stores aren't obvious — and fixing them doesn't require a full rebuild. Here's where to look first.", date: "12 Nov 2024", readTime: "5 min", featured: true, icon: ShoppingBag, href: "#" },
-  { id: 2, tag: "Migration", tagColor: "#F46F25", tagBg: "#fff8f0", title: "The Magento to Shopify Migration Checklist We Actually Use", excerpt: "After 40+ platform migrations, we've refined a process that protects your SEO, your data, and your sanity. Here's exactly what it covers and why.", date: "28 Oct 2024", readTime: "8 min", featured: false, icon: Shuffle, href: "#" },
-  { id: 3, tag: "Shopify", tagColor: "#96BF48", tagBg: "#f5fbee", title: "Shopify Plus vs Adobe Commerce: A Straight-Talking Guide", excerpt: "We work with both platforms every day. This isn't a sales pitch — it's an honest comparison for technical decision-makers who need the right answer.", date: "15 Oct 2024", readTime: "6 min", featured: false, icon: Store, href: "#" },
-  { id: 4, tag: "Integration", tagColor: "#6366F1", tagBg: "#f5f3ff", title: "Why Off-The-Shelf Integration Apps Keep Breaking", excerpt: "Generic Shopify apps work until your business has real complexity. Here's why custom middleware beats app-stack integrations every time.", date: "3 Oct 2024", readTime: "7 min", featured: false, icon: Settings, href: "#" },
-  { id: 5, tag: "Adobe Commerce", tagColor: "#FF0000", tagBg: "#fff5f5", title: "Adobe Commerce Security Patches: What They Are and Why They Can't Wait", excerpt: "A plain-English guide to Adobe Commerce security patches — what APSB notices mean, how to read severity ratings, and how to apply patches safely.", date: "20 Sep 2024", readTime: "4 min", featured: false, icon: ShieldCheck, href: "#" },
-  { id: 6, tag: "Shopify", tagColor: "#96BF48", tagBg: "#f5fbee", title: "Building a High-Converting Shopify Store: What Actually Moves the Needle", excerpt: "After 80+ Shopify builds, we know which decisions drive conversion and which ones agencies spend time on that buyers don't notice or care about.", date: "5 Sep 2024", readTime: "6 min", featured: false, icon: TrendingUp, href: "#" },
+  { id: 1, tag: "Adobe Commerce", tagColor: "#FF0000", tagBg: "#fff5f5", title: "Why Your Magento Checkout Is Losing You 30% of Conversions", excerpt: "The most common performance bottlenecks on Adobe Commerce stores aren't obvious — and fixing them doesn't require a full rebuild. Here's where to look first.", date: "12 Nov 2024", readTime: "5 min", featured: true, icon: ShoppingBag, href: "/services/adobe-commerce-development-support" },
+  { id: 2, tag: "Migration", tagColor: "#F46F25", tagBg: "#fff8f0", title: "The Magento to Shopify Migration Checklist We Actually Use", excerpt: "After 40+ platform migrations, we've refined a process that protects your SEO, your data, and your sanity. Here's exactly what it covers and why.", date: "28 Oct 2024", readTime: "8 min", featured: false, icon: Shuffle, href: "/services/magento-to-shopify-migration" },
+  { id: 3, tag: "Shopify", tagColor: "#96BF48", tagBg: "#f5fbee", title: "Shopify Plus vs Adobe Commerce: A Straight-Talking Guide", excerpt: "We work with both platforms every day. This isn't a sales pitch — it's an honest comparison for technical decision-makers who need the right answer.", date: "15 Oct 2024", readTime: "6 min", featured: false, icon: Store, href: "/services/shopify-development-support" },
+  { id: 4, tag: "Integration", tagColor: "#6366F1", tagBg: "#f5f3ff", title: "Why Off-The-Shelf Integration Apps Keep Breaking", excerpt: "Generic Shopify apps work until your business has real complexity. Here's why custom middleware beats app-stack integrations every time.", date: "3 Oct 2024", readTime: "7 min", featured: false, icon: Settings, href: "/services/third-party-integrations" },
+  { id: 5, tag: "Adobe Commerce", tagColor: "#FF0000", tagBg: "#fff5f5", title: "Adobe Commerce Security Patches: What They Are and Why They Can't Wait", excerpt: "A plain-English guide to Adobe Commerce security patches — what APSB notices mean, how to read severity ratings, and how to apply patches safely.", date: "20 Sep 2024", readTime: "4 min", featured: false, icon: ShieldCheck, href: "/services/adobe-commerce-development-support" },
+  { id: 6, tag: "Shopify", tagColor: "#96BF48", tagBg: "#f5fbee", title: "Building a High-Converting Shopify Store: What Actually Moves the Needle", excerpt: "After 80+ Shopify builds, we know which decisions drive conversion and which ones agencies spend time on that buyers don't notice or care about.", date: "5 Sep 2024", readTime: "6 min", featured: false, icon: TrendingUp, href: "/services/shopify-development-support" },
 ];
 
 const heroStats = [
@@ -58,6 +59,7 @@ function attachPostIcons(items: ApiBlogPostCard[]) {
     ...item,
     featured: index === 0,
     icon: postIconMap[item.iconKey || "shoppingBag"] || ShoppingBag,
+    href: item.href && item.href !== "#" ? item.href : "/services",
   }));
 }
 
@@ -179,7 +181,7 @@ export default function InsightsPage() {
 
           {/* Featured post */}
           {featured && (
-            <div style={{ background: "var(--color-white)", border: "1.5px solid var(--color-border)", borderRadius: 20, overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr", marginBottom: 24, cursor: "pointer", transition: "box-shadow 0.2s, transform 0.2s" }} className="featured-post"
+            <div style={{ background: "var(--color-white)", border: "1.5px solid var(--color-border)", borderRadius: 20, overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr", marginBottom: 24, transition: "box-shadow 0.2s, transform 0.2s" }} className="featured-post"
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 48px rgba(0, 0, 0, 0.08)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
               <div style={{ height: "100%", minHeight: 280, background: `linear-gradient(135deg, ${featured.tagColor}18, ${featured.tagColor}30)`, display: "flex", alignItems: "center", justifyContent: "center", color: featured.tagColor, position: "relative" }}>
@@ -198,11 +200,11 @@ export default function InsightsPage() {
                 </div>
                 <h2 style={{ fontSize: 22, fontWeight: 800, color: "var(--color-ink)", lineHeight: 1.3, marginBottom: 14, letterSpacing: "-0.01em" }}>{featured.title}</h2>
                 <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--color-muted)", marginBottom: 24 }}>{featured.excerpt}</p>
-                <a href={featured.href || "#"} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand)", color: "var(--color-white)", padding: "11px 20px", borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: "none", width: "fit-content", transition: "background 0.2s" }}
+                <Link href={featured.href || "/services"} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand)", color: "var(--color-white)", padding: "11px 20px", borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: "none", width: "fit-content", transition: "background 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.background = "var(--color-brand-hover)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "var(--color-brand)")}>
-                  Read Article <ArrowRight size={14} />
-                </a>
+                  {featured.href?.startsWith("/insights/") ? "Read Article" : "Explore Service"} <ArrowRight size={14} />
+                </Link>
               </div>
             </div>
           )}
@@ -213,7 +215,7 @@ export default function InsightsPage() {
               {rest.map((post) => {
                 const Icon = post.icon;
                 return (
-                <article key={post.id} style={{ background: "var(--color-white)", border: "1px solid var(--color-border)", borderRadius: 16, overflow: "hidden", cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}
+                <article key={post.id} style={{ background: "var(--color-white)", border: "1px solid var(--color-border)", borderRadius: 16, overflow: "hidden", transition: "transform 0.2s, box-shadow 0.2s" }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 36px rgba(0, 0, 0, 0.07)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}>
                   <div style={{ height: 160, background: `linear-gradient(135deg, ${post.tagColor}15, ${post.tagColor}28)`, display: "flex", alignItems: "center", justifyContent: "center", color: post.tagColor, position: "relative" }}>
@@ -229,11 +231,11 @@ export default function InsightsPage() {
                     </div>
                     <h3 style={{ fontSize: 14, fontWeight: 700, color: "var(--color-ink)", lineHeight: 1.4, marginBottom: 9 }}>{post.title}</h3>
                     <p style={{ fontSize: 12, lineHeight: 1.7, color: "var(--color-muted)", marginBottom: 16 }}>{post.excerpt}</p>
-                    <a href={post.href || "#"} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, fontWeight: 600, color: post.tagColor, textDecoration: "none", transition: "gap 0.2s" }}
+                    <Link href={post.href || "/services"} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, fontWeight: 600, color: post.tagColor, textDecoration: "none", transition: "gap 0.2s" }}
                     onMouseEnter={e => (e.currentTarget.style.gap = "9px")}
                     onMouseLeave={e => (e.currentTarget.style.gap = "5px")}>
-                      Read Article <ArrowRight size={12} />
-                    </a>
+                      {post.href?.startsWith("/insights/") ? "Read Article" : "Explore Service"} <ArrowRight size={12} />
+                    </Link>
                   </div>
                 </article>
                 );
@@ -256,17 +258,9 @@ export default function InsightsPage() {
           <Mail size={38} color="var(--color-brand)" style={{ marginBottom: 16, margin: "0 auto", }} />
           <h2 style={{ fontSize: 24, fontWeight: 800, color: "var(--color-ink)", marginBottom: 12 }}>New articles, straight to your inbox</h2>
           <p style={{ fontSize: 14, lineHeight: 1.75, color: "var(--color-muted)", marginBottom: 24 }}>
-            One email when a new article is published. No newsletters. No marketing. Unsubscribe any time.
+            Leave your email to hear from us about new technical insights.
           </p>
-          <div style={{ display: "flex", background: "var(--color-bg-soft)", border: "1.5px solid var(--color-border)", borderRadius: 10, overflow: "hidden" }}
-          onFocus={() => {}} onBlur={() => {}}>
-            <input type="email" placeholder="your@email.com" style={{ flex: 1, padding: "13px 16px", fontSize: 14, border: "none", background: "transparent", outline: "none", color: "var(--color-ink)" }} />
-            <button style={{ padding: "13px 20px", background: "var(--color-brand)", color: "var(--color-white)", border: "none", cursor: "pointer", fontSize: 13, fontWeight: 600, display: "flex", alignItems: "center", gap: 6, transition: "background 0.2s", whiteSpace: "nowrap" }}
-            onMouseEnter={e => (e.currentTarget.style.background = "var(--color-brand-hover)")}
-            onMouseLeave={e => (e.currentTarget.style.background = "var(--color-brand)")}>
-              Subscribe <ArrowRight size={13} />
-            </button>
-          </div>
+          <EmailCaptureForm variant="newsletter" submitLabel="Subscribe" />
         </div>
       </section>
 

@@ -24,6 +24,7 @@
 .portfolio-filter-group button[aria-pressed="true"] { color: var(--color-brand); border-color: var(--color-brand); background: var(--color-brand-soft); }
 .portfolio-count { font-size: 12px; color: var(--color-subtle); margin-left: auto; }
 .portfolio-projects { background: var(--color-bg-soft); padding: 48px 0 64px; }
+#all-projects { scroll-margin-top: 96px; }
 .portfolio-eyebrow { display: flex; align-items: center; gap: 8px; color: var(--color-brand); font-size: 11px; font-weight: 700; margin-bottom: 16px; }
 .portfolio-eyebrow::before { content: ""; width: 20px; height: 2px; background: currentColor; }
 .portfolio-project { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s; min-width: 0; }

@@ -442,7 +442,26 @@
 .home-testimonials__dots {
   display: flex;
   gap: 6px;
+}
+
+.home-testimonials__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-top: 20px;
+}
+
+.home-testimonials__all-link {
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-testimonials__all-link:hover,
+.home-testimonials__all-link:focus-visible {
+  text-decoration: underline;
 }
 
 .home-testimonials__dot {

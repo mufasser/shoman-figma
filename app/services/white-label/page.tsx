@@ -1,4 +1,5 @@
 "use client";
+import { useState, type FormEvent } from "react";
 import ServiceLayout from "@/components/services/ServiceLayout";
 import {
   SectionLabel, SectionHeading, PainGrid, Checklist,
@@ -22,6 +23,45 @@ const BG = "#f0f9ff";
 
 
 export default function WhiteLabelPage() {
+  const [submitting, setSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  async function submitPartnershipEnquiry(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (submitting) return;
+
+    const form = event.currentTarget;
+    const fields = new FormData(form);
+    const website = String(fields.get("website") || "").trim();
+    const capacity = String(fields.get("capacity") || "").trim();
+    const services = fields.getAll("services").map(String);
+
+    setSubmitting(true);
+    setFormStatus(null);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(fields.get("name") || "").trim(),
+          company: String(fields.get("agency") || "").trim(),
+          email: String(fields.get("email") || "").trim(),
+          services,
+          stage: "Agency partner",
+          message: [`Agency website: ${website || "Not provided"}`, `Monthly capacity: ${capacity}`].join("\n"),
+        }),
+      });
+      const result = await response.json() as { success?: boolean; message?: string };
+      if (!response.ok || !result.success) throw new Error(result.message || "We couldn't send your enquiry. Please try again.");
+      form.reset();
+      setFormStatus({ type: "success", message: result.message || "Thank you. We'll be in touch shortly." });
+    } catch (error) {
+      setFormStatus({ type: "error", message: error instanceof Error ? error.message : "We couldn't send your enquiry. Please try again." });
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <ServiceLayout
       badge="Agency Partners"
@@ -33,7 +73,9 @@ export default function WhiteLabelPage() {
       heroHighlight="For Agencies."
       heroSub="Add a experienced ecommerce engineering team to your agency — invisibly. We deliver Adobe Commerce, Magento, and Shopify work under your brand, to your clients, on your timelines. You present. We build."
       ctaText="Start a Partnership"
+      ctaHref="#partnership-enquiry"
       secondaryCta="How It Works"
+      secondaryCtaHref="#how-it-works"
       breadcrumb="White-Label Partnerships"
     >
       {/* Problems we solve */}
@@ -55,7 +97,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* How it works */}
-      <section className="section-padding-gutter" style={{ background: "var(--color-white)" }}>
+      <section id="how-it-works" className="section-padding-gutter" style={{ background: "var(--color-white)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <TwoCol
             left={
@@ -216,7 +258,7 @@ export default function WhiteLabelPage() {
       </section>
 
       {/* Partner enquiry box */}
-      <section className="section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
+      <section id="partnership-enquiry" className="section-padding-gutter" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <SectionCenteredLabel text="Start a Partnership" />
@@ -224,20 +266,20 @@ export default function WhiteLabelPage() {
               Partnership enquiry
             </SectionHeading>
           </div>
-          <div style={{
+          <form onSubmit={submitPartnershipEnquiry} aria-busy={submitting} style={{
             background: "var(--color-white)", border: "1.5px solid var(--color-border)",
             borderRadius: 16, padding: 36,
           }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }} className="form-grid">
               {[
-                { label: "Agency Name", type: "text", placeholder: "Your agency name" },
-                { label: "Your Name", type: "text", placeholder: "Your full name" },
-                { label: "Email Address", type: "email", placeholder: "you@agency.com" },
-                { label: "Website", type: "url", placeholder: "https://youragency.com" },
+                { label: "Agency Name", name: "agency", type: "text", placeholder: "Your agency name", required: true },
+                { label: "Your Name", name: "name", type: "text", placeholder: "Your full name", required: true },
+                { label: "Email Address", name: "email", type: "email", placeholder: "you@agency.com", required: true },
+                { label: "Website", name: "website", type: "url", placeholder: "https://youragency.com", required: false },
               ].map((f) => (
-                <div key={f.label}>
-                  <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "var(--color-ink)", marginBottom: 6 }}>{f.label}</label>
-                  <input type={f.type} placeholder={f.placeholder} style={{
+                <div key={f.name}>
+                  <label htmlFor={`partnership-${f.name}`} style={{ display: "block", fontSize: 12, fontWeight: 600, color: "var(--color-ink)", marginBottom: 6 }}>{f.label}</label>
+                  <input id={`partnership-${f.name}`} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} disabled={submitting} style={{
                     width: "100%", padding: "11px 14px",
                     border: "1.5px solid var(--color-border)", borderRadius: 8,
                     fontSize: 13, color: "var(--color-ink)", background: "var(--color-bg-soft)",
@@ -270,16 +312,16 @@ export default function WhiteLabelPage() {
                     (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
                     (e.currentTarget as HTMLElement).style.color = "var(--color-copy)";
                   }}>
-                    <input type="checkbox" style={{ accentColor: COLOR }} /> {opt}
+                    <input type="checkbox" name="services" value={opt} disabled={submitting} style={{ accentColor: COLOR }} /> {opt}
                   </label>
                 ))}
               </div>
             </div>
             <div style={{ marginBottom: 20 }}>
-              <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "var(--color-ink)", marginBottom: 6 }}>
+              <label htmlFor="partnership-capacity" style={{ display: "block", fontSize: 12, fontWeight: 600, color: "var(--color-ink)", marginBottom: 6 }}>
                 Monthly capacity needed (rough estimate)
               </label>
-              <select style={{
+              <select id="partnership-capacity" name="capacity" disabled={submitting} style={{
                 width: "100%", padding: "11px 14px",
                 border: "1.5px solid var(--color-border)", borderRadius: 8,
                 fontSize: 13, color: "var(--color-copy)", background: "var(--color-bg-soft)",
@@ -292,7 +334,7 @@ export default function WhiteLabelPage() {
                 <option>Ad-hoc overflow only</option>
               </select>
             </div>
-            <button style={{
+            <button type="submit" disabled={submitting} style={{
               width: "100%", padding: "14px 0",
               background: COLOR, color: "var(--color-white)",
               border: "none", borderRadius: 9,
@@ -307,12 +349,16 @@ export default function WhiteLabelPage() {
               (e.currentTarget as HTMLElement).style.background = COLOR;
               (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
             }}>
-              Submit Partnership Enquiry →
+              {submitting ? "Sending Enquiry…" : "Submit Partnership Enquiry →"}
             </button>
+            {formStatus && <p role={formStatus.type === "error" ? "alert" : "status"} style={{ marginTop: 12, color: formStatus.type === "error" ? "#b42318" : "#047857", fontSize: 13 }}>{formStatus.message}</p>}
             <p style={{ textAlign: "center", fontSize: 12, color: "var(--color-subtle)", marginTop: 12 }}>
               We respond within 24 hours · NDA sent before any project details shared
             </p>
-          </div>
+            <p style={{ textAlign: "center", fontSize: 12, color: "var(--color-subtle)", marginTop: 8 }}>
+              Your enquiry is sent to our team. <a href="/privacy-policy" style={{ color: COLOR }}>Privacy Policy</a>
+            </p>
+          </form>
           <style jsx>{`@media(max-width:600px){.form-grid{grid-template-columns:1fr!important}}`}</style>
         </div>
       </section>

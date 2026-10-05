@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import ContactForm from "./ContactForm";
 
 function useCountUp(target: number, duration = 1800, start = false) {
@@ -98,7 +99,7 @@ export default function WhyChooseUs() {
               ))}
             </div>
 
-            <a href="#contact" style={{
+            <Link href="/about" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
               background: "var(--color-brand)", color: "var(--color-white)",
               padding: "14px 24px", borderRadius: 10,
@@ -113,8 +114,8 @@ export default function WhyChooseUs() {
               (e.currentTarget as HTMLElement).style.background = "var(--color-brand)";
               (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
             }}>
-              See Our Team <ArrowRight size={16} />
-            </a>
+              About Us <ArrowRight size={16} />
+            </Link>
           </div>
 
           {/* Right — Visual */}

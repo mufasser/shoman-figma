@@ -82,6 +82,7 @@ export default function AuditsPage() {
       heroSub="Get a clear, prioritised picture of your store's health before investing in new features or campaigns. Expert-written, actionable — not an automated scan report. Delivered in 5 business days."
       ctaText="Order Your Audit — From £499"
       secondaryCta="See What's Included"
+      secondaryCtaHref="#audit-deliverables"
       breadcrumb="Technical Audits"
       heroImage="/assets/services/Technical-Audit-Service-hero-section.png"
       heroImageAlt="Technical ecommerce audit and performance analysis"
@@ -134,7 +135,7 @@ export default function AuditsPage() {
       </section>
 
       {/* Sample report */}
-      <section className="service-content-section">
+      <section id="audit-deliverables" className="service-content-section">
         <div className="service-content-container">
           <TwoCol
             left={

@@ -1222,6 +1222,10 @@
   justify-self: center;
 }
 
+.service-standard-overview > section[id] {
+  scroll-margin-top: 76px;
+}
+
 .service-standard-page .service-standard-overview > section {
   scroll-margin-top: 76px;
   padding: var(--section-space, 72px) 0 !important;

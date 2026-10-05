@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import Link from "next/link";
 import "./home-sections.css";
 
 type TestimonialPreview = {
@@ -225,10 +226,13 @@ export default function Testimonials({ initialTestimonials = [] }: TestimonialsP
               </div>
 
               {/* Dot indicators */}
-              <div className="home-testimonials__dots">
-                {testimonialItems.map((_, i) => (
-                  <button key={i} aria-label={`Show testimonial ${i + 1}`} aria-current={active === i ? "true" : undefined} onClick={() => showTestimonial(i)} className={`home-testimonials__dot${active === i ? " is-active" : ""}`} />
-                ))}
+              <div className="home-testimonials__navigation">
+                <div className="home-testimonials__dots">
+                  {testimonialItems.map((_, i) => (
+                    <button key={i} aria-label={`Show testimonial ${i + 1}`} aria-current={active === i ? "true" : undefined} onClick={() => showTestimonial(i)} className={`home-testimonials__dot${active === i ? " is-active" : ""}`} />
+                  ))}
+                </div>
+                <Link href="/testimonials" className="home-testimonials__all-link">View all testimonials</Link>
               </div>
             </div>
           </div>

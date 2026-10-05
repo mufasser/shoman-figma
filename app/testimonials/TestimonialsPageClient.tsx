@@ -56,7 +56,6 @@ const testimonials: TestimonialCard[] = [
     initials: "S",
     rating: 5,
     date: "2024-11-12",
-    href: "#",
   },
   {
     id: 2,
@@ -73,7 +72,6 @@ const testimonials: TestimonialCard[] = [
     initials: "M",
     rating: 5,
     date: "2024-10-28",
-    href: "#",
   },
   {
     id: 3,
@@ -90,7 +88,6 @@ const testimonials: TestimonialCard[] = [
     initials: "J",
     rating: 5,
     date: "2024-10-15",
-    href: "#",
   },
   {
     id: 4,
@@ -107,7 +104,6 @@ const testimonials: TestimonialCard[] = [
     initials: "R",
     rating: 5,
     date: "2024-10-03",
-    href: "#",
   },
   {
     id: 5,
@@ -124,7 +120,6 @@ const testimonials: TestimonialCard[] = [
     initials: "A",
     rating: 5,
     date: "2024-09-20",
-    href: "#",
   },
   {
     id: 6,
@@ -141,7 +136,6 @@ const testimonials: TestimonialCard[] = [
     initials: "C",
     rating: 5,
     date: "2024-09-05",
-    href: "#",
   },
   {
     id: 7,
@@ -158,7 +152,6 @@ const testimonials: TestimonialCard[] = [
     initials: "N",
     rating: 5,
     date: "2024-08-22",
-    href: "#",
   },
   {
     id: 8,
@@ -175,7 +168,6 @@ const testimonials: TestimonialCard[] = [
     initials: "D",
     rating: 5,
     date: "2024-08-08",
-    href: "#",
   },
   {
     id: 9,
@@ -192,7 +184,6 @@ const testimonials: TestimonialCard[] = [
     initials: "T",
     rating: 5,
     date: "2024-07-18",
-    href: "#",
   },
 ];
 

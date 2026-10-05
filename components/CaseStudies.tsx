@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import { ArrowRight, PackageCheck, Settings, ShoppingBag } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import "./home-sections.css";
 
 type CaseStudyPreview = {
@@ -51,7 +52,7 @@ const cases: CaseStudyPreview[] = [
     metricLabel: "faster checkout",
     image: ShoppingBag,
     bg: "#fff5f5",
-    href: "#",
+    href: "/portfolio",
   },
   {
     tag: "Migration",
@@ -63,7 +64,7 @@ const cases: CaseStudyPreview[] = [
     metricLabel: "downtime on launch",
     image: PackageCheck,
     bg: "#fff8f0",
-    href: "#",
+    href: "/portfolio",
   },
   {
     tag: "Integration",
@@ -75,7 +76,7 @@ const cases: CaseStudyPreview[] = [
     metricLabel: "manual cost removed",
     image: Settings,
     bg: "#f5f3ff",
-    href: "#",
+    href: "/portfolio",
   },
 ];
 
@@ -90,8 +91,13 @@ function normalizePreviewCases(items: ApiCaseStudy[]) {
     metricLabel: item.resultLabel,
     image: previewIconMap[item.iconKey || "shoppingBag"] || ShoppingBag,
     bg: item.bg,
-    href: item.href || "#",
+    href: item.href && item.href !== "#" ? item.href : "/portfolio",
   }));
+}
+
+function caseLinkLabel(href: string) {
+  if (href === "/portfolio") return "Explore work";
+  return /^https?:\/\//.test(href) ? "Visit website" : "Read story";
 }
 
 export default function CaseStudies() {
@@ -174,9 +180,11 @@ export default function CaseStudies() {
                 </div>
                 <div className="home-case-card__metric-label">{caseItems[0].metricLabel}</div>
               </div>
-              <a href={caseItems[0].href} className="home-case-card__link home-case-card__link--featured">
-                Read story <ArrowRight size={14} />
-              </a>
+              <Link href={caseItems[0].href} className="home-case-card__link home-case-card__link--featured"
+                target={/^https?:\/\//.test(caseItems[0].href) ? "_blank" : undefined}
+                rel={/^https?:\/\//.test(caseItems[0].href) ? "noopener noreferrer" : undefined}>
+                {caseLinkLabel(caseItems[0].href)} <ArrowRight size={14} />
+              </Link>
             </div>
           </div>
 
@@ -210,9 +218,11 @@ export default function CaseStudies() {
                   </div>
                   <div className="home-case-card__metric-label home-case-card__metric-label--small">{c.metricLabel}</div>
                 </div>
-                <a href={c.href} className="home-case-card__link">
-                  Read <ArrowRight size={12} />
-                </a>
+                <Link href={c.href} className="home-case-card__link"
+                  target={/^https?:\/\//.test(c.href) ? "_blank" : undefined}
+                  rel={/^https?:\/\//.test(c.href) ? "noopener noreferrer" : undefined}>
+                  {caseLinkLabel(c.href)} <ArrowRight size={12} />
+                </Link>
               </div>
             </div>
             );
@@ -221,9 +231,9 @@ export default function CaseStudies() {
 
         {/* View all */}
         <div className="home-cases__all">
-          <a href="/portfolio" className="home-cases__all-link">
+          <Link href="/portfolio" className="home-cases__all-link">
             View Portfolio <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
       </div>
 

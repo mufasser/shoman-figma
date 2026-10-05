@@ -25,6 +25,7 @@ export default function IntegrationsPage() {
       heroSub="Connect your ecommerce platform to the tools that run your business. We build robust custom middleware and APIs so your store, ERP, CRM, and warehouse all talk to each other — in real time, without errors."
       ctaText="Describe Your Integration"
       secondaryCta="See How It Works"
+      secondaryCtaHref="#our-approach"
       breadcrumb="Systems Integration"
       heroImage="/assets/services/Enterprise-Systems-Integration.webp"
       heroImageAlt="Enterprise ecommerce systems and API integration"
@@ -111,7 +112,7 @@ export default function IntegrationsPage() {
       </section>
 
       {/* How it works */}
-      <section className="service-content-section service-content-section--soft">
+      <section id="our-approach" className="service-content-section service-content-section--soft">
         <div className="service-content-container">
           <TwoCol
             left={
