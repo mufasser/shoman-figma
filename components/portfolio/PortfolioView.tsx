@@ -50,7 +50,11 @@ export default function PortfolioView({ initialProjects, initialTestimonials }: 
   const visible = filtered.slice(0, limit);
   return <main className="portfolio-page"><Navbar />
     <section className="portfolio-hero"><div className="portfolio-container"><nav className="portfolio-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><ChevronRight size={12} /><span>Portfolio</span></nav>
-      <div className="portfolio-hero__layout"><div><span className="portfolio-hero__badge">150+ projects · Real results · No agency fluff</span><h1>Work that proves<br /><em>what we say we can do.</em></h1><p>Every project below includes the actual problem, what we built, and the measurable outcome. No vague &ldquo;improved performance&rdquo; — real numbers from real clients across Adobe Commerce, Shopify, and integration projects.</p></div>
+      <div className="portfolio-hero__layout">
+        <div>
+          {/* <span className="portfolio-hero__badge">150+ projects · Real results · No agency fluff</span> */}
+          <h1>Work that proves<br /><em>what we say we can do.</em></h1><p>Every project below includes the actual problem, what we built, and the measurable outcome. No vague &ldquo;improved performance&rdquo; — real numbers from real clients across Adobe Commerce, Shopify, and integration projects.</p>
+        </div>
         <div className="portfolio-hero__stats" aria-label="Company statistics">{[{ value: "150+", label: "Projects delivered" }, { value: "10+", label: "Years experience" }, { value: "98%", label: "Client retention" }].map(stat => <div key={stat.label}><strong>{stat.value}</strong><span>{stat.label}</span></div>)}</div>
       </div></div></section><LogoTicker />
     <section className="portfolio-filters"><div className="portfolio-container"><FilterGroup label="Platform" options={platforms} value={platform} onChange={value => { setPlatform(value); setLimit(8); }} /><FilterGroup label="Type" options={types} value={type} onChange={value => { setType(value); setLimit(8); }} /><span className="portfolio-count" aria-live="polite">Showing {filtered.length} {filtered.length === 1 ? "project" : "projects"}</span></div></section>

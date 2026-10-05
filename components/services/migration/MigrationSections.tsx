@@ -34,7 +34,7 @@ export function MigrationHero() {
         </nav>
         <div className="mg-hero__grid">
           <div className="mg-hero__content">
-            <Eyebrow>Migration System</Eyebrow>
+            {/* <Eyebrow>Migration System</Eyebrow> */}
             <h1>Magento to Shopify migration <span>without the mess.</span></h1>
             <p>A migration application and engineering workflow for moving products, customers, orders, media, redirects and custom data from Magento or Adobe Commerce into Shopify at serious scale.</p>
             <div className="mg-actions">

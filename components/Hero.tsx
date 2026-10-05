@@ -17,13 +17,13 @@ export default function Hero() {
           {/* Left — Content */}
           <div className="animate-fade-up">
             {/* Badge */}
-            <div className="home-hero__badge">
+            {/* <div className="home-hero__badge">
               <span />
               <MapPin size={13} color="var(--color-brand)" strokeWidth={2.3} />
               <strong>
                 UK-BASED · STARTUP TO ENTERPRISE
               </strong>
-            </div>
+            </div> */}
 
             <h1 className="home-hero__title">
               Grow your business<br />

@@ -94,10 +94,10 @@ export default function ServiceLayout({
           <div className="hero-service-grid service-standard-hero__grid">
             <div className="service-standard-hero__content">
               {/* Platform badge */}
-              <div className="service-standard-badge">
+              {/* <div className="service-standard-badge">
                 <div className="service-standard-badge__symbol">{platformSymbol}</div>
                 <span>{badge}</span>
-              </div>
+              </div> */}
 
               <h1 className="service-standard-hero__title">
                 {heroTitle}

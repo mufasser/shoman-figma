@@ -119,10 +119,10 @@ export default function InsightsPage() {
           </div>
           <div className="insights-hero-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0, 560px) minmax(420px, 1fr)", gap: 64, alignItems: "center" }}>
             <div>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)", borderRadius: 100, padding: "6px 14px", marginBottom: 20 }}>
+              {/* <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)", borderRadius: 100, padding: "6px 14px", marginBottom: 20 }}>
                 <PenLine size={14} color="var(--color-brand)" strokeWidth={2.2} />
                 <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>TECHNICAL INSIGHTS · NO FILLER</span>
-              </div>
+              </div> */}
               <h1 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--color-ink)", marginBottom: 16 }}>
                 Ecommerce engineering<br />
                 <span style={{ color: "var(--color-brand)" }}>explained plainly.</span>

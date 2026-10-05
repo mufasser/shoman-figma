@@ -306,10 +306,10 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
 
           <div className="testimonials-hero-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.2fr) minmax(360px, 463px)", gap: 56, alignItems: "center" }}>
             <div>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)", borderRadius: 100, padding: "6px 14px", marginBottom: 20 }}>
+              {/* <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)", borderRadius: 100, padding: "6px 14px", marginBottom: 20 }}>
                 <Star size={13} color={BRAND} fill="currentColor" />
                 <span style={{ fontSize: 12, fontWeight: 600, color: BRAND }}>98% client satisfaction rate</span>
-              </div>
+              </div> */}
 
               <h1 style={{ fontSize: "clamp(34px, 4.6vw, 52px)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.03em", color: "var(--color-ink)", marginBottom: 20 }}>
                 What our clients say<br />

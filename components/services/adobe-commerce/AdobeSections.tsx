@@ -12,7 +12,9 @@ export function SectionIntro({ eyebrow, title, description, centered = false }: 
 export function AdobeHero() {
   return <section className="ac-hero"><Image className="ac-hero__background ac-hero__background--right" src="/assets/adobe-commerce/hero-background-right.png" width={460} height={460} alt="" aria-hidden="true" /><Image className="ac-hero__background ac-hero__background--left" src="/assets/adobe-commerce/hero-background-left.png" width={280} height={280} alt="" aria-hidden="true" />
     <div className="ac-container"><nav className="ac-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><ChevronRight size={11} /><Link href="/services">Services</Link><ChevronRight size={11} /><span>Adobe Commerce &amp; Magento</span></nav>
-      <div className="ac-hero__layout"><div className="ac-hero__content"><div className="ac-platform-badge"><span>Ac</span>Adobe Commerce Experts</div><h1>Adobe Commerce &amp;<br />Magento Development<br /><em>&amp; Support.</em></h1><p>Certified backend engineering for Adobe Commerce and Magento 2. We stabilise platforms other agencies gave up on — security patching, performance, custom modules, and honest SLAs with no surprises.</p>
+      <div className="ac-hero__layout"><div className="ac-hero__content">
+        {/* <div className="ac-platform-badge"><span>Ac</span>Adobe Commerce Experts</div> */}
+        <h1>Adobe Commerce &amp;<br />Magento Development<br /><em>&amp; Support.</em></h1><p>Certified backend engineering for Adobe Commerce and Magento 2. We stabilise platforms other agencies gave up on — security patching, performance, custom modules, and honest SLAs with no surprises.</p>
         <div className="ac-hero__actions"><Link className="ac-button ac-button--primary" href="/contact-us">Book Free Consultation<ArrowRight size={14} /></Link><Link className="ac-button" href="/services/technical-audits">Start With an Audit</Link></div>
         <ul className="ac-hero__trust">{["Adobe Commerce certified", "Magento 1, 2, and AC Cloud", "No retainer lock-in"].map(item => <li key={item}><Check size={12} />{item}</li>)}</ul>
       </div>
