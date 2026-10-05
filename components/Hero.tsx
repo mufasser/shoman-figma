@@ -47,14 +47,14 @@ export default function Hero() {
             <EmailCaptureForm variant="hero" />
 
             {/* Trust signals */}
-            <div className="home-hero__trust">
+            {/* <div className="home-hero__trust">
               {["No lock-in contracts", "UK management", "Code ownership"].map((item) => (
                 <div key={item}>
                   <CheckCircle2 size={15} color="var(--color-brand)" />
                   <span>{item}</span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Right — Figma platform logo cluster */}
