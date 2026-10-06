@@ -71,13 +71,13 @@ export default function AboutPage() {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="about-hero-grid">
             <div>
-              <div style={{
+              {/* <div style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)",
                 borderRadius: 100, padding: "6px 14px", marginBottom: 20,
               }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>eCommerce experts</span>
-              </div>
+              </div> */}
               <h1 style={{
                 fontSize: "clamp(32px, 4vw, 54px)",
                 fontWeight: 800, lineHeight: 1.1,

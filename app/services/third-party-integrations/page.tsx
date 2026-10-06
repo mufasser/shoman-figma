@@ -15,7 +15,7 @@ const BG = "#f5f3ff";
 export default function IntegrationsPage() {
   return (
     <ServiceLayout
-      badge=""
+      badge="ERP · CRM · API Development"
       badgeColor={COLOR}
       badgeBg={BG}
       platformSymbol="API"

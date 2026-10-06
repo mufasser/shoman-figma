@@ -82,7 +82,7 @@ export default function ServicesPage() {
         }} />
         <div style={{ maxWidth: 1240, margin: "0 auto", padding: "64px 24px 72px" }}>
           <div style={{ maxWidth: 640 }}>
-            <div style={{
+            {/* <div style={{
               display: "inline-flex", alignItems: "center", gap: 8,
               background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)",
               borderRadius: 100, padding: "6px 14px", marginBottom: 20,
@@ -91,7 +91,7 @@ export default function ServicesPage() {
               <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)", letterSpacing: "0.06em" }}>
                 6 specialist services · Startup to enterprise
               </span>
-            </div>
+            </div> */}
             <h1 style={{
               fontSize: "clamp(36px, 5vw, 60px)",
               fontWeight: 800, lineHeight: 1.1,
