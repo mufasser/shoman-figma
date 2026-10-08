@@ -2,6 +2,7 @@ import AboutTestimonialsWidget from "@/components/AboutTestimonialsWidget";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { MigrationSectionNavigation } from "@/components/services/migration/MigrationInteractions";
 import {
   MigrationAssurance,
   MigrationCoverage,
@@ -13,10 +14,12 @@ import {
 } from "@/components/services/migration/MigrationSections";
 import "@/components/services/migration/migration.css";
 
+
 export default function MigrationPage() {
   return (
-    <div className="migration-page">
+    <div className="migration-page service-layout">
       <Navbar />
+      {/* <MigrationSectionNavigation /> */}
       <main>
         <MigrationHero />
         <MigrationAssurance />
