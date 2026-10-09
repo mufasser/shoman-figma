@@ -16,7 +16,7 @@ export default function ProjectCard({ project, featured = false, wide = false }:
     </div>
     <div className="portfolio-project__body"><span className="portfolio-project__client">{project.client}</span><h3>{project.title}</h3><p>{project.problem}</p>
       <div className="portfolio-project__tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-      <div className="portfolio-project__footer"><div><strong>{project.result}</strong><small>{project.resultLabel}</small></div>{project.href && project.href !== "#" && <a href={project.href} className="portfolio-project-link" target={externalLink ? "_blank" : undefined} rel={externalLink ? "noopener noreferrer" : undefined}>{externalLink ? "Visit website" : featured ? "Read Full Case Study" : "Read Case Study"}<ArrowRight size={15} /></a>}</div>
+      <div className="portfolio-project__footer"><div><strong>{project.result}</strong><small>{project.resultLabel}</small></div>{project.href && project.href !== "#" && <a href={project.href} className="portfolio-project-link" target={externalLink ? "_blank" : undefined} rel={externalLink ? "noopener noreferrer" : undefined}>{externalLink ? "Read More" : featured ? "Read Full Case Study" : "Read Case Study"}<ArrowRight size={15} /></a>}</div>
     </div>
   </article>;
 }

@@ -49,7 +49,7 @@ type RawTestimonial = {
     date?: string | null;
     customer?: string | null;
     testimonial?: string | null;
-    service?: string | null;
+    service?: string | string[] | null;
     rating?: string | number | null;
     designation?: string | null;
     outcome?: string | null;
@@ -227,8 +227,8 @@ const postPalettes = [
   { keywords: ["adobe", "magento", "commerce"], iconKey: "shoppingBag" as const, tagColor: "#FF0000", tagBg: "#fff5f5" },
 ];
 
-function stripHtml(value?: string | null) {
-  if (!value) return "";
+function stripHtml(value: unknown) {
+  if (typeof value !== "string") return "";
 
   return value
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
@@ -377,7 +377,10 @@ function normalizeProject(project: RawProject, index: number): PortfolioItem {
 function normalizeTestimonial(testimonial: RawTestimonial, index: number): TestimonialItem {
   const fields = testimonial.testimonialFields;
   const title = stripHtml(testimonial.title);
-  const service = stripHtml(fields?.service) || "Client Feedback";
+  const serviceValue = Array.isArray(fields?.service)
+    ? fields.service.filter((item): item is string => typeof item === "string").join(", ")
+    : fields?.service;
+  const service = stripHtml(serviceValue) || "Client Feedback";
   const palette = inferPalette(service);
   const author = stripHtml(fields?.customer) || title || `Client ${index + 1}`;
   const outcome = splitOutcome(fields?.outcome);

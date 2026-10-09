@@ -79,7 +79,7 @@ export default function WhyChooseUs() {
               {[
                 { value: years, suffix: "+", label: "Years experience", color: "var(--color-brand)" },
                 { value: projects, suffix: "+", label: "Projects delivered", color: "#0284c7" },
-                { value: "Enterprise", suffix: "", label: "Adobe Commerce App Builder Specialists", color: "#96BF48" },
+                { value: "Enterprise", suffix: "", label: "Adobe Commerce/Magento & Shopify Experts", color: "#96BF48" },
                 { value: satisfaction, suffix: "%", label: "Client satisfaction", color: "#6366F1" },
               ].map((stat) => (
                 <div key={stat.label} style={{

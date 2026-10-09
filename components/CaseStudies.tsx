@@ -97,7 +97,7 @@ function normalizePreviewCases(items: ApiCaseStudy[]) {
 
 function caseLinkLabel(href: string) {
   if (href === "/portfolio") return "Explore work";
-  return /^https?:\/\//.test(href) ? "Visit website" : "Read story";
+  return /^https?:\/\//.test(href) ? "Read More" : "Read story";
 }
 
 export default function CaseStudies() {

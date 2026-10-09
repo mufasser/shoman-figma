@@ -529,7 +529,7 @@
   width: 100%;
   max-width: var(--layout-max-wide, 1240px);
   margin: 0 auto;
-  padding: 80px var(--layout-gutter, 24px);
+  padding: 40px var(--layout-gutter, 24px);
 }
 
 .home-hero__grid {
