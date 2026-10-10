@@ -270,6 +270,7 @@ body {
 .about-testimonials__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
   gap: 22px;
 }
 
@@ -337,6 +338,26 @@ body {
   font-style: italic;
   line-height: 1.7;
   margin: 0;
+}
+
+.about-testimonials__read-more {
+  background: none;
+  border: 0;
+  color: var(--color-brand);
+  cursor: pointer;
+  display: inline-block;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 12px;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-testimonials__read-more:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
 }
 
 .about-testimonials__author {

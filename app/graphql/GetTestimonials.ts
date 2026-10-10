@@ -1,6 +1,6 @@
 export const GetAllProjectsQuery = `query GetTestimonials {
   
-  testimonials {
+  testimonials(first: 100) {
     
     nodes {
       id: databaseId

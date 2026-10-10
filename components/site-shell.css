@@ -496,7 +496,7 @@
 .home-hero {
   position: relative;
   display: flex;
-  min-height: 100vh;
+  min-height: 80vh;
   align-items: center;
   overflow: hidden;
   padding-top: 72px;

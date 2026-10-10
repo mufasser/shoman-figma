@@ -4,7 +4,9 @@ import Footer from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import ContactForm from "@/components/ContactForm";
 import { SectionLabel } from "@/components/services/ServiceComponents";
+import "./services-page.css";
 
 const services = [
   {
@@ -31,17 +33,17 @@ const services = [
     image: "/assets/services/adobe-commerce-development-support-app-builder.jpg",
     imageAlt: "Adobe Commerce App Builder migration planning",
     title: "Adobe Commerce App Builder",
-    desc: "Full platform migration handling all products, orders, customers, SEO redirects, and third-party integrations — with zero data loss and no downtime on launch day.",
+    desc: "Extend Adobe Commerce with custom integrations and business logic that connect your store to the systems and workflows your business relies on.",
     cta: "Explore Service",
   },
   {
     bg: "#f0f9ff",
-    href: "/services/technical-audits",
-    image: "/assets/services/technical-audit-service.jpg",
-    imageAlt: "Technical audit review meeting",
-    title: "Technical Audit Service",
-    desc: "Fixed-fee, expert-written audit of your ecommerce store. Security, performance, checkout path, or migration complexity — delivered as a prioritised PDF report in 5 days.",
-    cta: "Order Audit",
+    href: "/services/white-label",
+    image: "/assets/services/white-label-agency-partnerships.jpg",
+    imageAlt: "White-label agency partnership discussion",
+    title: "White-Label Agency Partnerships",
+    desc: "Add an experienced ecommerce engineering team to your agency roster invisibly. We deliver under your brand, on your timelines — so you never have to turn away profitable work.",
+    cta: "Become a Partner",
   },
   {
     bg: "#f5f3ff",
@@ -54,12 +56,12 @@ const services = [
   },
   {
     bg: "#f0f9ff",
-    href: "/services/white-label",
-    image: "/assets/services/white-label-agency-partnerships.jpg",
-    imageAlt: "White-label agency partnership discussion",
-    title: "White-Label Agency Partnerships",
-    desc: "Add an experienced ecommerce engineering team to your agency roster invisibly. We deliver under your brand, on your timelines — so you never have to turn away profitable work.",
-    cta: "Become a Partner",
+    href: "/services/technical-audits",
+    image: "/assets/services/technical-audit-service.jpg",
+    imageAlt: "Technical audit review meeting",
+    title: "Technical Audit Service",
+    desc: "Fixed-fee, expert-written audit of your ecommerce store. Security, performance, checkout path, or migration complexity — delivered as a prioritised PDF report in 5 days.",
+    cta: "Order Audit",
   },
 ];
 
@@ -80,45 +82,52 @@ export default function ServicesPage() {
           background: "radial-gradient(circle, rgba(var(--color-brand-rgb), 0.07) 0%, transparent 70%)",
           pointerEvents: "none",
         }} />
-        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "64px 24px 72px" }}>
-          <div style={{ maxWidth: 640 }}>
-            {/* <div style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)",
-              borderRadius: 100, padding: "6px 14px", marginBottom: 20,
-            }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--color-brand)", display: "inline-block" }} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)", letterSpacing: "0.06em" }}>
-                6 specialist services · Startup to enterprise
-              </span>
-            </div> */}
-            <h1 style={{
-              fontSize: "clamp(36px, 5vw, 60px)",
-              fontWeight: 800, lineHeight: 1.1,
-              letterSpacing: "-0.03em", color: "var(--color-ink)", marginBottom: 20,
-            }}>
-              Every ecommerce challenge.<br />
-              <span style={{ color: "var(--color-brand)" }}>One engineering team.</span>
-            </h1>
-            <p style={{ fontSize: 17, lineHeight: 1.75, color: "var(--color-copy)", maxWidth: 520 }}>
-              From launching your first Shopify store to migrating a complex Adobe Commerce platform — we cover every stage of the ecommerce lifecycle with specialist engineers, not generalists.
-            </p>
-          </div>
-
-
-          {/* Quick stats */}
-          <div style={{ display: "flex", gap: 32, marginTop: 40, flexWrap: "wrap" }}>
-            {[
-              { value: "10+", label: "Years experience" },
-              { value: "50+", label: "Projects delivered" },
-              { value: "Enterprise", label: "Adobe Commerce App Builder Specialists" },
-              { value: "100%", label: "Code ownership" },
-            ].map((s) => (
-              <div key={s.label}>
-                <div style={{ fontSize: 28, fontWeight: 800, color: "var(--color-brand)", letterSpacing: "-0.03em" }}>{s.value}</div>
-                <div style={{ fontSize: 12, color: "var(--color-muted)", fontWeight: 500, marginTop: 2 }}>{s.label}</div>
+        <div className="services-overview-hero__inner">
+          <div className="services-overview-hero__grid">
+            <div className="services-overview-hero__content">
+              <div style={{ maxWidth: 640 }}>
+                <h1 style={{
+                  fontSize: "clamp(36px, 5vw, 60px)",
+                  fontWeight: 800, lineHeight: 1.1,
+                  letterSpacing: "-0.03em", color: "var(--color-ink)", marginBottom: 20,
+                }}>
+                  {/* Every ecommerce challenge.<br />
+                  <span style={{ color: "var(--color-brand)" }}>One engineering team.</span> */}
+                  Ecommerce Engineering for<br />
+                  <span style={{ color: "var(--color-brand)" }}>Ambitious Brands</span>
+                </h1>
+                <p style={{ fontSize: 17, lineHeight: 1.75, color: "var(--color-copy)", maxWidth: 520 }}>
+                  We work directly with businesses to build, improve and support Adobe Commerce and Shopify platforms—from new launches to complex migrations and integrations.
+                  {/* From launching your first Shopify store to migrating a complex Adobe Commerce platform — we cover every stage of the ecommerce lifecycle with specialist engineers, not generalists. */}
+                </p>
               </div>
-            ))}
+
+              {/* Quick stats */}
+              <div className="services-overview-hero__stats">
+                {[
+                  { value: "10+", label: "Years of ecommerce experience" },
+                  { value: "50+", label: "Projects delivered" },
+                  { value: "Enterprise", label: "Adobe Commerce App Builder Specialists" },
+                  { value: "100%", label: "Code ownership" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <div className="services-overview-hero__stat-value">{s.value}</div>
+                    <div className="services-overview-hero__stat-label">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="services-overview-hero__form">
+              <ContactForm
+                compact
+                title="Tell us about your project"
+                subtitle="Share the essentials and a senior ecommerce engineer will reply with the next best step."
+                submitLabel="Send Enquiry"
+                backHref="/services"
+                backLabel="Back to Services"
+              />
+            </div>
           </div>
         </div>
       </section>

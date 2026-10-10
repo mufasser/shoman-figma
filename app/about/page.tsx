@@ -29,9 +29,9 @@ const team = [
 ];
 
 const values = [
-  { icon: Search, title: "Transparency", body: "We tell you what we find, not what you want to hear. If your codebase is a mess, we say so — and we show you exactly what it will take to fix it. No sugar-coating, ever." },
-  { icon: Target, title: "Precision", body: "Senior engineers only. Every line of code reviewed before it goes live. We don't guess — we test, validate, and document. The quality bar is the same on sprint one and sprint fifty." },
-  { icon: Handshake, title: "Partnership", body: "You own the code. Always. No retainer lock-ins, no vendor dependency. We're here to make your team stronger, not dependent on ours. Exit conditions are always clean." },
+  { icon: Search, title: "Transparency", body: "You get an honest assessment, clear options and practical recommendations. We explain the trade-offs so you can make confident decisions at every stage." },
+  { icon: Target, title: "Precision", body: "Senior-led engineering, thoughtful code reviews and testing throughout delivery. We document decisions and validate changes before they reach your live store." },
+  { icon: Handshake, title: "Partnership", body: "Work directly with experienced engineers who understand your goals. We provide clear handover and documentation, so your team stays in control of the platform and the code we create for you." },
 ];
 
 const timeline = [
@@ -71,23 +71,23 @@ export default function AboutPage() {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="about-hero-grid">
             <div>
-              {/* <div style={{
+              <div style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 background: "var(--color-brand-soft)", border: "1px solid rgba(var(--color-brand-rgb), 0.2)",
                 borderRadius: 100, padding: "6px 14px", marginBottom: 20,
               }}>
-                <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>eCommerce experts</span>
-              </div> */}
+                <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-brand)" }}>12+ years of ecommerce engineering experience</span>
+              </div>
               <h1 style={{
-                fontSize: "clamp(32px, 4vw, 54px)",
+                fontSize: "clamp(32px, 4vw, 52px)",
                 fontWeight: 800, lineHeight: 1.1,
                 letterSpacing: "-0.03em", color: "var(--color-ink)", marginBottom: 20,
               }}>
-                10+ Years Engineering<br />
-                <span style={{ color: "var(--color-brand)" }}>What Others Can&apos;t Fix.</span>
+                Complex ecommerce.<br />
+                <span style={{ color: "var(--color-brand)" }}>Engineered to perform.</span>
               </h1>
               <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--color-copy)", marginBottom: 32, maxWidth: 500 }}>
-                We started because too many UK merchants were stuck with agencies that sold them platforms they couldn&apos;t maintain. We built the team that fixes those platforms — and builds ones that don&apos;t break.
+                We bring more than 12 years of ecommerce engineering experience to businesses ready to build, improve or scale their platforms. Our senior team works directly with you to solve complex challenges and deliver dependable solutions built around your goals.
               </p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                 <Link href="/contact-us" style={{
@@ -130,12 +130,12 @@ export default function AboutPage() {
             {/* Stats panel */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
               {[
-                { value: "10+", label: "Years active", sub: "Founded 2014", color: "var(--color-brand)" },
-                { value: "50+", label: "Projects delivered", sub: "Across all platforms", color: "#0284C7" },
-                { value: "100%", label: "Senior Engineers", sub: "No juniors, ever", color: "#96BF48" },
-                { value: "25+", label: "Agency partners", sub: "White-label programme", color: "#6366F1" },
-                { value: "98%", label: "Client retention", sub: "Year-on-year", color: "#F46F25" },
-                { value: "100%", label: "Code ownership", sub: "Always yours", color: "#FF0000" },
+                { value: "12+", label: "Years", sub: "Ecommerce engineering experience", color: "var(--color-brand)" },
+                { value: "50+", label: "Projects", sub: "Delivered across Magento, Adobe Commerce and Shopify", color: "#0284C7" },
+                { value: "100%", label: "Senior-led", sub: "Experienced engineers stay involved throughout", color: "#96BF48" },
+                { value: "25+", label: "Direct partnership", sub: "Work directly with Shoman’s senior team", color: "#6366F1" },
+                { value: "98%", label: "Client retention", sub: "Clients return for ongoing support and new projects", color: "#F46F25" },
+                { value: "100%", label: "Your code. Your platform.", sub: "Clear ownership from day one", color: "#FF0000" },
               ].map((s) => (
                 <div key={s.label} style={{
                   background: "var(--color-bg-soft)",
@@ -298,7 +298,7 @@ export default function AboutPage() {
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <SectionCenteredLabel text="Our Values" />
             <h2 style={{ fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.02em", color: "var(--color-ink)" }}>
-              Three principles. Non-negotiable.
+              The standards behind every engagement
             </h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="values-grid">
@@ -355,15 +355,15 @@ export default function AboutPage() {
             <div>
               <SectionLabel text="Our Quality Standards" />
               <h2 style={{ fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.02em", color: "var(--color-ink)", marginBottom: 16 }}>
-                How we make sure it&apos;s right before it goes live
+                Quality built into every release
               </h2>
-              <p>Four rules we apply on every project, every sprint, every time — without exception.</p>
+              <p>A clear review, testing and handover process helps us deliver dependable ecommerce work, with fewer surprises at launch.</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 {[
-                  { icon: Microscope, title: "Senior code review on every PR", body: "No code goes to staging without review by a second senior engineer. We catch problems before your customers do." },
-                  { icon: Globe2, title: "Staging-first, always", body: "Every change is tested in a mirrored staging environment. We never push directly to live — no exceptions, even for small fixes." },
-                  { icon: FileText, title: "Full documentation on handover", body: "Architecture decisions, deployment process, custom features — all documented and handed over at the end of every project or sprint." },
-                  { icon: KeyRound, title: "Code ownership from day one", body: "Your code belongs to you the moment we write it. No licensing, no dependencies on us to deploy it, no conditions attached." },
+                  { icon: Microscope, title: "Peer-reviewed code", body: "Changes are reviewed against agreed standards before release. Higher-risk work receives an additional review." },
+                  { icon: Globe2, title: "Tested before release", body: "We validate changes in a staging environment before deploying them to production, with checks suited to the work." },
+                  { icon: FileText, title: "Clear documentation", body: "We document key decisions, deployment steps and custom functionality, then provide a structured handover at agreed milestones." },
+                  { icon: KeyRound, title: "Clear code ownership", body: "Project-specific code is handed over under the ownership terms agreed for your project. We document how to deploy and maintain it, so you stay in control." },
                 ].map((q) => {
                   const Icon = q.icon;
 

@@ -1,16 +1,31 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import type { ClientLogo } from "@/app/graphql/content";
 
-const logos = [
-  { name: "Swyftch", src: "/logos/swyftch.png", width: 165, height: 63 },
-  { name: "Bathshark", src: "/logos/bathshark.png", width: 166, height: 63 },
-  { name: "Clintons", src: "/logos/clintons.png", width: 165, height: 63 },
-  { name: "Black Country Metalworks", src: "/logos/black-country-metalworks.png", width: 167, height: 64 },
-  { name: "Tower Health", src: "/logos/tower-health.png", width: 166, height: 64 },
-];
+export default function LogoTicker({ initialLogos = [] }: { initialLogos?: ClientLogo[] }) {
+  const [logos, setLogos] = useState(initialLogos);
 
-export default function LogoTicker() {
+  useEffect(() => {
+    if (logos.length) return;
+
+    const controller = new AbortController();
+    async function loadLogos() {
+      try {
+        const response = await fetch("/api/clients", { signal: controller.signal });
+        if (!response.ok) return;
+        const data = await response.json() as { clients?: ClientLogo[] };
+        if (!controller.signal.aborted && Array.isArray(data.clients)) setLogos(data.clients);
+      } catch {
+        // Keep the ticker's dimensions stable if the CMS is unavailable.
+      }
+    }
+
+    loadLogos();
+    return () => controller.abort();
+  }, [logos.length]);
+
   return (
     <section id="client-logos" className="figma-logo-ticker" aria-label="Trusted client logos">
       <div className="figma-logo-ticker__viewport">
@@ -23,11 +38,13 @@ export default function LogoTicker() {
             >
               {logos.map((logo) => (
                 <Image
-                  key={`${groupIndex}-${logo.name}`}
+                  key={`${groupIndex}-${logo.id}`}
                   src={logo.src}
                   alt={groupIndex === 0 ? logo.name : ""}
-                  width={logo.width}
-                  height={logo.height}
+                  width={166}
+                  height={64}
+                  sizes="167px"
+                  loading={groupIndex === 0 ? "eager" : "lazy"}
                   className="figma-logo-ticker__logo"
                 />
               ))}

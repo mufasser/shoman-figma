@@ -10,6 +10,13 @@ type AboutTestimonial = Pick<
   "id" | "platform" | "color" | "bg" | "author" | "role" | "quote" | "initials" | "rating" | "avatar"
 >;
 
+const QUOTE_PREVIEW_LENGTH = 210;
+
+function getQuotePreview(quote: string) {
+  const cut = quote.lastIndexOf(" ", QUOTE_PREVIEW_LENGTH);
+  return `${quote.slice(0, cut > 0 ? cut : QUOTE_PREVIEW_LENGTH).trimEnd()}…`;
+}
+
 const fallbackTestimonials: AboutTestimonial[] = [
   {
     id: "fallback-1",
@@ -52,7 +59,7 @@ const fallbackTestimonials: AboutTestimonial[] = [
 function normalizeTestimonials(items: TestimonialItem[]) {
   return items
     .filter((item) => item.quote && item.author)
-    .slice(0, 3)
+    .slice(0, 6)
     .map((item) => ({
       id: item.id,
       platform: item.platform || "Client Feedback",
@@ -81,6 +88,7 @@ function Stars({ rating }: { rating: number }) {
 
 export default function AboutTestimonialsWidget({ initialTestimonials, title = "What our clients say", eyebrow = "Client Voices" }: { initialTestimonials?: TestimonialItem[]; title?: string; eyebrow?: string } = {}) {
   const [testimonials, setTestimonials] = useState<AboutTestimonial[]>(initialTestimonials?.length ? normalizeTestimonials(initialTestimonials) : fallbackTestimonials);
+  const [expandedQuotes, setExpandedQuotes] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     let cancelled = false;
@@ -124,46 +132,61 @@ export default function AboutTestimonialsWidget({ initialTestimonials, title = "
         </div>
 
         <div className="about-testimonials__grid">
-          {testimonials.map((testimonial) => (
-            <article className="about-testimonials__card" key={testimonial.id}>
-              <div className="about-testimonials__topline">
-                <Stars rating={testimonial.rating} />
-                <span className="about-testimonials__quote-mark" aria-hidden="true">
-                  &rdquo;
-                </span>
-              </div>
+          {testimonials.map((testimonial) => {
+            const hasLongQuote = testimonial.quote.length > QUOTE_PREVIEW_LENGTH;
+            const expanded = Boolean(expandedQuotes[testimonial.id]);
 
-              <span
-                className="about-testimonials__badge"
-                style={{
-                  color: testimonial.color,
-                  background: testimonial.bg,
-                  borderColor: `${testimonial.color}35`,
-                }}
-              >
-                {testimonial.platform}
-              </span>
+            return (
+              <article className="about-testimonials__card" key={testimonial.id}>
+                <div className="about-testimonials__topline">
+                  <Stars rating={testimonial.rating} />
+                  <span className="about-testimonials__quote-mark" aria-hidden="true">
+                    &rdquo;
+                  </span>
+                </div>
 
-              <blockquote>
-                <p>&ldquo;{testimonial.quote}&rdquo;</p>
-              </blockquote>
-
-              <div className="about-testimonials__author">
                 <span
-                  className="about-testimonials__avatar"
+                  className="about-testimonials__badge"
                   style={{
-                    background: testimonial.avatar ? `url(${testimonial.avatar}) center / cover` : testimonial.color,
+                    color: testimonial.color,
+                    background: testimonial.bg,
+                    borderColor: `${testimonial.color}35`,
                   }}
                 >
-                  {!testimonial.avatar && testimonial.initials}
+                  {testimonial.platform}
                 </span>
-                <span>
-                  <strong>{testimonial.author}</strong>
-                  <small>{testimonial.role}</small>
-                </span>
-              </div>
-            </article>
-          ))}
+
+                <blockquote>
+                  <p>&ldquo;{hasLongQuote && !expanded ? getQuotePreview(testimonial.quote) : testimonial.quote}&rdquo;</p>
+                  {hasLongQuote && (
+                    <button
+                      type="button"
+                      className="about-testimonials__read-more"
+                      aria-expanded={expanded}
+                      onClick={() => setExpandedQuotes((current) => ({ ...current, [testimonial.id]: !current[testimonial.id] }))}
+                    >
+                      {expanded ? "Read less" : "Read more"}
+                    </button>
+                  )}
+                </blockquote>
+
+                <div className="about-testimonials__author">
+                  <span
+                    className="about-testimonials__avatar"
+                    style={{
+                      background: testimonial.avatar ? `url(${testimonial.avatar}) center / cover` : testimonial.color,
+                    }}
+                  >
+                    {!testimonial.avatar && testimonial.initials}
+                  </span>
+                  <span>
+                    <strong>{testimonial.author}</strong>
+                    <small>{testimonial.role}</small>
+                  </span>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <div className="about-testimonials__footer">

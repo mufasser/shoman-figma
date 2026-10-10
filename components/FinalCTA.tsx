@@ -16,13 +16,13 @@ type FinalCTAProps = {
 };
 
 export default function FinalCTA({
-  eyebrow = "Free 30-min discovery call",
-  title = "Ready to Build your",
+  eyebrow = "Speak directly with a senior Adobe Commerce engineer",
+  title = "Find the right next step for your",
   highlight = "Adobe Commerce platform?",
-  description = "No jargon. No hard sell. A direct conversation with a senior Adobe Commerce engineer about your specific platform and what it needs.",
-  primaryLabel = "Book Free Consultation",
+  description = "Discuss your goals and challenges directly with an experienced engineer, and get a clear view of the options for your store.",
+  primaryLabel = "Book a 30-minute Call",
   primaryHref = "https://calendly.com/shoaib-shomansolutions/30min",
-  secondaryLabel = "Start With a £499 Audit",
+  secondaryLabel = "Start with a £499 Technical Audit",
   secondaryHref = "/services/technical-audits",
 }: FinalCTAProps) {
   return (

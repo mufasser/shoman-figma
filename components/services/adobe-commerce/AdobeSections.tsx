@@ -14,7 +14,7 @@ export function AdobeHero() {
     <div className="ac-container"><nav className="ac-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><ChevronRight size={11} /><Link href="/services">Services</Link><ChevronRight size={11} /><span>Adobe Commerce &amp; Magento</span></nav>
       <div className="ac-hero__layout"><div className="ac-hero__content">
         {/* <div className="ac-platform-badge"><span>Ac</span>Adobe Commerce Experts</div> */}
-        <h1>Adobe Commerce &amp;<br />Magento Development<br /><em>&amp; Support.</em></h1><p>Certified backend engineering for Adobe Commerce and Magento 2. We stabilise platforms other agencies gave up on — security patching, performance, custom modules, and honest SLAs with no surprises.</p>
+        <h1>Adobe Commerce &amp;<br />Magento Development<br /><em>and Support.</em></h1><p>From Magento and Adobe Commerce development to App Builder integrations and AI-powered merchandising, we help you get more from your ecommerce platform through direct, senior-led engineering.</p>
         <div className="ac-hero__actions"><Link className="ac-button ac-button--primary" href="/contact-us">Book Free Consultation<ArrowRight size={14} /></Link><Link className="ac-button" href="/services/technical-audits">Start With an Audit</Link></div>
         <ul className="ac-hero__trust">{["Adobe Commerce certified", "Magento 1, 2, and AC Cloud", "No retainer lock-in"].map(item => <li key={item}><Check size={12} />{item}</li>)}</ul>
       </div>
@@ -35,7 +35,7 @@ export function AdobeEngagement() {
 }
 
 export function AdobeVersions() {
-  return <section className="ac-section ac-section--soft ac-versions" id="versions"><div className="ac-container"><SectionIntro eyebrow="Platform Versions" title="Adobe Commerce, Magento 2 or Magento" description="We work across all versions. Here's what you need to know about each and what we recommend depending on where you are today." /><VersionTabs /></div></section>;
+  return <section className="ac-section ac-section--soft ac-versions" id="versions"><div className="ac-container"><SectionIntro eyebrow="Platform Versions" title="Adobe Commerce, Magento OpenSource or Magento" description="We work across all versions. Here's what you need to know about each and what we recommend depending on where you are today." /><VersionTabs /></div></section>;
 }
 
 export function AdobeProcess() {

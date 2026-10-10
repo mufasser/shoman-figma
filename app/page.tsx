@@ -8,19 +8,22 @@ import Testimonials from "@/components/Testimonials";
 import { Blog, CommunityBanner } from "@/components/BlogAndCTA";
 import Footer from "@/components/Footer";
 import { FAQ, SectionCenteredLabel, SectionHeading } from "@/components/services/ServiceComponents";
-import { getContentPayload } from "@/app/graphql/content";
+import { getClients, getContentPayload } from "@/app/graphql/content";
 import "@/components/home-sections.css";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const content = await getContentPayload();
+  const [content, logos] = await Promise.all([
+    getContentPayload(),
+    getClients().catch(() => []),
+  ]);
 
   return (
     <main>
       <Navbar />
       <Hero />
-      <LogoTicker />
+      <LogoTicker initialLogos={logos} />
       <ServicesCarousel />
       <WhyChooseUs />
       <CaseStudies />

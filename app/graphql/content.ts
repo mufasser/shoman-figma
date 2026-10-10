@@ -1,4 +1,5 @@
 import { GetPaginatedPosts } from "@/app/graphql/GetPaginatedPosts";
+import { GetClients } from "@/app/graphql/GetClients";
 import { GetOurProjects } from "@/app/graphql/GetProjects";
 import { GetSinglePost } from "@/app/graphql/GetSinglePost";
 import { GetAllProjectsQuery } from "@/app/graphql/GetTestimonials";
@@ -14,6 +15,22 @@ type GraphQLResponse<T> = {
 
 type FetchGraphQLOptions = {
   variables?: Record<string, unknown>;
+  revalidate?: number;
+};
+
+type RawClient = {
+  id?: number | string | null;
+  title?: string | null;
+  status?: string | null;
+  featuredImage?: {
+    node?: { avatar?: string | null } | null;
+  } | null;
+};
+
+export type ClientLogo = {
+  id: string;
+  name: string;
+  src: string;
 };
 
 type Palette = {
@@ -309,7 +326,7 @@ function getReadTime(content?: string | null) {
   return `${Math.max(1, Math.ceil(words / 200))} min`;
 }
 
-async function fetchGraphQL<T>(query: string, { variables }: FetchGraphQLOptions = {}) {
+async function fetchGraphQL<T>(query: string, { variables, revalidate }: FetchGraphQLOptions = {}) {
   if (!endpoint) {
     throw new Error("GraphQL endpoint is not configured. Set WORDPRESS_GRAPHQL_ENDPOINT or GRAPHQL_ENDPOINT.");
   }
@@ -327,7 +344,7 @@ async function fetchGraphQL<T>(query: string, { variables }: FetchGraphQLOptions
     method: "POST",
     headers,
     body: JSON.stringify({ query, variables }),
-    cache: "no-store",
+    ...(revalidate ? { next: { revalidate } } : { cache: "no-store" as const }),
   });
 
   const payload = (await response.json()) as GraphQLResponse<T>;
@@ -338,6 +355,39 @@ async function fetchGraphQL<T>(query: string, { variables }: FetchGraphQLOptions
   }
 
   return payload.data as T;
+}
+
+export async function getClients(): Promise<ClientLogo[]> {
+  const clients: RawClient[] = [];
+  const seenCursors = new Set<string>();
+  let after: string | null = null;
+
+  while (true) {
+    const data: { clients?: { nodes?: RawClient[]; pageInfo?: { hasNextPage?: boolean; endCursor?: string | null } } } =
+      await fetchGraphQL(GetClients, { variables: { after }, revalidate: 3600 });
+    clients.push(...(data.clients?.nodes || []));
+
+    const pageInfo = data.clients?.pageInfo;
+    if (!pageInfo?.hasNextPage) break;
+    const cursor = pageInfo.endCursor;
+    if (!cursor || seenCursors.has(cursor)) throw new Error("Clients pagination returned an invalid cursor.");
+    seenCursors.add(cursor);
+    after = cursor;
+  }
+
+  return clients.flatMap((client, index) => {
+    const name = typeof client.title === "string" ? stripHtml(client.title) : "";
+    const image = client.featuredImage?.node?.avatar;
+    if (client.status !== "publish" || !name || typeof image !== "string") return [];
+
+    try {
+      const url = new URL(image);
+      if (url.protocol !== "https:" || url.hostname !== "admin.shomansolutions.com" || !url.pathname.startsWith("/wp-content/uploads/")) return [];
+      return [{ id: String(client.id ?? index), name, src: url.toString() }];
+    } catch {
+      return [];
+    }
+  });
 }
 
 function normalizeProject(project: RawProject, index: number): PortfolioItem {
