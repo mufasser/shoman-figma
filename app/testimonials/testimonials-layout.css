@@ -1,0 +1,104 @@
+.testimonial-reviews {
+  padding: 64px 24px;
+}
+
+.testimonial-reviews__controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.testimonial-reviews__layout {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-white);
+}
+
+.testimonial-reviews__layout button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.testimonial-reviews__layout button[aria-pressed="true"] {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+
+.testimonial-reviews__layout button:focus-visible,
+.testimonial-review__read-more:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.testimonial-grid--grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.testimonial-grid--masonry {
+  columns: 3;
+  column-gap: 20px;
+}
+
+.testimonial-grid--masonry > article {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+  break-inside: avoid;
+  vertical-align: top;
+}
+
+.testimonial-review__read-more {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-brand);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 980px) {
+  .testimonial-grid--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .testimonial-grid--masonry {
+    columns: 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .testimonial-reviews {
+    padding: 32px 24px;
+  }
+
+  .testimonial-grid--grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .testimonial-grid--masonry {
+    columns: 1;
+  }
+}

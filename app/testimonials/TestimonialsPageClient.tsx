@@ -9,6 +9,8 @@ import FinalCTA from "@/components/FinalCTA";
 import {
   BadgeCheck,
   ChevronRight,
+  Columns3,
+  LayoutGrid,
   Play,
   Search,
   Settings,
@@ -17,8 +19,12 @@ import {
   Store,
 } from "lucide-react";
 import LogoTicker from "@/components/LogoTicker";
+import "./testimonials-layout.css";
 
 const BRAND = "var(--color-brand)";
+const QUOTE_PREVIEW_LENGTH = 280;
+
+type ReviewLayout = "masonry" | "grid";
 
 const fallbackFilters = ["All", "Adobe Commerce", "Shopify", "Migration", "Integration", "Audit", "White-Label"];
 
@@ -235,6 +241,31 @@ function Stars({ color = "var(--color-ink)", rating = 5 }: { color?: string; rat
   );
 }
 
+function TestimonialQuote({ quote }: { quote: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const isLong = quote.length > QUOTE_PREVIEW_LENGTH;
+  const cut = quote.lastIndexOf(" ", QUOTE_PREVIEW_LENGTH);
+  const preview = isLong ? `${quote.slice(0, cut > 0 ? cut : QUOTE_PREVIEW_LENGTH).trimEnd()}…` : quote;
+
+  return (
+    <blockquote className="testimonial-review__quote" style={{ borderLeft: `3px solid ${BRAND}`, paddingLeft: 14, margin: "14px 0 18px", minHeight: 112 }}>
+      <p style={{ margin: 0, fontSize: 13, lineHeight: 1.75, color: "var(--color-ink-2)", fontStyle: "italic" }}>
+        &ldquo;{expanded ? quote : preview}&rdquo;
+      </p>
+      {isLong && (
+        <button
+          type="button"
+          className="testimonial-review__read-more"
+          aria-expanded={expanded}
+          onClick={() => setExpanded((current) => !current)}
+        >
+          {expanded ? "Read less" : "Read more"}
+        </button>
+      )}
+    </blockquote>
+  );
+}
+
 type TestimonialsPageClientProps = {
   initialTestimonials?: TestimonialCard[];
 };
@@ -242,6 +273,7 @@ type TestimonialsPageClientProps = {
 export default function TestimonialsPageClient({ initialTestimonials = [] }: TestimonialsPageClientProps) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [sort, setSort] = useState("recent");
+  const [reviewLayout, setReviewLayout] = useState<ReviewLayout>("masonry");
   const [testimonialItems, setTestimonialItems] = useState<TestimonialCard[]>(
     initialTestimonials.length ? initialTestimonials : testimonials
   );
@@ -383,7 +415,7 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
         </div>
       </section>
 
-      <section style={{ background: "var(--color-bg-soft)", padding: "64px 24px" }}>
+      <section className="testimonial-reviews" style={{ background: "var(--color-bg-soft)" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto" }}>
           <div className="reviews-heading" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 20, marginBottom: 32 }}>
             <div>
@@ -392,26 +424,36 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
                 <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", color: BRAND }}>{activeFilter} Reviews</span>
               </div>
               <h2 style={{ fontSize: 24, fontWeight: 800, color: "var(--color-ink)", letterSpacing: "-0.02em" }}>
-                Showing {filteredTestimonials.length} testimonials
+                Showing {filteredTestimonials.length} {filteredTestimonials.length === 1 ? "testimonial" : "testimonials"}
               </h2>
             </div>
 
-            <label style={{ display: "inline-flex", alignItems: "center", gap: 10, fontSize: 12, color: "var(--color-muted)" }}>
-              Sort by:
-              <select
-                value={sort}
-                onChange={(event) => setSort(event.target.value)}
-                style={{ border: "1.5px solid var(--color-border)", borderRadius: 8, background: "var(--color-white)", padding: "8px 12px", fontSize: 12, color: "var(--color-ink)", fontFamily: "inherit" }}
-              >
-                <option value="recent">Most recent</option>
-                <option value="rating">Platform</option>
-                <option value="impact">Impact</option>
-              </select>
-            </label>
+            <div className="testimonial-reviews__controls">
+              <div className="testimonial-reviews__layout" role="group" aria-label="Review layout">
+                <button type="button" aria-pressed={reviewLayout === "masonry"} onClick={() => setReviewLayout("masonry")}>
+                  <Columns3 size={15} aria-hidden="true" /> Masonry
+                </button>
+                <button type="button" aria-pressed={reviewLayout === "grid"} onClick={() => setReviewLayout("grid")}>
+                  <LayoutGrid size={15} aria-hidden="true" /> Grid
+                </button>
+              </div>
+              <label style={{ display: "inline-flex", alignItems: "center", gap: 10, fontSize: 12, color: "var(--color-muted)" }}>
+                Sort by:
+                <select
+                  value={sort}
+                  onChange={(event) => setSort(event.target.value)}
+                  style={{ border: "1.5px solid var(--color-border)", borderRadius: 8, background: "var(--color-white)", padding: "8px 12px", fontSize: 12, color: "var(--color-ink)", fontFamily: "inherit" }}
+                >
+                  <option value="recent">Most recent</option>
+                  <option value="rating">Platform</option>
+                  <option value="impact">Impact</option>
+                </select>
+              </label>
+            </div>
           </div>
 
           {filteredTestimonials.length > 0 ? (
-            <div className="testimonial-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+            <div className={`testimonial-grid testimonial-grid--${reviewLayout}`}>
               {filteredTestimonials.map((testimonial) => (
                 <article key={testimonial.id} style={{ background: "var(--color-white)", border: "1.5px solid var(--color-border)", borderRadius: 16, padding: 22, position: "relative", overflow: "hidden", transition: "transform 0.2s, box-shadow 0.2s" }}
                   onMouseEnter={(event) => {
@@ -434,9 +476,7 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
 
                   <Stars rating={testimonial.rating} />
 
-                  <blockquote style={{ borderLeft: `3px solid ${BRAND}`, paddingLeft: 14, margin: "14px 0 18px", minHeight: 112 }}>
-                    <p style={{ margin: 0, fontSize: 13, lineHeight: 1.75, color: "var(--color-ink-2)", fontStyle: "italic" }}>&ldquo;{testimonial.quote}&rdquo;</p>
-                  </blockquote>
+                  <TestimonialQuote quote={testimonial.quote} />
 
                   <div style={{ height: 1, background: "var(--color-border)", marginBottom: 16 }} />
 
@@ -562,7 +602,6 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
       <style jsx>{`
         @media (max-width: 980px) {
           .testimonials-hero-grid,
-          .testimonial-grid,
           .video-grid,
           .platform-grid {
             grid-template-columns: 1fr 1fr !important;
@@ -576,7 +615,6 @@ export default function TestimonialsPageClient({ initialTestimonials = [] }: Tes
         @media (max-width: 720px) {
           .testimonials-hero-grid,
           .stats-grid,
-          .testimonial-grid,
           .video-grid,
           .platform-grid {
             grid-template-columns: 1fr !important;
